@@ -6,14 +6,24 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get"
+        "post"
       ],
-      "route":"gerencias"
+      "route":"gerencias/"
     },
     {
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "gerencia",
+      "databaseName": "organizacion",
+      "collectionName": "gerencias",
+      "createIfNotExists": true,
+      "connectionStringSetting": "CosmosDBConnection",
+      "partitionKey": "compania"
     }
   ],
   "scriptFile": "../dist/postgerencias/index.js"
