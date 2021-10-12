@@ -1,0 +1,11 @@
+<div>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div>
+      <input type="text" formControlName="nombre" />
+    </div>
+    <div>
+      <input type="text" formControlName="gerente" />
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+</div>
