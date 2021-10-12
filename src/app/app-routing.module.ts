@@ -26,6 +26,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: '', redirectTo: '/organizacion/gerencias', pathMatch: 'full' },
 ];
 
 @NgModule({
