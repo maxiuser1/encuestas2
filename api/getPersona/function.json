@@ -6,7 +6,7 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get"
+        "post"
       ],
       "route":"public/persona"
     },
@@ -22,8 +22,9 @@
       "databaseName": "organizacion",
       "collectionName": "personas",
       "connectionStringSetting": "CosmosDBConnection",
-      "partitionKey": "compania"
+      "sqlQuery":"SELECT * from c where c.email = {email}",
+      "PartitionKey": "bciseguros"
     }
   ],
-  "scriptFile": "../dist/postgerencias/index.js"
+  "scriptFile": "../dist/getPersona/index.js"
 }
