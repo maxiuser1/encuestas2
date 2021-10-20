@@ -12,6 +12,7 @@ const httpTrigger: AzureFunction = async function (
     id: getGuid(),
     nombre: gerenciaVm.nombre,
     gerente: gerenciaVm.gerente,
+    empresa: 'bci seguros',
   };
   context.bindings.gerencia = gerencia;
   context.res = {
