@@ -1,0 +1,31 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"public/persona"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "personas",
+      "createIfNotExists": true,
+      "connectionStringSetting": "CosmosDBConnection",
+      "PartitionKey":"bciseguros",
+      "Id":"{id}"
+    }
+  ],
+  "scriptFile": "../dist/findPersona/index.js"
+}
