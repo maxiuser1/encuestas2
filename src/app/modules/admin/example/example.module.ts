@@ -4,19 +4,13 @@ import { ExampleComponent } from 'app/modules/admin/example/example.component';
 
 const exampleRoutes: Route[] = [
     {
-        path     : '',
-        component: ExampleComponent
-    }
+        path: '',
+        component: ExampleComponent,
+    },
 ];
 
 @NgModule({
-    declarations: [
-        ExampleComponent
-    ],
-    imports     : [
-        RouterModule.forChild(exampleRoutes)
-    ]
+    declarations: [ExampleComponent],
+    imports: [RouterModule.forChild(exampleRoutes)],
 })
-export class ExampleModule
-{
-}
+export class ExampleModule {}
