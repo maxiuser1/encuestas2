@@ -1,1 +1,17 @@
-<p>list works!</p>
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden">
+    <div class="relative">
+        <ng-container *ngIf="gerencias$ | async as gerencias">
+            <ng-container *ngIf="gerencias.length">
+                <ng-container
+                    *ngFor="
+                        let gerencia of gerencias;
+                        let i = index;
+                        trackBy: trackByFn
+                    "
+                >
+                    {{ gerencia.nombre }}
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>

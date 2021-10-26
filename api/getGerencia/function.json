@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"private/gerencias/{id}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "gerencias",
+      "connectionStringSetting": "CosmosDBConnection",
+      "Id":"{id}",
+      "PartitionKey":"{id}"
+    }
+  ],
+  "scriptFile": "../dist/getGerencia/index.js"
+}

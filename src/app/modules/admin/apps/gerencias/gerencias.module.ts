@@ -5,6 +5,7 @@ import { GerenciasListComponent } from './list/list.component';
 import { GerenciasDetailsComponent } from './details/details.component';
 import { Route, RouterModule } from '@angular/router';
 import { CanDeactivateGerenciasDetails } from './gerencias.guards';
+import { GerenciasResolver } from './gerencias.resolver';
 
 const routes: Route[] = [
     {
@@ -14,11 +15,13 @@ const routes: Route[] = [
             {
                 path: '',
                 component: GerenciasListComponent,
+                resolve: {
+                    gerencias: GerenciasResolver,
+                },
                 children: [
                     {
                         path: ':id',
                         component: GerenciasDetailsComponent,
-                        canDeactivate: [CanDeactivateGerenciasDetails],
                     },
                 ],
             },
