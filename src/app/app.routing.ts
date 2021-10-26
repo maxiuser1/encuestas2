@@ -134,6 +134,27 @@ export const appRoutes: Route[] = [
                                 'app/modules/admin/apps/gerencias/gerencias.module'
                             ).then((m) => m.GerenciasModule),
                     },
+                    {
+                        path: 'notes',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/apps/notes/notes.module'
+                            ).then((m) => m.NotesModule),
+                    },
+                    {
+                        path: 'contacts',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/apps/contacts/contacts.module'
+                            ).then((m) => m.ContactsModule),
+                    },
+                    {
+                        path: 'tasks',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/apps/tasks/tasks.module'
+                            ).then((m) => m.TasksModule),
+                    },
                 ],
             },
         ],
