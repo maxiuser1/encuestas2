@@ -8,7 +8,7 @@
       "methods": [
         "post"
       ],
-      "route":"gerencias/"
+      "route":"private/gerencias"
     },
     {
       "type": "http",
@@ -23,7 +23,6 @@
       "collectionName": "gerencias",
       "createIfNotExists": true,
       "connectionStringSetting": "CosmosDBConnection",
-      "partitionKey": "compania"
     }
   ],
   "scriptFile": "../dist/postgerencias/index.js"

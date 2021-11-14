@@ -1,0 +1,39 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "put"
+      ],
+      "route": "private/gerencias/{id}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "gerencias",
+      "connectionStringSetting": "CosmosDBConnection",
+      "Id":"{id}",
+      "PartitionKey":"{id}"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "updatedGerencia",
+      "databaseName": "organizacion",
+      "collectionName": "gerencias",
+      "createIfNotExists": false,
+      "connectionStringSetting": "CosmosDBConnection"
+    }
+  ],
+  "scriptFile": "../dist/patchGerencia/index.js"
+}

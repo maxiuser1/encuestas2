@@ -4,8 +4,15 @@ import { GerenciasComponent } from './gerencias.component';
 import { GerenciasListComponent } from './list/list.component';
 import { GerenciasDetailsComponent } from './details/details.component';
 import { Route, RouterModule } from '@angular/router';
-import { CanDeactivateGerenciasDetails } from './gerencias.guards';
 import { GerenciasResolver } from './gerencias.resolver';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SharedModule } from 'app/shared/shared.module';
 
 const routes: Route[] = [
     {
@@ -35,6 +42,16 @@ const routes: Route[] = [
         GerenciasListComponent,
         GerenciasDetailsComponent,
     ],
-    imports: [RouterModule.forChild(routes), CommonModule],
+    imports: [
+        RouterModule.forChild(routes),
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDialogModule,
+        MatSlideToggleModule,
+        MatButtonModule,
+        SharedModule,
+    ],
 })
 export class GerenciasModule {}

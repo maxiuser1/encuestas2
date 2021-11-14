@@ -4,17 +4,15 @@ import { merge } from 'lodash-es';
 import { FUSE_APP_CONFIG } from '@fuse/services/config/config.constants';
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
-export class FuseConfigService
-{
+export class FuseConfigService {
     private _config: BehaviorSubject<any>;
 
     /**
      * Constructor
      */
-    constructor(@Inject(FUSE_APP_CONFIG) config: any)
-    {
+    constructor(@Inject(FUSE_APP_CONFIG) config: any) {
         // Private
         this._config = new BehaviorSubject(config);
     }
@@ -26,8 +24,7 @@ export class FuseConfigService
     /**
      * Setter & getter for config
      */
-    set config(value: any)
-    {
+    set config(value: any) {
         // Merge the new config over to the current config
         const config = merge({}, this._config.getValue(), value);
 
@@ -35,8 +32,7 @@ export class FuseConfigService
         this._config.next(config);
     }
 
-    get config$(): Observable<any>
-    {
+    get config$(): Observable<any> {
         return this._config.asObservable();
     }
 
@@ -47,8 +43,7 @@ export class FuseConfigService
     /**
      * Resets the config to the default
      */
-    reset(): void
-    {
+    reset(): void {
         // Set the config
         this._config.next(this.config);
     }
