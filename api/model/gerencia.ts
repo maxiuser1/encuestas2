@@ -23,6 +23,12 @@ export interface Servicio {
 
 export interface Responsable {
     id?: string;
-    nombres?: string;
-    correo?: string;
+    name?: string;
+    email?: string;
+}
+
+export interface Persona {
+    id?: string;
+    name?: string;
+    email?: string;
 }

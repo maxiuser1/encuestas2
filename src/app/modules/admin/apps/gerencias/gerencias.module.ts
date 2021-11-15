@@ -4,7 +4,10 @@ import { GerenciasComponent } from './gerencias.component';
 import { GerenciasListComponent } from './list/list.component';
 import { GerenciasDetailsComponent } from './details/details.component';
 import { Route, RouterModule } from '@angular/router';
-import { GerenciasResolver } from './gerencias.resolver';
+import {
+    GerenciaPersonasResolver,
+    GerenciasResolver,
+} from './gerencias.resolver';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -15,6 +18,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'app/shared/shared.module';
 import { GerenciasSubgerenciaComponent } from './subgerencias/subgerencias.component';
 import { GerenciasAreaComponent } from './areas/areas.component';
+import { GerenciasServicioComponent } from './servicios/servicios.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
 
 const routes: Route[] = [
     {
@@ -26,6 +32,7 @@ const routes: Route[] = [
                 component: GerenciasListComponent,
                 resolve: {
                     gerencias: GerenciasResolver,
+                    personas: GerenciaPersonasResolver,
                 },
                 children: [
                     {
@@ -45,6 +52,7 @@ const routes: Route[] = [
         GerenciasDetailsComponent,
         GerenciasSubgerenciaComponent,
         GerenciasAreaComponent,
+        GerenciasServicioComponent,
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -53,6 +61,8 @@ const routes: Route[] = [
         MatInputModule,
         MatSelectModule,
         MatDialogModule,
+        MatChipsModule,
+        MatAutocompleteModule,
         MatSlideToggleModule,
         MatButtonModule,
         SharedModule,

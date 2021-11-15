@@ -4,12 +4,16 @@ import { items } from 'app/mock-api/apps/file-manager/data';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { map, switchMap, take } from 'rxjs/operators';
-import { Gerencia } from '../../../../../../api/model/gerencia';
+import { Gerencia, Persona } from '../../../../../../api/model/gerencia';
 
 @Injectable({
     providedIn: 'root',
 })
 export class GerenciasService {
+    private _personas: BehaviorSubject<Persona[] | null> = new BehaviorSubject(
+        null
+    );
+
     private _gerencia: BehaviorSubject<Gerencia | null> = new BehaviorSubject(
         null
     );
@@ -18,12 +22,24 @@ export class GerenciasService {
 
     constructor(private _httpClient: HttpClient) {}
 
+    get personas$(): Observable<Persona[]> {
+        return this._personas.asObservable();
+    }
+
     get gerencia$(): Observable<Gerencia> {
         return this._gerencia.asObservable();
     }
 
     get gerencias$(): Observable<Gerencia[]> {
         return this._gerencias.asObservable();
+    }
+
+    getPersonas(): Observable<Persona[]> {
+        return this._httpClient.get<Persona[]>('api/private/personas').pipe(
+            tap((personas) => {
+                this._personas.next(personas);
+            })
+        );
     }
 
     getGerencias(): Observable<Gerencia[]> {

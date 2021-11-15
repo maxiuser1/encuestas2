@@ -16,6 +16,7 @@ import { Gerencia } from '../../../../../../../api/model/gerencia';
 import { GerenciasAreaComponent } from '../areas/areas.component';
 import { GerenciasDetailsComponent } from '../details/details.component';
 import { GerenciasService } from '../gerencias.service';
+import { GerenciasServicioComponent } from '../servicios/servicios.component';
 import { GerenciasSubgerenciaComponent } from '../subgerencias/subgerencias.component';
 
 @Component({
@@ -124,6 +125,18 @@ export class GerenciasListComponent implements OnInit {
                 gerencia: cloneDeep(gerencia),
                 index: i,
                 iarea: ia,
+            },
+        });
+    }
+
+    editarServicio(gerencia: Gerencia, i: number, ia: number, ias: number) {
+        this._matDialog.open(GerenciasServicioComponent, {
+            autoFocus: false,
+            data: {
+                gerencia: cloneDeep(gerencia),
+                index: i,
+                iarea: ia,
+                iservicio: ias,
             },
         });
     }

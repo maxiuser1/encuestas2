@@ -6,7 +6,7 @@ import {
     ActivatedRouteSnapshot,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Gerencia } from '../../../../../../api/model/gerencia';
+import { Gerencia, Persona } from '../../../../../../api/model/gerencia';
 import { GerenciasService } from './gerencias.service';
 
 @Injectable({
@@ -21,5 +21,22 @@ export class GerenciasResolver implements Resolve<any> {
     ): Observable<Gerencia[]> {
         console.log('llamo resolver');
         return this._gerenciasService.getGerencias();
+    }
+}
+
+@Injectable({
+    providedIn: 'root',
+})
+export class GerenciaPersonasResolver implements Resolve<any> {
+    /**
+     * Constructor
+     */
+    constructor(private _gerenciasService: GerenciasService) {}
+
+    resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<Persona[]> {
+        return this._gerenciasService.getPersonas();
     }
 }

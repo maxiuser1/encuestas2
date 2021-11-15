@@ -8,7 +8,7 @@
       "methods": [
         "get"
       ],
-      "route":"public/persona"
+      "route":"private/personas"
     },
     {
       "type": "http",
@@ -18,14 +18,11 @@
     {
       "type": "cosmosDB",
       "direction": "in",
-      "name": "item",
+      "name": "items",
       "databaseName": "organizacion",
       "collectionName": "personas",
-      "createIfNotExists": true,
-      "connectionStringSetting": "CosmosDBConnection",
-      "PartitionKey":"{id}",
-      "Id":"{id}"
+      "connectionStringSetting": "CosmosDBConnection"
     }
   ],
-  "scriptFile": "../dist/findPersona/index.js"
+  "scriptFile": "../dist/getPersonas/index.js"
 }
