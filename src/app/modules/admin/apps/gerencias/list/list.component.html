@@ -45,8 +45,28 @@
                         <ng-container *ngFor="let gerencia of gerencias; trackBy: trackByFn">
                             <!-- Gerencia -->
                             <div class="flex flex-col shadow rounded-2xl overflow-hidden bg-card">
+
+
+
+
                                 <!-- Body -->
                                 <div class="flex flex-col p-6">
+
+                                    <div class="flex items-center justify-between">
+                                        <!-- Course category -->
+                                        <div class="py-0.5 px-3 rounded-full text-sm font-semibold"
+                                            [ngClass]="{'text-blue-800 bg-blue-100 dark:text-blue-50 dark:bg-blue-500': gerencia.empresa === 'bci',
+                                                            'text-green-800 bg-green-100 dark:text-green-50 dark:bg-green-500': gerencia.empresa === 'zenit',
+                                                            'text-pink-800 bg-pink-100 dark:text-pink-50 dark:bg-pink-500': gerencia.empresa === 'vida',
+                                                            'text-amber-800 bg-amber-100 dark:text-amber-50 dark:bg-amber-500': gerencia.empresa === ''}">
+                                            {{gerencia.empresa}}
+                                        </div>
+                                        <!-- Completed at least once -->
+                                        <div class="flex items-center">
+
+                                        </div>
+                                    </div>
+
                                     <div class="mt-4 text-lg font-medium">
                                         {{ gerencia.nombre }}
                                     </div>
@@ -56,7 +76,7 @@
                                             <div class="group flex items-center">
                                                 <div>
                                                     <span class="text-primary-600 text-sm">
-                                                        sub gerencia:
+                                                        Subgerencia:
                                                     </span>
                                                     {{ subg.nombre }}
                                                 </div>
@@ -132,15 +152,10 @@
                                 <div class="flex flex-col w-full mt-auto">
                                     <div class="px-6 py-4 text-right bg-gray-50 dark:bg-transparent">
                                         <button mat-stroked-button
+                                            [color]="'primary'"
                                             (click)="editarGerencia(gerencia)">
                                             <span class="inline-flex items-center">
                                                 <span>Editar</span>
-                                            </span>
-                                        </button>
-                                        <button mat-stroked-button
-                                            class="ml-2">
-                                            <span class="inline-flex items-center">
-                                                <span>Areas</span>
                                             </span>
                                         </button>
                                     </div>
