@@ -29,7 +29,7 @@
                 <mat-autocomplete #auto2="matAutocomplete"
                     (optionSelected)="agregarEquipo(gerencia,$event.option.value); newTaskInput.value = ''"
                     [displayWith]="displayFn">
-                    <mat-option *ngFor="let persona of filteredOptions | async"
+                    <mat-option *ngFor="let persona of equipoFilteredOptions | async"
                         [value]="persona">
                         {{persona.name}}
                     </mat-option>
@@ -50,6 +50,7 @@
                     <input class="w-full ml-1.5 px-1 py-0.5"
                         [placeholder]="'Ingrese un área'"
                         [matAutocomplete]="auto2"
+                        [formControl]="controlEquipo"
                         [matAutocompleteConnectedTo]="origin"
                         #newTaskInput />
                 </div>

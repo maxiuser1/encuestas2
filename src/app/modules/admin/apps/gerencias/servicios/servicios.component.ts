@@ -32,6 +32,9 @@ export class GerenciasServicioComponent implements OnInit {
     controlResponsable = new FormControl();
     filteredOptions: Observable<Persona[]>;
 
+    equipoFilteredOptions: Observable<Persona[]>;
+    controlEquipo = new FormControl();
+
     gerenciaChanged: Subject<Gerencia> = new Subject<Gerencia>();
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -76,6 +79,12 @@ export class GerenciasServicioComponent implements OnInit {
             });
 
         this.filteredOptions = this.controlResponsable.valueChanges.pipe(
+            startWith(''),
+            map((value) => (typeof value === 'string' ? value : value.name)),
+            map((name) => (name ? this._filter(name) : this.personas.slice()))
+        );
+
+        this.equipoFilteredOptions = this.controlEquipo.valueChanges.pipe(
             startWith(''),
             map((value) => (typeof value === 'string' ? value : value.name)),
             map((name) => (name ? this._filter(name) : this.personas.slice()))
@@ -139,5 +148,7 @@ export class GerenciasServicioComponent implements OnInit {
             email: persona.email,
         });
         this.gerenciaChanged.next(gerencia);
+
+        this.controlEquipo.setValue('');
     }
 }
