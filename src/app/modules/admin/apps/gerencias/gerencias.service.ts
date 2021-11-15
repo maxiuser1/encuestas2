@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, KeyValueDiffers } from '@angular/core';
+import { items } from 'app/mock-api/apps/file-manager/data';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { map, switchMap, take } from 'rxjs/operators';
@@ -34,8 +35,45 @@ export class GerenciasService {
         );
     }
 
+    getGerencia(id: string): Observable<Gerencia> {
+        return this._gerencias.pipe(
+            take(1),
+            map((gerencias) => {
+                const gerencia =
+                    gerencias.find((value) => value.id === id) || null;
+                this._gerencia.next(gerencia);
+                return gerencia;
+            })
+        );
+    }
+
     updateGerencia(gerencia: Gerencia): Observable<Gerencia> {
-        return of(gerencia);
+        console.log('update geren', gerencia);
+        if (gerencia.id) {
+            return this.gerencias$.pipe(
+                take(1),
+                switchMap((gerencias) =>
+                    this._httpClient
+                        .put<Gerencia>(
+                            `api/private/gerencias/${gerencia.id}`,
+                            gerencia
+                        )
+                        .pipe(
+                            map((updatedGerencia) => {
+                                const index = gerencias.findIndex(
+                                    (item) => item.id == gerencia.id
+                                );
+                                gerencias[index] = updatedGerencia;
+
+                                this._gerencias.next(gerencias);
+                                return updatedGerencia;
+                            })
+                        )
+                )
+            );
+        } else {
+            return of(gerencia);
+        }
     }
 
     createGerencia(gerencia: Gerencia): Observable<Gerencia> {

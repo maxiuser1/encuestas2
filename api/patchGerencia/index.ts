@@ -7,7 +7,7 @@ const httpTrigger: AzureFunction = async function (
 ): Promise<void> {
     context.bindings.updatedGerencia = req.body;
     context.res = {
-        body: item,
+        body: req.body,
         headers: {
             'Content-Type': 'application/json',
         },

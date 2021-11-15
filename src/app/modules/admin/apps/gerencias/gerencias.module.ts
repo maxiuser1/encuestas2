@@ -13,6 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'app/shared/shared.module';
+import { GerenciasSubgerenciaComponent } from './subgerencias/subgerencias.component';
+import { GerenciasAreaComponent } from './areas/areas.component';
 
 const routes: Route[] = [
     {
@@ -41,6 +43,8 @@ const routes: Route[] = [
         GerenciasComponent,
         GerenciasListComponent,
         GerenciasDetailsComponent,
+        GerenciasSubgerenciaComponent,
+        GerenciasAreaComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

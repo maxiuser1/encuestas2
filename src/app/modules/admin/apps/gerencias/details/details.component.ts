@@ -35,14 +35,23 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        const gerencia = {
-            id: null,
-            nombre: '',
-            empresa: '',
-            subgerencias: null,
-        };
+        console.log('wtf', this._data.gerencia);
 
-        this.gerencia$ = of(gerencia);
+        if (this._data.gerencia.id) {
+            this._gerenciasService
+                .getGerencia(this._data.gerencia.id)
+                .subscribe();
+            this.gerencia$ = this._gerenciasService.gerencia$;
+        } else {
+            const gerencia = {
+                id: null,
+                nombre: '',
+                empresa: '',
+                subgerencias: [],
+            };
+
+            this.gerencia$ = of(gerencia);
+        }
 
         this.gerenciaChanged
             .pipe(
@@ -74,7 +83,7 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
             .createGerencia(gerencia)
             .subscribe((newGerencia: Gerencia) => {
                 this.gerencia$ = this._gerenciasService.gerencia$;
-                gerencia.subgerencias = [];
+                this._changeDetectorRef.markForCheck();
             });
     }
 
@@ -83,10 +92,22 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     }
 
     addSubgerenciaOnGerencia(gerencia: Gerencia, subgerencia: string): void {
+        console.log('gee', gerencia, subgerencia);
         if (subgerencia.trim() === '') {
             return;
         }
+
         gerencia.subgerencias.push({ nombre: subgerencia });
+        this.gerenciaChanged.next(gerencia);
+    }
+
+    updateSubgerenciaOnGrencia(gerencia: Gerencia, subgerencia: string) {
+        if (subgerencia) this.gerenciaChanged.next(gerencia);
+    }
+
+    removeSubgerenciaFromGerencia(gerencia: Gerencia, index) {
+        console.log('i', index);
+        gerencia.subgerencias.splice(index, 1);
         this.gerenciaChanged.next(gerencia);
     }
 }
