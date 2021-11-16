@@ -1,8 +1,12 @@
 <div class="flex flex-col flex-auto md:w-160 md:min-w-160 m-6">
     <ng-container *ngIf="gerencia$ | async as gerencia">
+        <span class="p-4 text-primary-600">
+            Gerencia
+        </span>
         <div class="m-4">
             <div>
                 <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Empresa</mat-label>
                     <mat-select [value]="''"
                         [(ngModel)]="gerencia.empresa"
                         (selectionChange)="updateGerenciaDetails(gerencia)">

@@ -1,7 +1,11 @@
 <div class="flex flex-col flex-auto md:w-160 md:min-w-160 m-6">
     <ng-container *ngIf="gerencia$ | async as gerencia">
         <div class="m-4">
+            <span class="p-2 text-primary-600 text-sm">
+                Subgerencia:
+            </span>
             <div>
+
                 <input class="w-full p-2 text-2xl"
                     [(ngModel)]="gerencia.subgerencias[_data.index].nombre" />
             </div>
@@ -18,6 +22,12 @@
                         <input class="w-full px-1 py-0.5"
                             [placeholder]="'Sub gerencia'"
                             [(ngModel)]="area.nombre" />
+
+                        <mat-icon class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
+                            [svgIcon]="'heroicons_solid:x'"
+                            (click)="
+                            removeAreaFromSubgerencia(gerencia, i)
+                        "></mat-icon>
                     </div>
                 </ng-container>
                 <div class="flex items-center">
@@ -31,6 +41,15 @@
                         "
                         #newTaskInput />
                 </div>
+            </div>
+
+            <div class="flex items-center justify-between mt-4">
+                <div class="flex items-center space-x-2">
+                </div>
+                <button mat-flat-button
+                    matDialogClose>
+                    Cerrar
+                </button>
             </div>
         </div>
     </ng-container>

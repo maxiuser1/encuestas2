@@ -59,4 +59,9 @@ export class GerenciasSubgerenciaComponent implements OnInit {
         gerencia.subgerencias[this._data.index].areas.push({ nombre: area });
         this.gerenciaChanged.next(gerencia);
     }
+
+    removeAreaFromSubgerencia(gerencia: Gerencia, i: number): void {
+        gerencia.subgerencias[this._data.index].areas.splice(i, 1);
+        this.gerenciaChanged.next(gerencia);
+    }
 }
