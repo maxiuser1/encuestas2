@@ -52,13 +52,10 @@ export class GerenciasServicioComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        console.log('data serv', this._data);
-
         this._gerenciasService.personas$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((personas: Persona[]) => {
                 this.personas = personas;
-                console.log('per', personas);
                 this._changeDetectorRef.markForCheck();
             });
 

@@ -3,22 +3,26 @@ export interface Gerencia {
     nombre?: string;
     empresa?: string;
     subgerencias?: Subgerencia[];
+    responsable?: Responsable;
 }
 
 export interface Subgerencia {
     nombre?: string;
     areas?: Area[];
+    responsable?: Responsable;
 }
 
 export interface Area {
     nombre?: string;
     servicios?: Servicio[];
+    responsable?: Responsable;
 }
 
 export interface Servicio {
     nombre?: string;
     responsable?: Responsable;
     equipo?: Responsable[];
+    ascritos?: Responsable[];
 }
 
 export interface Responsable {

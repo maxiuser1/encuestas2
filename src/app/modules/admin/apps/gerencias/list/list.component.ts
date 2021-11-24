@@ -9,9 +9,17 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
 import { MatDrawer } from '@angular/material/sidenav';
+import { UserService } from 'app/core/user/user.service';
+import { User } from 'app/core/user/user.types';
 import { cloneDeep } from 'lodash';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    switchMap,
+    takeUntil,
+} from 'rxjs/operators';
 import { Gerencia } from '../../../../../../../api/model/gerencia';
 import { GerenciasAreaComponent } from '../areas/areas.component';
 import { GerenciasDetailsComponent } from '../details/details.component';
@@ -34,16 +42,26 @@ export class GerenciasListComponent implements OnInit {
         empresaSlug$: new BehaviorSubject('todas'),
         query$: new BehaviorSubject(''),
     };
+    user: User;
 
+    gerenciaChanged: Subject<Gerencia> = new Subject<Gerencia>();
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _gerenciasService: GerenciasService,
+        private _userService: UserService,
         private _matDialog: MatDialog
     ) {}
 
     ngOnInit(): void {
+        this._userService.user$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((user: User) => {
+                console.log('el user', user);
+                this.user = user;
+            });
+
         this._gerenciasService.getGerencias().subscribe();
 
         this.gerencias$ = combineLatest([
@@ -66,16 +84,27 @@ export class GerenciasListComponent implements OnInit {
                 }
 
                 if (query !== '') {
+                    const qlq = query.toLowerCase();
                     filteredGerencias = filteredGerencias.filter((gerencia) =>
-                        gerencia.nombre
-                            .toLowerCase()
-                            .includes(query.toLowerCase())
+                        JSON.stringify(gerencia).toLowerCase().includes(qlq)
                     );
                 }
 
                 return filteredGerencias;
             })
         );
+
+        this.gerenciaChanged
+            .pipe(
+                takeUntil(this._unsubscribeAll),
+                debounceTime(500),
+                switchMap((gerencia) =>
+                    this._gerenciasService.updateGerencia(gerencia)
+                )
+            )
+            .subscribe(() => {
+                this._changeDetectorRef.markForCheck();
+            });
     }
 
     filtrarPorEmpresa(change: MatSelectChange): void {
@@ -139,5 +168,20 @@ export class GerenciasListComponent implements OnInit {
                 iservicio: ias,
             },
         });
+    }
+
+    subscribirse(gerencia: Gerencia, i: number, ia: number, ias: number) {
+        console.log('subs', gerencia);
+
+        if (!gerencia.subgerencias[i].areas[ia].servicios[ias].ascritos)
+            gerencia.subgerencias[i].areas[ia].servicios[ias].ascritos = [];
+
+        gerencia.subgerencias[i].areas[ia].servicios[ias].ascritos.push({
+            id: this.user.id,
+            name: this.user.name,
+            email: this.user.email,
+        });
+
+        this.gerenciaChanged.next(gerencia);
     }
 }

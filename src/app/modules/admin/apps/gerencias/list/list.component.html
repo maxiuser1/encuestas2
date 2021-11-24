@@ -16,7 +16,7 @@
                 <mat-form-field class="fuse-mat-no-subscript w-full sm:w-36">
                     <mat-select [value]="'todas'"
                         (selectionChange)="filtrarPorEmpresa($event)">
-                        <mat-option [value]="'todas'">Todas</mat-option>
+                        <mat-option [value]="'todas'">Empresas</mat-option>
                         <mat-option [value]="'bci'">Bci Seguros</mat-option>
                         <mat-option [value]="'zenit'">Zenit</mat-option>
                         <mat-option [value]="'vida'">Bci Vida</mat-option>
@@ -25,23 +25,24 @@
                 <mat-form-field class="fuse-mat-no-subscript w-full sm:w-72 mt-4 sm:mt-0 sm:ml-4"
                     [floatLabel]="'always'">
                     <input (input)="filtrarPorNombre(query.value)"
-                        placeholder="Buscar por nombre de gerencia"
+                        placeholder="Buscar"
                         matInput
                         #query />
                 </mat-form-field>
 
                 <button class="mt-8 sm:mt-0 sm:ml-auto"
+                    *ngIf="user?.rol == 'admin'"
                     mat-flat-button
                     [color]="'primary'"
                     (click)="agregarGerencia()">
-                    <span class="hidden sm:inline-block ml-2">Agregar</span>
+                    <span class="hidden sm:inline-block ml-2">Nueva Gerencia</span>
                 </button>
             </div>
 
             <!-- Gerencias -->
             <ng-container *ngIf="gerencias$ | async as gerencias; else loading">
                 <ng-container *ngIf="gerencias.length; else noGerencias">
-                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8 mt-8 sm:mt-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-8 mt-8 sm:mt-10">
                         <ng-container *ngFor="let gerencia of gerencias; trackBy: trackByFn">
                             <!-- Gerencia -->
                             <div class="flex flex-col shadow rounded-2xl overflow-hidden bg-card">
@@ -68,84 +69,131 @@
                                     </div>
 
                                     <div class="mt-4 text-lg font-medium">
-                                        {{ gerencia.nombre }}
+                                        <div>
+                                            <span class="text-primary-700 text-sm">
+                                                Gerencia:
+                                            </span>
+                                            {{ gerencia.nombre }}
+                                        </div>
+                                        <div>
+                                            <span class="text-primary-700 text-sm">
+                                                Responsable:
+                                            </span>
+                                            {{gerencia.responsable?.name}}
+                                        </div>
                                     </div>
 
-                                    <ng-container *ngFor="let subg of gerencia.subgerencias; let i = index">
-                                        <div class="mb-5 mt-1 p-1 border shadow rounded-sm">
-                                            <div class="group flex items-center">
+                                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 gap-8">
+                                        <ng-container *ngFor="let subg of gerencia.subgerencias; let i = index">
+                                            <div class="mb-5 mt-1 p-1 border shadow rounded-sm">
+                                                <div class="group flex items-center">
+                                                    <div>
+                                                        <span class="text-primary-600 text-sm">
+                                                            Subgerencia:
+                                                        </span>
+                                                        {{ subg.nombre }}
+                                                    </div>
+
+
+                                                    <mat-icon *ngIf="user?.rol == 'admin'"
+                                                        (click)="editarSubgerencia(gerencia,i)"
+                                                        class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
+                                                        [svgIcon]="'heroicons_solid:pencil'">
+                                                    </mat-icon>
+
+                                                </div>
                                                 <div>
                                                     <span class="text-primary-600 text-sm">
-                                                        Subgerencia:
+                                                        Responsable:
                                                     </span>
-                                                    {{ subg.nombre }}
+                                                    {{ subg.responsable?.name }}
                                                 </div>
 
-                                                <mat-icon (click)="editarSubgerencia(gerencia,i)"
-                                                    class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
-                                                    [svgIcon]="'heroicons_solid:pencil'">
-                                                </mat-icon>
-                                            </div>
-
-                                            <!-- areas -->
-                                            <div class="mt-2 p-2">
-                                                <ng-container *ngFor="let area of subg.areas;let ia = index">
-                                                    <div class="mt-1 mb-4 p-2 border">
-                                                        <div class="group flex items-center">
+                                                <!-- areas -->
+                                                <div class="mt-2 p-2">
+                                                    <ng-container *ngFor="let area of subg.areas;let ia = index">
+                                                        <div class="mt-1 mb-4 p-2 border">
+                                                            <div class="group flex items-center">
+                                                                <div>
+                                                                    <span class="text-primary-500 text-sm">
+                                                                        área:
+                                                                    </span>
+                                                                    {{area.nombre}}
+                                                                </div>
+                                                                <mat-icon class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
+                                                                    [svgIcon]="'heroicons_solid:pencil'"
+                                                                    (click)="editarArea(gerencia,i,ia)">
+                                                                </mat-icon>
+                                                            </div>
                                                             <div>
                                                                 <span class="text-primary-500 text-sm">
-                                                                    área:
+                                                                    Responsable:
                                                                 </span>
-                                                                {{area.nombre}}
+                                                                {{ area.responsable?.name }}
                                                             </div>
-                                                            <mat-icon class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
-                                                                [svgIcon]="'heroicons_solid:pencil'"
-                                                                (click)="editarArea(gerencia,i,ia)">
-                                                            </mat-icon>
-                                                        </div>
 
-                                                        <!-- servicios -->
-                                                        <ng-container *ngFor="let servicio of area.servicios; let ias = index">
-                                                            <div class="mt-1 p-1 border">
-                                                                <div class="group flex items-center">
-                                                                    <div>
-                                                                        <span class="text-primary-400 text-sm">
-                                                                            servicio:
-                                                                        </span>
-                                                                        {{servicio.nombre}}
+                                                            <!-- servicios -->
+                                                            <ng-container *ngFor="let servicio of area.servicios; let ias = index">
+                                                                <div class="mt-1 p-1 border">
+                                                                    <div class="group flex justify-between">
+                                                                        <div>
+                                                                            <span class="text-primary-400 text-sm">
+                                                                                servicio:
+                                                                            </span>
+                                                                            {{servicio.nombre}}
+                                                                        </div>
+                                                                        <div class="group flex justify-end">
+                                                                            <mat-icon (click)="editarServicio(gerencia,i,ia,ias)"
+                                                                                class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
+                                                                                [svgIcon]="'heroicons_solid:pencil'">
+                                                                            </mat-icon>
+                                                                            <mat-icon (click)="subscribirse(gerencia,i,ia,ias)"
+                                                                                class="flex ml-auto icon-size-5 cursor-pointer"
+                                                                                [svgIcon]="'heroicons_solid:user-add'">
+                                                                            </mat-icon>
+                                                                        </div>
                                                                     </div>
-                                                                    <mat-icon (click)="editarServicio(gerencia,i,ia,ias)"
-                                                                        class="hidden group-hover:flex ml-auto icon-size-5 cursor-pointer"
-                                                                        [svgIcon]="'heroicons_solid:pencil'">
-                                                                    </mat-icon>
+                                                                    <ng-container *ngIf="servicio.responsable">
+                                                                        <div>
+                                                                            <span class="text-primary-300 text-sm">
+                                                                                responable:
+                                                                            </span>
+                                                                            {{servicio.responsable.name}}
+                                                                        </div>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="servicio.equipo && servicio.equipo.length && servicio.equipo.length > 0">
+                                                                        <div>
+                                                                            <span class="text-primary-200 text-sm">
+                                                                                equipo:
+                                                                            </span>
+                                                                            <mat-chip-list>
+                                                                                <mat-chip *ngFor="let miembro of servicio.equipo">
+                                                                                    {{miembro.name}}
+                                                                                </mat-chip>
+                                                                            </mat-chip-list>
+                                                                        </div>
+                                                                    </ng-container>
+
+                                                                    <ng-container *ngIf="servicio.ascritos && servicio.ascritos.length && servicio.ascritos.length > 0">
+                                                                        <div>
+                                                                            <span class="text-primary-200 text-sm">
+                                                                                evaluadores:
+                                                                            </span>
+                                                                            <mat-chip-list>
+                                                                                <mat-chip *ngFor="let miembro of servicio.ascritos">
+                                                                                    {{miembro.name}}
+                                                                                </mat-chip>
+                                                                            </mat-chip-list>
+                                                                        </div>
+                                                                    </ng-container>
                                                                 </div>
-                                                                <ng-container *ngIf="servicio.responsable">
-                                                                    <div>
-                                                                        <span class="text-primary-300 text-sm">
-                                                                            responable:
-                                                                        </span>
-                                                                        {{servicio.responsable.name}}
-                                                                    </div>
-                                                                </ng-container>
-                                                                <ng-container *ngIf="servicio.equipo && servicio.equipo.length && servicio.equipo.length > 0">
-                                                                    <div>
-                                                                        <span class="text-primary-200 text-sm">
-                                                                            equipo:
-                                                                        </span>
-                                                                        <mat-chip-list>
-                                                                            <mat-chip *ngFor="let miembro of servicio.equipo">
-                                                                                {{miembro.name}}
-                                                                            </mat-chip>
-                                                                        </mat-chip-list>
-                                                                    </div>
-                                                                </ng-container>
-                                                            </div>
-                                                        </ng-container>
-                                                    </div>
-                                                </ng-container>
+                                                            </ng-container>
+                                                        </div>
+                                                    </ng-container>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </ng-container>
+                                        </ng-container>
+                                    </div>
                                 </div>
 
                                 <!-- Footer -->
@@ -155,7 +203,7 @@
                                             [color]="'primary'"
                                             (click)="editarGerencia(gerencia)">
                                             <span class="inline-flex items-center">
-                                                <span>Editar</span>
+                                                <span>Editar Gerencia</span>
                                             </span>
                                         </button>
                                     </div>

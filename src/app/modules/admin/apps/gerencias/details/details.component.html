@@ -1,9 +1,15 @@
 <div class="flex flex-col flex-auto md:w-160 md:min-w-160 m-6">
     <ng-container *ngIf="gerencia$ | async as gerencia">
-        <span class="p-4 text-primary-600">
-            Gerencia
-        </span>
+
         <div class="m-4">
+            <div>
+                <input mat-input
+                    class="w-full p-2 text-2xl"
+                    [placeholder]="'Ingrese el nombre de la gerencia'"
+                    [(ngModel)]="gerencia.nombre"
+                    (input)="updateGerenciaDetails(gerencia)" />
+            </div>
+            <br />
             <div>
                 <mat-form-field class="fuse-mat-no-subscript w-full">
                     <mat-label>Empresa</mat-label>
@@ -18,16 +24,32 @@
                 </mat-form-field>
             </div>
             <br />
-            <div>
-                <input mat-input
-                    class="w-full p-2 text-2xl"
-                    [placeholder]="'Ingrese el nombre de la gerencia'"
-                    [(ngModel)]="gerencia.nombre"
-                    (input)="updateGerenciaDetails(gerencia)" />
-            </div>
+
+
 
             <!-- Subgerencias -->
             <ng-container *ngIf="gerencia.id">
+
+
+                <div>
+                    <mat-form-field class="fuse-mat-no-subscript w-full">
+                        <mat-label>Responsable</mat-label>
+                        <input class="w-full p-2 text-2xl"
+                            matInput
+                            [matAutocomplete]="auto"
+                            placeholder="Responsable"
+                            [formControl]="controlResponsable">
+                        <mat-autocomplete #auto="matAutocomplete"
+                            (optionSelected)="responsableCambiado(gerencia,$event.option.value)"
+                            [displayWith]="displayFn">
+                            <mat-option *ngFor="let persona of personasFiltradas | async"
+                                [value]="persona">
+                                {{persona.name}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
                 <div class="mx-2 mt-4 space-y-1.5 border p-5">
                     <h5 class="text-primary-500">Subgerencias</h5>
                     <ng-container *ngFor="

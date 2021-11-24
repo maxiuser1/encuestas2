@@ -1,3 +1,4 @@
+import { DataRowOutlet } from '@angular/cdk/table';
 import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
@@ -7,11 +8,22 @@ import {
     OnInit,
     ViewEncapsulation,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDrawerToggleResult } from '@angular/material/sidenav';
 import { Observable, of, Subject } from 'rxjs';
-import { debounceTime, switchMap, takeUntil } from 'rxjs/operators';
-import { Gerencia, Subgerencia } from '../../../../../../../api/model/gerencia';
+import {
+    debounceTime,
+    map,
+    startWith,
+    switchMap,
+    takeUntil,
+} from 'rxjs/operators';
+import {
+    Gerencia,
+    Persona,
+    Subgerencia,
+} from '../../../../../../../api/model/gerencia';
 import { GerenciasService } from '../gerencias.service';
 import { GerenciasListComponent } from '../list/list.component';
 
@@ -23,6 +35,9 @@ import { GerenciasListComponent } from '../list/list.component';
 })
 export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     gerencia$: Observable<Gerencia>;
+    personas: Persona[];
+    personasFiltradas: Observable<Persona[]>;
+    controlResponsable = new FormControl();
 
     gerenciaChanged: Subject<Gerencia> = new Subject<Gerencia>();
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -53,6 +68,13 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
             this.gerencia$ = of(gerencia);
         }
 
+        this._gerenciasService.personas$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((personas: Persona[]) => {
+                this.personas = personas;
+                this._changeDetectorRef.markForCheck();
+            });
+
         this.gerenciaChanged
             .pipe(
                 takeUntil(this._unsubscribeAll),
@@ -64,6 +86,32 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
             .subscribe(() => {
                 this._changeDetectorRef.markForCheck();
             });
+
+        this.personasFiltradas = this.controlResponsable.valueChanges.pipe(
+            startWith(''),
+            map((value) => (typeof value === 'string' ? value : value.name)),
+            map((name) => (name ? this._filter(name) : this.personas.slice()))
+        );
+    }
+
+    private _filter(value: string): Persona[] {
+        const filterValue = value.toLowerCase();
+
+        return this.personas.filter((option) =>
+            option.name.toLowerCase().includes(filterValue)
+        );
+    }
+    responsableCambiado(gerencia: Gerencia, data: Persona) {
+        gerencia.responsable = {
+            id: data.id,
+            name: data.name,
+            email: data.email,
+        };
+        this.gerenciaChanged.next(gerencia);
+    }
+
+    displayFn(user: Persona): string {
+        return user && user.name ? user.name : '';
     }
 
     ngOnDestroy(): void {
