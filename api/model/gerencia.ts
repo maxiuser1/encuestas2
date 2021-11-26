@@ -10,6 +10,13 @@ export interface Subgerencia {
     nombre?: string;
     areas?: Area[];
     responsable?: Responsable;
+    subgerencias?: SubSubgerencia[];
+}
+
+export interface SubSubgerencia {
+    nombre?: string;
+    areas?: Area[];
+    responsable?: Responsable;
 }
 
 export interface Area {

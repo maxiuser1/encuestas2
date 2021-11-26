@@ -135,6 +135,13 @@ export const appRoutes: Route[] = [
                             ).then((m) => m.GerenciasModule),
                     },
                     {
+                        path: 'encuestas',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/apps/encuestas/encuestas.module'
+                            ).then((m) => m.EncuestasModule),
+                    },
+                    {
                         path: 'notes',
                         loadChildren: () =>
                             import(
