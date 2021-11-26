@@ -153,10 +153,18 @@
                                                                             </mat-icon>
                                                                         </div>
                                                                     </div>
+                                                                    <ng-container *ngIf="servicio.tipo">
+                                                                        <div>
+                                                                            <span class="text-primary-300 text-sm">
+                                                                                tipo:
+                                                                            </span>
+                                                                            {{servicio.tipo}}
+                                                                        </div>
+                                                                    </ng-container>
                                                                     <ng-container *ngIf="servicio.responsable">
                                                                         <div>
                                                                             <span class="text-primary-300 text-sm">
-                                                                                responable:
+                                                                                responsable:
                                                                             </span>
                                                                             {{servicio.responsable.name}}
                                                                         </div>
@@ -164,7 +172,7 @@
                                                                     <ng-container *ngIf="servicio.equipo && servicio.equipo.length && servicio.equipo.length > 0">
                                                                         <div>
                                                                             <span class="text-primary-200 text-sm">
-                                                                                equipo:
+                                                                                evaluadores:
                                                                             </span>
                                                                             <mat-chip-list>
                                                                                 <mat-chip *ngFor="let miembro of servicio.equipo">
@@ -177,7 +185,7 @@
                                                                     <ng-container *ngIf="servicio.ascritos && servicio.ascritos.length && servicio.ascritos.length > 0">
                                                                         <div>
                                                                             <span class="text-primary-200 text-sm">
-                                                                                evaluadores:
+                                                                                suscritos:
                                                                             </span>
                                                                             <mat-chip-list>
                                                                                 <mat-chip *ngFor="let miembro of servicio.ascritos">

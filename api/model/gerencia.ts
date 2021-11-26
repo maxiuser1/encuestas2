@@ -23,6 +23,7 @@ export interface Servicio {
     responsable?: Responsable;
     equipo?: Responsable[];
     ascritos?: Responsable[];
+    tipo?: string;
 }
 
 export interface Responsable {

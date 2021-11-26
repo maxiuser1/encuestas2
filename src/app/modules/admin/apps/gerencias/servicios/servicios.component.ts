@@ -75,6 +75,12 @@ export class GerenciasServicioComponent implements OnInit {
                 this._changeDetectorRef.markForCheck();
             });
 
+        this.controlResponsable.setValue(
+            this._data.gerencia.subgerencias[this._data.index].areas[
+                this._data.iarea
+            ].servicios[this._data.iservicio].responsable
+        );
+
         this.filteredOptions = this.controlResponsable.valueChanges.pipe(
             startWith(''),
             map((value) => (typeof value === 'string' ? value : value.name)),
@@ -110,6 +116,10 @@ export class GerenciasServicioComponent implements OnInit {
             name: data.name,
             email: data.email,
         };
+        this.gerenciaChanged.next(gerencia);
+    }
+
+    updateGerenciaDetails(gerencia: Gerencia): void {
         this.gerenciaChanged.next(gerencia);
     }
 

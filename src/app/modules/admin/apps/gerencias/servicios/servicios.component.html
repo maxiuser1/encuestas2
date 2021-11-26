@@ -5,9 +5,28 @@
                 <input class="w-full p-2 text-2xl"
                     [(ngModel)]="gerencia.subgerencias[_data.index].areas[_data.iarea].servicios[_data.iservicio].nombre" />
             </div>
+
+            <br />
             <div>
                 <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Tipo</mat-label>
+                    <mat-select [value]="''"
+                        [(ngModel)]="gerencia.subgerencias[_data.index].areas[_data.iarea].servicios[_data.iservicio].tipo"
+                        (selectionChange)="updateGerenciaDetails(gerencia)">
+                        <mat-option [value]="''">Tipo</mat-option>
+                        <mat-option [value]="'ECI'">ECI</mat-option>
+                        <mat-option [value]="'ESI'">ESI</mat-option>
+                        <mat-option [value]="'NE'">NE</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <br />
+            <div>
+
+                <mat-form-field class="fuse-mat-no-subscript w-full">
+                    <mat-label>Responsable</mat-label>
                     <input class="w-full p-2 text-2xl"
+                        value=""
                         matInput
                         [matAutocomplete]="auto"
                         placeholder="Responsable"
