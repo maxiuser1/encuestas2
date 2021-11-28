@@ -3,7 +3,7 @@
         <div class="m-4">
             <div>
                 <input class="w-full p-2 text-2xl"
-                    [(ngModel)]="gerencia.subgerencias[_data.index].areas[_data.iarea].servicios[_data.iservicio].nombre" />
+                    [(ngModel)]="gerencia.gerenciasrd[_data.index].areas[_data.iarea].servicios[_data.iservicio].nombre" />
             </div>
 
             <br />
@@ -11,7 +11,7 @@
                 <mat-form-field class="fuse-mat-no-subscript w-full">
                     <mat-label>Tipo</mat-label>
                     <mat-select [value]="''"
-                        [(ngModel)]="gerencia.subgerencias[_data.index].areas[_data.iarea].servicios[_data.iservicio].tipo"
+                        [(ngModel)]="gerencia.gerenciasrd[_data.index].areas[_data.iarea].servicios[_data.iservicio].tipo"
                         (selectionChange)="updateGerenciaDetails(gerencia)">
                         <mat-option [value]="''">Tipo</mat-option>
                         <mat-option [value]="'ECI'">ECI</mat-option>
@@ -54,7 +54,7 @@
                     </mat-option>
                 </mat-autocomplete>
 
-                <ng-container *ngFor="let persona of gerencia.subgerencias[_data.index].areas[_data.iarea].servicios[_data.iservicio].equipo;index as i;trackBy: trackByFn">
+                <ng-container *ngFor="let persona of gerencia.gerenciasrd[_data.index].areas[_data.iarea].servicios[_data.iservicio].equipo;index as i;trackBy: trackByFn">
                     <div class="group flex items-center">
                         <input class="w-full px-1 py-0.5"
                             [placeholder]="'Servicio'"

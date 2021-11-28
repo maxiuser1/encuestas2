@@ -50,8 +50,6 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        console.log('wtf', this._data.gerencia);
-
         if (this._data.gerencia.id) {
             this._gerenciasService
                 .getGerencia(this._data.gerencia.id)
@@ -121,12 +119,10 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     }
 
     updateGerenciaDetails(gerencia: Gerencia): void {
-        console.log('gerencia up', gerencia);
         this.gerenciaChanged.next(gerencia);
     }
 
     crearGerencia(gerencia: Gerencia): void {
-        console.log('llamo crearGerencia', gerencia);
         this._gerenciasService
             .createGerencia(gerencia)
             .subscribe((newGerencia: Gerencia) => {
@@ -140,12 +136,11 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     }
 
     addSubgerenciaOnGerencia(gerencia: Gerencia, subgerencia: string): void {
-        console.log('gee', gerencia, subgerencia);
         if (subgerencia.trim() === '') {
             return;
         }
 
-        gerencia.subgerencias.push({ nombre: subgerencia });
+        gerencia.gerenciasrd.push({ nombre: subgerencia });
         this.gerenciaChanged.next(gerencia);
     }
 
@@ -154,8 +149,7 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
     }
 
     removeSubgerenciaFromGerencia(gerencia: Gerencia, index) {
-        console.log('i', index);
-        gerencia.subgerencias.splice(index, 1);
+        gerencia.gerenciasrd.splice(index, 1);
         this.gerenciaChanged.next(gerencia);
     }
 }

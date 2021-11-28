@@ -45,7 +45,6 @@ export class GerenciasService {
     getGerencias(): Observable<Gerencia[]> {
         return this._httpClient.get<Gerencia[]>('api/private/gerencias').pipe(
             tap((gerencias) => {
-                console.log('tap', gerencias);
                 this._gerencias.next(gerencias);
             })
         );
@@ -64,7 +63,6 @@ export class GerenciasService {
     }
 
     updateGerencia(gerencia: Gerencia): Observable<Gerencia> {
-        console.log('update geren', gerencia);
         if (gerencia.id) {
             return this.gerencias$.pipe(
                 take(1),

@@ -26,7 +26,7 @@ import { GerenciasSubgerenciaComponent } from '../subgerencias/subgerencias.comp
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GerenciasServicioComponent implements OnInit {
+export class GerenciasServiciosComponent implements OnInit {
     personas: Persona[];
     gerencia$: Observable<Gerencia>;
     controlResponsable = new FormControl();
@@ -76,7 +76,7 @@ export class GerenciasServicioComponent implements OnInit {
             });
 
         this.controlResponsable.setValue(
-            this._data.gerencia.subgerencias[this._data.index].areas[
+            this._data.gerencia.gerenciasrd[this._data.index].areas[
                 this._data.iarea
             ].servicios[this._data.iservicio].responsable
         );
@@ -103,13 +103,12 @@ export class GerenciasServicioComponent implements OnInit {
     }
 
     displayFn(user: Persona): string {
-        console.log('user', user);
         return user && user.name ? user.name : '';
     }
 
     responsableCambiado(gerencia: Gerencia, data: Persona) {
         // if(!gerencia.subgerencias[this._data.index].areas[this._data.iarea].servicios[this._data.iservicio].responsable)
-        gerencia.subgerencias[this._data.index].areas[
+        gerencia.gerenciasrd[this._data.index].areas[
             this._data.iarea
         ].servicios[this._data.iservicio].responsable = {
             id: data.id,
@@ -125,29 +124,28 @@ export class GerenciasServicioComponent implements OnInit {
 
     addServicioOnArea(gerencia: Gerencia, servicio: string): void {
         if (
-            !gerencia.subgerencias[this._data.index].areas[this._data.iarea]
+            !gerencia.gerenciasrd[this._data.index].areas[this._data.iarea]
                 .servicios
         )
-            gerencia.subgerencias[this._data.index].areas[
+            gerencia.gerenciasrd[this._data.index].areas[
                 this._data.iarea
             ].servicios = [];
-        gerencia.subgerencias[this._data.index].areas[
+        gerencia.gerenciasrd[this._data.index].areas[
             this._data.iarea
         ].servicios.push({ nombre: servicio });
         this.gerenciaChanged.next(gerencia);
     }
 
     agregarEquipo(gerencia: Gerencia, persona: Persona) {
-        console.log('agregar equipo', persona);
         if (
-            !gerencia.subgerencias[this._data.index].areas[this._data.iarea]
+            !gerencia.gerenciasrd[this._data.index].areas[this._data.iarea]
                 .servicios[this._data.iservicio].equipo
         )
-            gerencia.subgerencias[this._data.index].areas[
+            gerencia.gerenciasrd[this._data.index].areas[
                 this._data.iarea
             ].servicios[this._data.iservicio].equipo = [];
 
-        gerencia.subgerencias[this._data.index].areas[
+        gerencia.gerenciasrd[this._data.index].areas[
             this._data.iarea
         ].servicios[this._data.iservicio].equipo.push({
             id: persona.id,

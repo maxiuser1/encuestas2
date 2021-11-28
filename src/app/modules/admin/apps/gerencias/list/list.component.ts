@@ -20,11 +20,19 @@ import {
     switchMap,
     takeUntil,
 } from 'rxjs/operators';
-import { Gerencia } from '../../../../../../../api/model/gerencia';
-import { GerenciasAreaComponent } from '../areas/areas.component';
+import { getGuid } from '../../../../../../../api/common/Utils';
+import {
+    Area,
+    Gerencia,
+    Gerenciard,
+    Servicio,
+    Subgerencia,
+} from '../../../../../../../api/model/gerencia';
+import { GerenciasAreasComponent } from '../areas/areas.component';
+import { GerenciasAsignacionComponent } from '../asignacion/asignacion.component';
 import { GerenciasDetailsComponent } from '../details/details.component';
 import { GerenciasService } from '../gerencias.service';
-import { GerenciasServicioComponent } from '../servicios/servicios.component';
+import { GerenciasServiciosComponent } from '../servicios/servicios.component';
 import { GerenciasSubgerenciaComponent } from '../subgerencias/subgerencias.component';
 
 @Component({
@@ -58,7 +66,6 @@ export class GerenciasListComponent implements OnInit {
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: User) => {
-                console.log('el user', user);
                 this.user = user;
             });
 
@@ -148,7 +155,7 @@ export class GerenciasListComponent implements OnInit {
     }
 
     editarArea(gerencia: Gerencia, i: number, ia: number) {
-        this._matDialog.open(GerenciasAreaComponent, {
+        this._matDialog.open(GerenciasAreasComponent, {
             autoFocus: false,
             data: {
                 gerencia: cloneDeep(gerencia),
@@ -159,7 +166,7 @@ export class GerenciasListComponent implements OnInit {
     }
 
     editarServicio(gerencia: Gerencia, i: number, ia: number, ias: number) {
-        this._matDialog.open(GerenciasServicioComponent, {
+        this._matDialog.open(GerenciasServiciosComponent, {
             autoFocus: false,
             data: {
                 gerencia: cloneDeep(gerencia),
@@ -171,17 +178,63 @@ export class GerenciasListComponent implements OnInit {
     }
 
     subscribirse(gerencia: Gerencia, i: number, ia: number, ias: number) {
-        console.log('subs', gerencia);
+        if (!gerencia.gerenciasrd[i].areas[ia].servicios[ias].ascritos)
+            gerencia.gerenciasrd[i].areas[ia].servicios[ias].ascritos = [];
 
-        if (!gerencia.subgerencias[i].areas[ia].servicios[ias].ascritos)
-            gerencia.subgerencias[i].areas[ia].servicios[ias].ascritos = [];
-
-        gerencia.subgerencias[i].areas[ia].servicios[ias].ascritos.push({
+        gerencia.gerenciasrd[i].areas[ia].servicios[ias].ascritos.push({
             id: this.user.id,
             name: this.user.name,
             email: this.user.email,
         });
 
         this.gerenciaChanged.next(gerencia);
+    }
+
+    agregarGerenciard(gerencia: Gerencia) {
+        const dialogRef = this._matDialog.open(GerenciasAsignacionComponent, {
+            autoFocus: false,
+            data: {
+                titulo: `${gerencia.nombre}: nueva gerencia R2`,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Gerenciard) => {
+            result.id = getGuid();
+            if (!gerencia.gerenciasrd) gerencia.gerenciasrd = [];
+            gerencia.gerenciasrd.push(result);
+            this.gerenciaChanged.next(gerencia);
+        });
+    }
+
+    agregarSubGerencia(gerencia: Gerencia) {
+        const dialogRef = this._matDialog.open(GerenciasAsignacionComponent, {
+            autoFocus: false,
+            data: {
+                titulo: `${gerencia.nombre}: nueva subgerencia`,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Subgerencia) => {
+            result.id = getGuid();
+            if (!gerencia.subgerencias) gerencia.subgerencias = [];
+            gerencia.subgerencias.push(result);
+            this.gerenciaChanged.next(gerencia);
+        });
+    }
+
+    agregarArea(gerencia: Gerencia) {
+        const dialogRef = this._matDialog.open(GerenciasAsignacionComponent, {
+            autoFocus: false,
+            data: {
+                titulo: `${gerencia.nombre}: nueva área`,
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Area) => {
+            result.id = getGuid();
+            if (!gerencia.areas) gerencia.areas = [];
+            gerencia.areas.push(result);
+            this.gerenciaChanged.next(gerencia);
+        });
     }
 }

@@ -26,7 +26,7 @@ import { GerenciasSubgerenciaComponent } from '../subgerencias/subgerencias.comp
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GerenciasAreaComponent implements OnInit {
+export class GerenciasAreasComponent implements OnInit {
     gerencia$: Observable<Gerencia>;
     personas: Persona[];
     controlResponsable = new FormControl();
@@ -83,12 +83,11 @@ export class GerenciasAreaComponent implements OnInit {
     }
 
     displayFn(user: Persona): string {
-        console.log('user', user);
         return user && user.name ? user.name : '';
     }
 
     responsableCambiado(gerencia: Gerencia, data: Persona) {
-        gerencia.subgerencias[this._data.index].areas[
+        gerencia.gerenciasrd[this._data.index].areas[
             this._data.iarea
         ].responsable = {
             id: data.id,
@@ -100,13 +99,13 @@ export class GerenciasAreaComponent implements OnInit {
 
     addServicioOnArea(gerencia: Gerencia, servicio: string): void {
         if (
-            !gerencia.subgerencias[this._data.index].areas[this._data.iarea]
+            !gerencia.gerenciasrd[this._data.index].areas[this._data.iarea]
                 .servicios
         )
-            gerencia.subgerencias[this._data.index].areas[
+            gerencia.gerenciasrd[this._data.index].areas[
                 this._data.iarea
             ].servicios = [];
-        gerencia.subgerencias[this._data.index].areas[
+        gerencia.gerenciasrd[this._data.index].areas[
             this._data.iarea
         ].servicios.push({ nombre: servicio });
         this.gerenciaChanged.next(gerencia);

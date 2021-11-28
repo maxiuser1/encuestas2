@@ -17,10 +17,16 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'app/shared/shared.module';
 import { GerenciasSubgerenciaComponent } from './subgerencias/subgerencias.component';
-import { GerenciasAreaComponent } from './areas/areas.component';
-import { GerenciasServicioComponent } from './servicios/servicios.component';
+import { GerenciasAreasComponent } from './areas/areas.component';
+import { GerenciasServiciosComponent } from './servicios/servicios.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatMenuModule } from '@angular/material/menu';
+import { GerenciasAsignacionComponent } from './asignacion/asignacion.component';
+import { GerenciasGerenciardComponent } from './gerenciard/gerenciard.component';
+import { SubgerenciaComponent } from './subgerencia/subgerencia.component';
+import { GerenciasAreaComponent } from './area/area.component';
+import { GerenciasServicioComponent } from './servicio/servicio.component';
 
 const routes: Route[] = [
     {
@@ -51,6 +57,11 @@ const routes: Route[] = [
         GerenciasListComponent,
         GerenciasDetailsComponent,
         GerenciasSubgerenciaComponent,
+        GerenciasAreasComponent,
+        GerenciasServiciosComponent,
+        GerenciasAsignacionComponent,
+        GerenciasGerenciardComponent,
+        SubgerenciaComponent,
         GerenciasAreaComponent,
         GerenciasServicioComponent,
     ],
@@ -64,6 +75,7 @@ const routes: Route[] = [
         MatChipsModule,
         MatAutocompleteModule,
         MatSlideToggleModule,
+        MatMenuModule,
         MatButtonModule,
         SharedModule,
     ],

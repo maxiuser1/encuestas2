@@ -32,28 +32,13 @@
 
 
                 <div>
-                    <mat-form-field class="fuse-mat-no-subscript w-full">
-                        <mat-label>Responsable</mat-label>
-                        <input class="w-full p-2 text-2xl"
-                            matInput
-                            [matAutocomplete]="auto"
-                            placeholder="Responsable"
-                            [formControl]="controlResponsable">
-                        <mat-autocomplete #auto="matAutocomplete"
-                            (optionSelected)="responsableCambiado(gerencia,$event.option.value)"
-                            [displayWith]="displayFn">
-                            <mat-option *ngFor="let persona of personasFiltradas | async"
-                                [value]="persona">
-                                {{persona.name}}
-                            </mat-option>
-                        </mat-autocomplete>
-                    </mat-form-field>
+
                 </div>
 
                 <div class="mx-2 mt-4 space-y-1.5 border p-5">
                     <h5 class="text-primary-500">Subgerencias</h5>
                     <ng-container *ngFor="
-                            let subgerencia of gerencia.subgerencias;
+                            let subgerencia of gerencia.gerenciasrd;
                             index as i;
                             trackBy: trackByFn
                         ">

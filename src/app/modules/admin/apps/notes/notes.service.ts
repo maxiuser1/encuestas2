@@ -56,7 +56,6 @@ export class NotesService {
     getLabels(): Observable<Label[]> {
         return this._httpClient.get<Label[]>('api/apps/notes/labels').pipe(
             tap((response: Label[]) => {
-                console.log('response labeels', response);
                 this._labels.next(response);
             })
         );
@@ -73,7 +72,6 @@ export class NotesService {
             .pipe(
                 tap((labels) => {
                     // Update the labels
-                    console.log('labels on add', labels);
                     this._labels.next(labels);
                 })
             );

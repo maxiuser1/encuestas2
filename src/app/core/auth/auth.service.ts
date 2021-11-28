@@ -67,7 +67,6 @@ export class AuthService {
 
         return this._httpClient.post('api/public/persona', credentials).pipe(
             switchMap((response: any) => {
-                console.log('response login', response);
                 // Store the access token in the local storage
                 this.accessToken = response.id;
 
@@ -166,6 +165,10 @@ export class AuthService {
         if (!this.accessToken) {
             return of(false);
         }
+
+        this._userService.user$.subscribe((user) => {
+            if (!user) return of(false);
+        });
 
         // If the access token exists and it didn't expire, sign in using it
         return this.signInUsingToken();

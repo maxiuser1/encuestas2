@@ -2,34 +2,42 @@ export interface Gerencia {
     id?: string;
     nombre?: string;
     empresa?: string;
+    gerenciasrd?: Gerenciard[];
     subgerencias?: Subgerencia[];
+    areas?: Area[];
     responsable?: Responsable;
+}
+
+export interface Gerenciard {
+    id?: string;
+    nombre?: string;
+    areas?: Area[];
+    responsable?: Responsable;
+    subgerencias?: Subgerencia[];
 }
 
 export interface Subgerencia {
+    id?: string;
     nombre?: string;
     areas?: Area[];
     responsable?: Responsable;
-    subgerencias?: SubSubgerencia[];
-}
-
-export interface SubSubgerencia {
-    nombre?: string;
-    areas?: Area[];
-    responsable?: Responsable;
+    servicios?: Servicio[];
 }
 
 export interface Area {
+    id?: string;
     nombre?: string;
     servicios?: Servicio[];
     responsable?: Responsable;
 }
 
 export interface Servicio {
+    id?: string;
     nombre?: string;
     responsable?: Responsable;
     equipo?: Responsable[];
     ascritos?: Responsable[];
+    definidos?: Responsable[];
     tipo?: string;
 }
 

@@ -86,12 +86,11 @@ export class GerenciasSubgerenciaComponent implements OnInit {
     }
 
     displayFn(user: Persona): string {
-        console.log('user', user);
         return user && user.name ? user.name : '';
     }
 
     responsableCambiado(gerencia: Gerencia, data: Persona) {
-        gerencia.subgerencias[this._data.index].responsable = {
+        gerencia.gerenciasrd[this._data.index].responsable = {
             id: data.id,
             name: data.name,
             email: data.email,
@@ -100,15 +99,14 @@ export class GerenciasSubgerenciaComponent implements OnInit {
     }
 
     addAreaOnSubgerencia(gerencia: Gerencia, area: string): void {
-        if (!gerencia.subgerencias[this._data.index].areas)
-            gerencia.subgerencias[this._data.index].areas = [];
-        console.log('gerencia on add area', gerencia);
-        gerencia.subgerencias[this._data.index].areas.push({ nombre: area });
+        if (!gerencia.gerenciasrd[this._data.index].areas)
+            gerencia.gerenciasrd[this._data.index].areas = [];
+        gerencia.gerenciasrd[this._data.index].areas.push({ nombre: area });
         this.gerenciaChanged.next(gerencia);
     }
 
     removeAreaFromSubgerencia(gerencia: Gerencia, i: number): void {
-        gerencia.subgerencias[this._data.index].areas.splice(i, 1);
+        gerencia.gerenciasrd[this._data.index].areas.splice(i, 1);
         this.gerenciaChanged.next(gerencia);
     }
 }

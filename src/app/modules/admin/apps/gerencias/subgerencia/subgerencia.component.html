@@ -1,0 +1,44 @@
+<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8">
+    <div class="text-lg font-medium">Subgerencia: {{ subgerencia.nombre }} ({{subgerencia.responsable?.name || 'sin responsable'}})</div>
+    <button class="ml-auto"
+        mat-icon-button
+        [matMenuTriggerFor]="conversationHeaderMenu">
+        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+        <mat-menu #conversationHeaderMenu>
+            <button (click)="agregarArea()"
+                mat-menu-item>
+                <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
+                Agregar área
+            </button>
+            <button (click)="agregarServicio()"
+                mat-menu-item>
+                <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+                Agregar servicio
+            </button>
+        </mat-menu>
+    </button>
+</div>
+
+<div class="flex flex-col p-6">
+    <div class="grid gap-8">
+        <ng-container *ngFor="let cadaArea of subgerencia.areas; let i = index">
+            <div class="mt-2 rounded-xl bg-gray-400 bg-opacity-12 dark:bg-transparent dark:border">
+                <gerencias-area [gerencia]="gerencia"
+                    [gerenciard]="gerenciard"
+                    [subgerencia]="subgerencia"
+                    [area]="cadaArea">
+                </gerencias-area>
+            </div>
+        </ng-container>
+
+        <ng-container *ngFor="let cadaServicio of subgerencia.servicios; let i = index">
+            <div class="mt-2 rounded-xl bg-gray-800 bg-opacity-12 dark:bg-transparent dark:border">
+                <gerencias-servicio [gerencia]="gerencia"
+                    [gerenciard]="gerenciard"
+                    [subgerencia]="subgerencia"
+                    [servicio]="cadaServicio">
+                </gerencias-servicio>
+            </div>
+        </ng-container>
+    </div>
+</div>

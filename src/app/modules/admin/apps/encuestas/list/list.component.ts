@@ -38,7 +38,6 @@ export class EncuestasListComponent implements OnInit {
         ]).pipe(
             distinctUntilChanged(),
             map(([encuestas, query]) => {
-                console.log('llegaron enc', encuestas);
                 if (!encuestas || !encuestas.length) {
                     return;
                 }

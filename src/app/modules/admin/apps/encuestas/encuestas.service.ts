@@ -28,7 +28,6 @@ export class EncuestasService {
     getEncuestas(): Observable<Encuesta[]> {
         return this._httpClient.get<Encuesta[]>('api/private/encuestas').pipe(
             tap((gerencias) => {
-                console.log('tap', gerencias);
                 this._encuestas.next(gerencias);
             })
         );

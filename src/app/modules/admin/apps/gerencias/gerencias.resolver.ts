@@ -19,7 +19,6 @@ export class GerenciasResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<Gerencia[]> {
-        console.log('llamo resolver');
         return this._gerenciasService.getGerencias();
     }
 }

@@ -38,10 +38,8 @@ export class UserService {
      * Get the current logged in user data
      */
     get(): Observable<User> {
-        console.log('llamo al get');
         return this._httpClient.get<User>('api/public/persona?id=').pipe(
             tap((user) => {
-                console.log('fuse user', user);
                 this._user.next(user);
             })
         );
@@ -53,7 +51,6 @@ export class UserService {
      * @param user
      */
     update(user: User): Observable<any> {
-        console.log('llamo al update', user);
         return this._httpClient.patch<User>('api/common/user', { user }).pipe(
             map((response) => {
                 this._user.next(response);

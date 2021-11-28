@@ -4,7 +4,7 @@
             <div>
                 <input class="w-full p-2 text-2xl"
                     [(ngModel)]="
-                        gerencia.subgerencias[_data.index].areas[_data.iarea]
+                        gerencia.gerenciasrd[_data.index].areas[_data.iarea]
                             .nombre
                     " />
             </div>
@@ -32,7 +32,7 @@
             <div class="mx-2 mt-4 space-y-1.5 border p-5">
                 <h5 class="text-primary-500">servicios</h5>
                 <ng-container *ngFor="
-                        let servicio of gerencia.subgerencias[_data.index]
+                        let servicio of gerencia.gerenciasrd[_data.index]
                             .areas[_data.iarea].servicios;
                         index as i;
                         trackBy: trackByFn

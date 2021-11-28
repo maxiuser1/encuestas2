@@ -21,7 +21,8 @@
       "name": "items",
       "databaseName": "organizacion",
       "collectionName": "personas",
-      "connectionStringSetting": "CosmosDBConnection"
+      "connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery": "SELECT c.name, c.id, c.email from c"
     }
   ],
   "scriptFile": "../dist/getPersonas/index.js"
