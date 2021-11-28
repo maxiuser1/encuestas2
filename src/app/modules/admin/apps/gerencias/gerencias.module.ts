@@ -29,6 +29,7 @@ import { GerenciasAreaComponent } from './area/area.component';
 import { GerenciasServicioComponent } from './servicio/servicio.component';
 import { GerenciasAgregarServicioComponent } from './agregar-servicio/agregar-servicio.component';
 import { GerenciasEditarServicioComponent } from './editar-servicio/editar-servicio.component';
+import { GerenciasEditarAsignacionComponent } from './editar-asignacion/editar-asignacion.component';
 
 const routes: Route[] = [
     {
@@ -68,6 +69,7 @@ const routes: Route[] = [
         GerenciasServicioComponent,
         GerenciasAgregarServicioComponent,
         GerenciasEditarServicioComponent,
+        GerenciasEditarAsignacionComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

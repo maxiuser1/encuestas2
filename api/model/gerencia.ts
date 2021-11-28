@@ -52,3 +52,9 @@ export interface Persona {
     name?: string;
     email?: string;
 }
+
+export interface Asignable {
+    id?: string;
+    nombre?: string;
+    responsable?: Responsable;
+}

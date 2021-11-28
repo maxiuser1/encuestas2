@@ -8,7 +8,12 @@ import {
     OnInit,
     ViewEncapsulation,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+    FormBuilder,
+    FormControl,
+    FormGroup,
+    Validators,
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDrawerToggleResult } from '@angular/material/sidenav';
 import { Observable, of, Subject } from 'rxjs';
@@ -33,9 +38,10 @@ import { GerenciasListComponent } from '../list/list.component';
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GerenciasDetailsComponent implements OnInit, OnDestroy {
-    gerencia$: Observable<Gerencia>;
+export class GerenciasDetailsComponent implements OnInit {
     personas: Persona[];
+    form!: FormGroup;
+
     personasFiltradas: Observable<Persona[]>;
     controlResponsable = new FormControl();
 
@@ -44,26 +50,32 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
 
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
+        private _formBuilder: FormBuilder,
         @Inject(MAT_DIALOG_DATA) private _data: { gerencia: Gerencia },
         private _gerenciasService: GerenciasService,
         private _matDialogRef: MatDialogRef<GerenciasDetailsComponent>
     ) {}
 
     ngOnInit(): void {
-        if (this._data.gerencia.id) {
+        if (this._data.gerencia?.id) {
+            this.form = this._formBuilder.group({
+                nombre: [this._data.gerencia.nombre, [Validators.required]],
+                responsable: [
+                    this._data.gerencia.responsable,
+                    [Validators.required],
+                ],
+                empresa: [this._data.gerencia.empresa, [Validators.required]],
+            });
+
             this._gerenciasService
                 .getGerencia(this._data.gerencia.id)
                 .subscribe();
-            this.gerencia$ = this._gerenciasService.gerencia$;
         } else {
-            const gerencia = {
-                id: null,
-                nombre: '',
-                empresa: '',
-                subgerencias: [],
-            };
-
-            this.gerencia$ = of(gerencia);
+            this.form = this._formBuilder.group({
+                nombre: ['', [Validators.required]],
+                responsable: ['', [Validators.required]],
+                empresa: ['', [Validators.required]],
+            });
         }
 
         this._gerenciasService.personas$
@@ -99,57 +111,15 @@ export class GerenciasDetailsComponent implements OnInit, OnDestroy {
             option.name.toLowerCase().includes(filterValue)
         );
     }
-    responsableCambiado(gerencia: Gerencia, data: Persona) {
-        gerencia.responsable = {
-            id: data.id,
-            name: data.name,
-            email: data.email,
-        };
-        this.gerenciaChanged.next(gerencia);
-    }
 
     displayFn(user: Persona): string {
         return user && user.name ? user.name : '';
     }
 
-    ngOnDestroy(): void {
-        // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
-        this._unsubscribeAll.complete();
-    }
-
-    updateGerenciaDetails(gerencia: Gerencia): void {
-        this.gerenciaChanged.next(gerencia);
-    }
-
-    crearGerencia(gerencia: Gerencia): void {
-        this._gerenciasService
-            .createGerencia(gerencia)
-            .subscribe((newGerencia: Gerencia) => {
-                this.gerencia$ = this._gerenciasService.gerencia$;
-                this._changeDetectorRef.markForCheck();
-            });
-    }
-
-    updateTaskOnNote(gerencia: Gerencia, subgerencia: Subgerencia) {
-        this.gerenciaChanged.next(gerencia);
-    }
-
-    addSubgerenciaOnGerencia(gerencia: Gerencia, subgerencia: string): void {
-        if (subgerencia.trim() === '') {
-            return;
+    onSubmit() {
+        console.log('thisfoirm', this.form);
+        if (this.form.valid) {
+            this._matDialogRef.close(this.form.value);
         }
-
-        gerencia.gerenciasrd.push({ nombre: subgerencia });
-        this.gerenciaChanged.next(gerencia);
-    }
-
-    updateSubgerenciaOnGrencia(gerencia: Gerencia, subgerencia: string) {
-        if (subgerencia) this.gerenciaChanged.next(gerencia);
-    }
-
-    removeSubgerenciaFromGerencia(gerencia: Gerencia, index) {
-        gerencia.gerenciasrd.splice(index, 1);
-        this.gerenciaChanged.next(gerencia);
     }
 }

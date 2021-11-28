@@ -7,16 +7,19 @@ import {
     ChangeDetectorRef,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Subject } from 'rxjs';
 import { debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { getGuid } from '../../../../../../../api/common/Utils';
 import {
     Area,
+    Asignable,
     Gerencia,
     Gerenciard,
     Subgerencia,
 } from '../../../../../../../api/model/gerencia';
 import { GerenciasAsignacionComponent } from '../asignacion/asignacion.component';
+import { GerenciasEditarAsignacionComponent } from '../editar-asignacion/editar-asignacion.component';
 import { GerenciasService } from '../gerencias.service';
 
 @Component({
@@ -35,7 +38,8 @@ export class GerenciasGerenciardComponent implements OnInit {
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _gerenciasService: GerenciasService,
-        private _matDialog: MatDialog
+        private _matDialog: MatDialog,
+        private _fuseConfirmationService: FuseConfirmationService
     ) {}
 
     ngOnInit(): void {
@@ -114,6 +118,57 @@ export class GerenciasGerenciardComponent implements OnInit {
                     (t) => t.id === this.gerenciard.id
                 )
             ].areas.push(result);
+            this.gerenciaChanged.next(this.gerencia);
+        });
+    }
+
+    eliminar() {
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Eliminar gerencia R2',
+            message: '¿Estas seguro que vas a eliminar esta gerencia?',
+            actions: {
+                confirm: {
+                    label: 'Eliminar',
+                },
+            },
+        });
+
+        confirmation.afterClosed().subscribe((result) => {
+            if (result === 'confirmed') {
+                const igerenciard = this.gerencia.gerenciasrd.findIndex(
+                    (t) => t.id === this.gerenciard.id
+                );
+
+                this.gerencia.gerenciasrd.splice(igerenciard, 1);
+                this.gerenciaChanged.next(this.gerencia);
+            }
+        });
+    }
+
+    editar() {
+        const dialogRef = this._matDialog.open(
+            GerenciasEditarAsignacionComponent,
+            {
+                autoFocus: false,
+                data: {
+                    titulo: `Gerencia ${this.gerencia.nombre}-${
+                        this.gerenciard?.nombre || ''
+                    }: nuevo servicio`,
+                    asignable: this.gerenciard,
+                },
+            }
+        );
+
+        dialogRef.afterClosed().subscribe((result: Asignable) => {
+            const igerenciard = this.gerencia.gerenciasrd.findIndex(
+                (t) => t.id === this.gerenciard.id
+            );
+
+            this.gerencia.gerenciasrd[igerenciard] = {
+                ...this.gerencia.gerenciasrd[igerenciard],
+                nombre: result.nombre,
+                responsable: result.responsable,
+            };
             this.gerenciaChanged.next(this.gerencia);
         });
     }

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { getGuid } from '../../../../../../../api/common/Utils';
 import {
     Area,
+    Asignable,
     Gerencia,
     Gerenciard,
     Subgerencia,
@@ -19,6 +20,8 @@ import { Subject } from 'rxjs';
 import { debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { GerenciasService } from '../gerencias.service';
 import { GerenciasAgregarServicioComponent } from '../agregar-servicio/agregar-servicio.component';
+import { GerenciasEditarAsignacionComponent } from '../editar-asignacion/editar-asignacion.component';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 
 @Component({
     selector: 'gerencias-area',
@@ -38,7 +41,8 @@ export class GerenciasAreaComponent implements OnInit {
     constructor(
         private _matDialog: MatDialog,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _gerenciasService: GerenciasService
+        private _gerenciasService: GerenciasService,
+        private _fuseConfirmationService: FuseConfirmationService
     ) {}
 
     ngOnInit(): void {
@@ -53,6 +57,166 @@ export class GerenciasAreaComponent implements OnInit {
             .subscribe(() => {
                 this._changeDetectorRef.markForCheck();
             });
+    }
+
+    eliminar() {
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Eliminar área',
+            message: '¿Estas seguro que vas a eliminar esta área?',
+            actions: {
+                confirm: {
+                    label: 'Eliminar',
+                },
+            },
+        });
+
+        confirmation.afterClosed().subscribe((result) => {
+            if (result === 'confirmed') {
+                if (this.gerenciard) {
+                    const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
+                        (t) => t.id === this.gerenciard.id
+                    );
+
+                    if (this.subgerencia) {
+                        const isubgerencia = this.gerencia.gerenciasrd[
+                            igerenciaRd
+                        ].subgerencias.findIndex(
+                            (t) => t.id == this.subgerencia.id
+                        );
+
+                        const iarea = this.gerencia.gerenciasrd[
+                            igerenciaRd
+                        ].subgerencias[isubgerencia].areas.findIndex(
+                            (t) => t.id == this.area.id
+                        );
+
+                        this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                            isubgerencia
+                        ].areas.splice(iarea, 1);
+                    } else {
+                        const iarea = this.gerencia.gerenciasrd[
+                            igerenciaRd
+                        ].areas.findIndex((t) => t.id == this.area.id);
+
+                        this.gerencia.gerenciasrd[igerenciaRd].areas.splice(
+                            iarea,
+                            1
+                        );
+                    }
+                } else {
+                    if (this.subgerencia) {
+                        const isubgerencia =
+                            this.gerencia.subgerencias.findIndex(
+                                (t) => t.id == this.subgerencia.id
+                            );
+
+                        const iarea = this.gerencia.subgerencias[
+                            isubgerencia
+                        ].areas.findIndex((t) => t.id == this.area.id);
+
+                        this.gerencia.subgerencias[isubgerencia].areas.splice(
+                            iarea,
+                            1
+                        );
+                    } else {
+                        const iarea = this.gerencia.areas.findIndex(
+                            (t) => t.id == this.area.id
+                        );
+
+                        this.gerencia.areas.splice(iarea, 1);
+                    }
+                }
+
+                this.gerenciaChanged.next(this.gerencia);
+            }
+        });
+    }
+
+    editar() {
+        const dialogRef = this._matDialog.open(
+            GerenciasEditarAsignacionComponent,
+            {
+                autoFocus: false,
+                data: {
+                    titulo: `Gerencia ${this.gerencia.nombre}-${
+                        this.gerenciard?.nombre || ''
+                    }: nuevo servicio`,
+                    asignable: this.area,
+                },
+            }
+        );
+
+        dialogRef.afterClosed().subscribe((result: Asignable) => {
+            if (this.gerenciard) {
+                const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
+                    (t) => t.id === this.gerenciard.id
+                );
+
+                if (this.subgerencia) {
+                    const isubgerencia = this.gerencia.gerenciasrd[
+                        igerenciaRd
+                    ].subgerencias.findIndex(
+                        (t) => t.id == this.subgerencia.id
+                    );
+
+                    const iarea = this.gerencia.gerenciasrd[
+                        igerenciaRd
+                    ].subgerencias[isubgerencia].areas.findIndex(
+                        (t) => t.id == this.area.id
+                    );
+
+                    this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                        isubgerencia
+                    ].areas[iarea] = {
+                        ...this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                            isubgerencia
+                        ].areas[iarea],
+                        nombre: result.nombre,
+                        responsable: result.responsable,
+                    };
+                } else {
+                    const iarea = this.gerencia.gerenciasrd[
+                        igerenciaRd
+                    ].areas.findIndex((t) => t.id == this.area.id);
+
+                    this.gerencia.gerenciasrd[igerenciaRd].areas[iarea] = {
+                        ...this.gerencia.gerenciasrd[igerenciaRd].areas[iarea],
+                        nombre: result.nombre,
+                        responsable: result.responsable,
+                    };
+                }
+            } else {
+                if (this.subgerencia) {
+                    const isubgerencia = this.gerencia.subgerencias.findIndex(
+                        (t) => t.id == this.subgerencia.id
+                    );
+
+                    const iarea = this.gerencia.subgerencias[
+                        isubgerencia
+                    ].areas.findIndex((t) => t.id == this.area.id);
+
+                    this.gerencia.subgerencias[isubgerencia].areas[iarea] = {
+                        ...this.gerencia.subgerencias[isubgerencia].areas[
+                            iarea
+                        ],
+                        nombre: result.nombre,
+                        responsable: result.responsable,
+                    };
+                } else {
+                    const iarea = this.gerencia.areas.findIndex(
+                        (t) => t.id == this.area.id
+                    );
+
+                    this.gerencia.areas[iarea] = {
+                        ...this.gerencia.areas[iarea],
+                        nombre: result.nombre,
+                        responsable: result.responsable,
+                    };
+                }
+            }
+
+            this.gerenciaChanged.next(this.gerencia);
+        });
     }
 
     agregarServicio() {

@@ -11,6 +11,7 @@ import {
     Gerenciard,
     Subgerencia,
     Servicio,
+    Asignable,
 } from '../../../../../../../api/model/gerencia';
 import { debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -18,6 +19,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { GerenciasService } from '../gerencias.service';
 import { GerenciasAsignacionComponent } from '../asignacion/asignacion.component';
 import { getGuid } from '../../../../../../../api/common/Utils';
+import { GerenciasEditarAsignacionComponent } from '../editar-asignacion/editar-asignacion.component';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 
 @Component({
     selector: 'gerencias-subgerencia',
@@ -36,7 +39,8 @@ export class SubgerenciaComponent implements OnInit {
     constructor(
         private _matDialog: MatDialog,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _gerenciasService: GerenciasService
+        private _gerenciasService: GerenciasService,
+        private _fuseConfirmationService: FuseConfirmationService
     ) {}
 
     ngOnInit(): void {
@@ -97,6 +101,107 @@ export class SubgerenciaComponent implements OnInit {
                     this.gerencia.subgerencias[isubgerencia].areas = [];
 
                 this.gerencia.subgerencias[isubgerencia].areas.push(result);
+            }
+
+            this.gerenciaChanged.next(this.gerencia);
+        });
+    }
+
+    eliminar() {
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Eliminar subgerencia',
+            message: '¿Estas seguro que vas a eliminar esta subgerencia?',
+            actions: {
+                confirm: {
+                    label: 'Eliminar',
+                },
+            },
+        });
+
+        confirmation.afterClosed().subscribe((result) => {
+            if (result === 'confirmed') {
+                if (this.gerenciard) {
+                    // si pertenezco a una gerencia R2
+                    const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
+                        (t) => t.id === this.gerenciard.id
+                    );
+
+                    const isubgerencia = this.gerencia.gerenciasrd[
+                        igerenciaRd
+                    ].subgerencias.findIndex(
+                        (p) => p.id == this.subgerencia.id
+                    );
+
+                    if (
+                        !this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                            isubgerencia
+                        ].servicios
+                    )
+                        this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                            isubgerencia
+                        ].servicios = [];
+
+                    this.gerencia.gerenciasrd[igerenciaRd].subgerencias.splice(
+                        isubgerencia,
+                        1
+                    );
+                } else {
+                    const isubgerencia = this.gerencia.subgerencias.findIndex(
+                        (t) => t.id == this.subgerencia.id
+                    );
+
+                    this.gerencia.subgerencias.splice(isubgerencia, 1);
+                }
+
+                this.gerenciaChanged.next(this.gerencia);
+            }
+        });
+    }
+
+    editar() {
+        const dialogRef = this._matDialog.open(
+            GerenciasEditarAsignacionComponent,
+            {
+                autoFocus: false,
+                data: {
+                    titulo: `Gerencia ${this.gerencia.nombre}-${
+                        this.gerenciard?.nombre || ''
+                    }: nuevo servicio`,
+                    asignable: this.subgerencia,
+                },
+            }
+        );
+
+        dialogRef.afterClosed().subscribe((result: Asignable) => {
+            if (this.gerenciard) {
+                // si pertenezco a una gerencia R2
+                const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
+                    (t) => t.id === this.gerenciard.id
+                );
+
+                const isubgerencia = this.gerencia.gerenciasrd[
+                    igerenciaRd
+                ].subgerencias.findIndex((p) => p.id == this.subgerencia.id);
+
+                this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                    isubgerencia
+                ] = {
+                    ...this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                        isubgerencia
+                    ],
+                    nombre: result.nombre,
+                    responsable: result.responsable,
+                };
+            } else {
+                const isubgerencia = this.gerencia.subgerencias.findIndex(
+                    (t) => t.id == this.subgerencia.id
+                );
+
+                this.gerencia.subgerencias[isubgerencia] = {
+                    ...this.gerencia.subgerencias[isubgerencia],
+                    nombre: result.nombre,
+                    responsable: result.responsable,
+                };
             }
 
             this.gerenciaChanged.next(this.gerencia);

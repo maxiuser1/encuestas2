@@ -127,20 +127,40 @@ export class GerenciasListComponent implements OnInit {
     }
 
     agregarGerencia(): void {
-        this._matDialog.open(GerenciasDetailsComponent, {
+        const dialogRef = this._matDialog.open(GerenciasDetailsComponent, {
             autoFocus: false,
             data: {
                 gerencia: {},
             },
         });
+
+        dialogRef.afterClosed().subscribe((result: Gerencia) => {
+            if (result) {
+                this._gerenciasService.createGerencia(result).subscribe((t) => {
+                    this._changeDetectorRef.markForCheck();
+                });
+            }
+        });
     }
 
     editarGerencia(gerencia: Gerencia): void {
-        this._matDialog.open(GerenciasDetailsComponent, {
+        const dialogRef = this._matDialog.open(GerenciasDetailsComponent, {
             autoFocus: false,
             data: {
                 gerencia: cloneDeep(gerencia),
             },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Gerencia) => {
+            gerencia = {
+                ...gerencia,
+                nombre: result.nombre,
+                responsable: result.responsable,
+                empresa: result.empresa,
+            };
+            this._gerenciasService.updateGerencia(gerencia).subscribe((t) => {
+                this._changeDetectorRef.markForCheck();
+            });
         });
     }
 
@@ -199,10 +219,12 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Gerenciard) => {
-            result.id = getGuid();
-            if (!gerencia.gerenciasrd) gerencia.gerenciasrd = [];
-            gerencia.gerenciasrd.push(result);
-            this.gerenciaChanged.next(gerencia);
+            if (result) {
+                result.id = getGuid();
+                if (!gerencia.gerenciasrd) gerencia.gerenciasrd = [];
+                gerencia.gerenciasrd.push(result);
+                this.gerenciaChanged.next(gerencia);
+            }
         });
     }
 
@@ -215,10 +237,12 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Subgerencia) => {
-            result.id = getGuid();
-            if (!gerencia.subgerencias) gerencia.subgerencias = [];
-            gerencia.subgerencias.push(result);
-            this.gerenciaChanged.next(gerencia);
+            if (result) {
+                result.id = getGuid();
+                if (!gerencia.subgerencias) gerencia.subgerencias = [];
+                gerencia.subgerencias.push(result);
+                this.gerenciaChanged.next(gerencia);
+            }
         });
     }
 
@@ -231,10 +255,12 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Area) => {
-            result.id = getGuid();
-            if (!gerencia.areas) gerencia.areas = [];
-            gerencia.areas.push(result);
-            this.gerenciaChanged.next(gerencia);
+            if (result) {
+                result.id = getGuid();
+                if (!gerencia.areas) gerencia.areas = [];
+                gerencia.areas.push(result);
+                this.gerenciaChanged.next(gerencia);
+            }
         });
     }
 }

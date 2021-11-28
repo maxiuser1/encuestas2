@@ -7,6 +7,7 @@ import {
     ChangeDetectorRef,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { Subject } from 'rxjs';
 import { debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import {
@@ -37,7 +38,8 @@ export class GerenciasServicioComponent implements OnInit {
     constructor(
         private _matDialog: MatDialog,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _gerenciasService: GerenciasService
+        private _gerenciasService: GerenciasService,
+        private _fuseConfirmationService: FuseConfirmationService
     ) {}
 
     ngOnInit(): void {
@@ -55,104 +57,127 @@ export class GerenciasServicioComponent implements OnInit {
     }
 
     eliminar() {
-        if (this.gerenciard) {
-            const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
-                (t) => t.id === this.gerenciard.id
-            );
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Eliminar servicio',
+            message: '¿Estas seguro que vas a eliminar este servicio?',
+            actions: {
+                confirm: {
+                    label: 'Eliminar',
+                },
+            },
+        });
 
-            if (this.subgerencia) {
-                const isubgerencia = this.gerencia.gerenciasrd[
-                    igerenciaRd
-                ].subgerencias.findIndex((t) => t.id == this.subgerencia.id);
-
-                if (this.area) {
-                    const iarea = this.gerencia.gerenciasrd[
-                        igerenciaRd
-                    ].subgerencias[isubgerencia].areas.findIndex(
-                        (t) => t.id == this.area.id
+        confirmation.afterClosed().subscribe((result) => {
+            if (result === 'confirmed') {
+                if (this.gerenciard) {
+                    const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
+                        (t) => t.id === this.gerenciard.id
                     );
 
-                    const iservicio = this.gerencia.gerenciasrd[
-                        igerenciaRd
-                    ].subgerencias[isubgerencia].areas[
-                        iarea
-                    ].servicios.findIndex((t) => t.id == this.servicio.id);
+                    if (this.subgerencia) {
+                        const isubgerencia = this.gerencia.gerenciasrd[
+                            igerenciaRd
+                        ].subgerencias.findIndex(
+                            (t) => t.id == this.subgerencia.id
+                        );
 
-                    this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
-                        isubgerencia
-                    ].areas[iarea].servicios.splice(iservicio, 1);
+                        if (this.area) {
+                            const iarea = this.gerencia.gerenciasrd[
+                                igerenciaRd
+                            ].subgerencias[isubgerencia].areas.findIndex(
+                                (t) => t.id == this.area.id
+                            );
+
+                            const iservicio = this.gerencia.gerenciasrd[
+                                igerenciaRd
+                            ].subgerencias[isubgerencia].areas[
+                                iarea
+                            ].servicios.findIndex(
+                                (t) => t.id == this.servicio.id
+                            );
+
+                            this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                                isubgerencia
+                            ].areas[iarea].servicios.splice(iservicio, 1);
+                        } else {
+                            const iservicio = this.gerencia.gerenciasrd[
+                                igerenciaRd
+                            ].subgerencias[isubgerencia].servicios.findIndex(
+                                (t) => t.id == this.servicio.id
+                            );
+
+                            this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
+                                isubgerencia
+                            ].servicios.splice(iservicio, 1);
+                        }
+                    } else {
+                        if (this.area) {
+                            const iarea = this.gerencia.gerenciasrd[
+                                igerenciaRd
+                            ].areas.findIndex((t) => t.id == this.area.id);
+
+                            const iservicio = this.gerencia.gerenciasrd[
+                                igerenciaRd
+                            ].areas[iarea].servicios.findIndex(
+                                (t) => t.id == this.servicio.id
+                            );
+
+                            this.gerencia.gerenciasrd[igerenciaRd].areas[
+                                iarea
+                            ].servicios.splice(iservicio, 1);
+                        }
+                    }
                 } else {
-                    const iservicio = this.gerencia.gerenciasrd[
-                        igerenciaRd
-                    ].subgerencias[isubgerencia].servicios.findIndex(
-                        (t) => t.id == this.servicio.id
-                    );
+                    if (this.subgerencia) {
+                        const isubgerencia =
+                            this.gerencia.subgerencias.findIndex(
+                                (t) => t.id == this.subgerencia.id
+                            );
 
-                    this.gerencia.gerenciasrd[igerenciaRd].subgerencias[
-                        isubgerencia
-                    ].servicios.splice(iservicio, 1);
+                        if (this.area) {
+                            const iarea = this.gerencia.subgerencias[
+                                isubgerencia
+                            ].areas.findIndex((t) => t.id == this.area.id);
+
+                            const iservicio = this.gerencia.subgerencias[
+                                isubgerencia
+                            ].areas[iarea].servicios.findIndex(
+                                (t) => t.id == this.servicio.id
+                            );
+
+                            this.gerencia.subgerencias[isubgerencia].areas[
+                                iarea
+                            ].servicios.splice(iservicio, 1);
+                        } else {
+                            const iservicio = this.gerencia.subgerencias[
+                                isubgerencia
+                            ].servicios.findIndex(
+                                (t) => t.id == this.servicio.id
+                            );
+
+                            this.gerencia.subgerencias[
+                                isubgerencia
+                            ].servicios.splice(iservicio, 1);
+                        }
+                    } else {
+                        const iarea = this.gerencia.areas.findIndex(
+                            (t) => t.id == this.area.id
+                        );
+
+                        const iservicio = this.gerencia.areas[
+                            iarea
+                        ].servicios.findIndex((t) => t.id == this.servicio.id);
+
+                        this.gerencia.areas[iarea].servicios.splice(
+                            iservicio,
+                            1
+                        );
+                    }
                 }
-            } else {
-                if (this.area) {
-                    const iarea = this.gerencia.gerenciasrd[
-                        igerenciaRd
-                    ].areas.findIndex((t) => t.id == this.area.id);
 
-                    const iservicio = this.gerencia.gerenciasrd[
-                        igerenciaRd
-                    ].areas[iarea].servicios.findIndex(
-                        (t) => t.id == this.servicio.id
-                    );
-
-                    this.gerencia.gerenciasrd[igerenciaRd].areas[
-                        iarea
-                    ].servicios.splice(iservicio, 1);
-                }
+                this.gerenciaChanged.next(this.gerencia);
             }
-        } else {
-            if (this.subgerencia) {
-                const isubgerencia = this.gerencia.subgerencias.findIndex(
-                    (t) => t.id == this.subgerencia.id
-                );
-
-                if (this.area) {
-                    const iarea = this.gerencia.subgerencias[
-                        isubgerencia
-                    ].areas.findIndex((t) => t.id == this.area.id);
-
-                    const iservicio = this.gerencia.subgerencias[
-                        isubgerencia
-                    ].areas[iarea].servicios.findIndex(
-                        (t) => t.id == this.servicio.id
-                    );
-
-                    this.gerencia.subgerencias[isubgerencia].areas[
-                        iarea
-                    ].servicios.splice(iservicio, 1);
-                } else {
-                    const iservicio = this.gerencia.subgerencias[
-                        isubgerencia
-                    ].servicios.findIndex((t) => t.id == this.servicio.id);
-
-                    this.gerencia.subgerencias[isubgerencia].servicios.splice(
-                        iservicio,
-                        1
-                    );
-                }
-            } else {
-                const iarea = this.gerencia.areas.findIndex(
-                    (t) => t.id == this.area.id
-                );
-
-                const iservicio = this.gerencia.areas[
-                    iarea
-                ].servicios.findIndex((t) => t.id == this.servicio.id);
-
-                this.gerencia.areas[iarea].servicios.splice(iservicio, 1);
-            }
-        }
-
-        this.gerenciaChanged.next(this.gerencia);
+        });
     }
 
     editar() {

@@ -2,7 +2,7 @@
 
 
     <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
-        <div class="text-lg font-medium">Nuevo serviciox</div>
+        <div class="text-lg font-medium">{{ titulo}}</div>
         <button mat-icon-button
             matDialogClose
             [tabIndex]="-1">
@@ -22,16 +22,6 @@
         </mat-form-field>
 
         <mat-form-field>
-            <mat-label>Empresa</mat-label>
-            <mat-select [formControlName]="'empresa'">
-                <mat-option [value]="''">Seleccione una empresa</mat-option>
-                <mat-option [value]="'bci'">Bci Seguros</mat-option>
-                <mat-option [value]="'zenit'">Zenit</mat-option>
-                <mat-option [value]="'vida'">Bci Vida</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field>
             <mat-label>Responsable</mat-label>
             <input matInput
                 [matAutocomplete]="auto"
@@ -46,12 +36,9 @@
             </mat-autocomplete>
         </mat-form-field>
 
-
         <!-- Actions -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
-            <div>
-
-            </div>
+            <div></div>
             <div class="flex items-center mt-4 sm:mt-0">
                 <!-- Save as draft -->
                 <button class="order-first sm:order-last"
