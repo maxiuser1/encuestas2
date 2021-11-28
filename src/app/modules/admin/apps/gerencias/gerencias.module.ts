@@ -28,6 +28,7 @@ import { SubgerenciaComponent } from './subgerencia/subgerencia.component';
 import { GerenciasAreaComponent } from './area/area.component';
 import { GerenciasServicioComponent } from './servicio/servicio.component';
 import { GerenciasAgregarServicioComponent } from './agregar-servicio/agregar-servicio.component';
+import { GerenciasEditarServicioComponent } from './editar-servicio/editar-servicio.component';
 
 const routes: Route[] = [
     {
@@ -66,6 +67,7 @@ const routes: Route[] = [
         GerenciasAreaComponent,
         GerenciasServicioComponent,
         GerenciasAgregarServicioComponent,
+        GerenciasEditarServicioComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

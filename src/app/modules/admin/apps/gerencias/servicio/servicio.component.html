@@ -1,3 +1,22 @@
-<div class="p-5">
-    <div class="text-lg font-medium leading-5">Servicio: {{servicio.nombre}}</div>
+<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8">
+    <div class="text-lg font-medium">Servicio: {{ servicio.nombre }} ({{servicio.responsable?.name || 'sin responsable'}})</div>
+    <button class="ml-auto"
+        mat-icon-button
+        [matMenuTriggerFor]="conversationHeaderMenu">
+        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+        <mat-menu #conversationHeaderMenu>
+
+            <button (click)="editar()"
+                mat-menu-item>
+                <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                Editar
+            </button>
+
+            <button (click)="eliminar()"
+                mat-menu-item>
+                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                Eliminar
+            </button>
+        </mat-menu>
+    </button>
 </div>

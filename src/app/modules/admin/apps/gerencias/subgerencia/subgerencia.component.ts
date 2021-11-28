@@ -67,7 +67,6 @@ export class SubgerenciaComponent implements OnInit {
 
             if (this.gerenciard) {
                 // si pertenezco a una gerencia R2
-                console.log('si pertenezco a una gerencia R2');
                 const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
                     (t) => t.id === this.gerenciard.id
                 );
@@ -91,7 +90,6 @@ export class SubgerenciaComponent implements OnInit {
             } else {
                 // si no tengo gerenciard significa que voy a
                 // agregar una subgerencia directa a la gerencia
-                console.log('no pertenezco a una gerencia R2');
                 const isubgerencia = this.gerencia.subgerencias.findIndex(
                     (t) => t.id == this.subgerencia.id
                 );
@@ -120,7 +118,6 @@ export class SubgerenciaComponent implements OnInit {
 
             if (this.gerenciard) {
                 // si pertenezco a una gerencia R2
-                console.log('si pertenezco a una gerencia R2');
                 const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
                     (t) => t.id === this.gerenciard.id
                 );
@@ -144,7 +141,6 @@ export class SubgerenciaComponent implements OnInit {
             } else {
                 // si no tengo gerenciard significa que voy a
                 // agregar una subgerencia directa a la gerencia
-                console.log('no pertenezco a una gerencia R2');
                 const isubgerencia = this.gerencia.subgerencias.findIndex(
                     (t) => t.id == this.subgerencia.id
                 );

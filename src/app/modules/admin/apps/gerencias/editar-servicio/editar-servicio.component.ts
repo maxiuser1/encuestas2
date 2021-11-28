@@ -13,14 +13,13 @@ import { map, startWith, takeUntil } from 'rxjs/operators';
 import { Persona, Servicio } from '../../../../../../../api/model/gerencia';
 import { GerenciasAsignacionComponent } from '../asignacion/asignacion.component';
 import { GerenciasService } from '../gerencias.service';
-
 @Component({
-    selector: 'gerencias-agregar-servicio',
-    templateUrl: './agregar-servicio.component.html',
+    selector: 'app-editar-servicio',
+    templateUrl: './editar-servicio.component.html',
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GerenciasAgregarServicioComponent implements OnInit {
+export class GerenciasEditarServicioComponent implements OnInit {
     form!: FormGroup;
     personas: Persona[];
     personasFiltradas: Observable<Persona[]>;
@@ -32,17 +31,28 @@ export class GerenciasAgregarServicioComponent implements OnInit {
         private _gerenciasService: GerenciasService,
         private _formBuilder: FormBuilder,
         private _changeDetectorRef: ChangeDetectorRef,
-        @Inject(MAT_DIALOG_DATA) private _data: { titulo }
+        @Inject(MAT_DIALOG_DATA) private _data: { titulo; servicio: Servicio }
     ) {}
 
     ngOnInit(): void {
         this.titulo = this._data.titulo;
 
         this.form = this._formBuilder.group({
-            nombre: ['', [Validators.required]],
-            responsable: ['', [Validators.required]],
-            tipo: ['', [Validators.required]],
+            nombre: [this._data.servicio.nombre, [Validators.required]],
+            responsable: [
+                this._data.servicio.responsable,
+                [Validators.required],
+            ],
+            tipo: [this._data.servicio.tipo, [Validators.required]],
             equipo: this._formBuilder.array([]),
+        });
+
+        this._data.servicio.equipo?.forEach((t) => {
+            const equipoForm = this._formBuilder.group({
+                integrante: [t],
+            });
+
+            this.integrantes.push(equipoForm);
         });
 
         this._gerenciasService.personas$
@@ -98,18 +108,16 @@ export class GerenciasAgregarServicioComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.form.valid) {
-            let serviciovm: Servicio = { ...this.form.value, equipo: [] };
+        let serviciovm: Servicio = { ...this.form.value, equipo: [] };
 
-            this.form.value.equipo.forEach((t) => {
-                serviciovm.equipo.push({
-                    id: t.integrante.id,
-                    name: t.integrante.name,
-                    email: t.integrante.email,
-                });
+        this.form.value.equipo.forEach((t) => {
+            serviciovm.equipo.push({
+                id: t.integrante.id,
+                name: t.integrante.name,
+                email: t.integrante.email,
             });
-            this.matDialogRef.close(serviciovm);
-        }
+        });
+        this.matDialogRef.close(serviciovm);
     }
 
     eliminarIntegrante(index) {

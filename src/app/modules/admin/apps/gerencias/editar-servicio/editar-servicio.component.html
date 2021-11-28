@@ -1,0 +1,95 @@
+<div class="flex flex-col max-w-240 md:min-w-160 max-h-screen -m-6">
+
+
+    <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
+        <div class="text-lg font-medium">Editar servicio</div>
+        <button mat-icon-button
+            matDialogClose
+            [tabIndex]="-1">
+            <mat-icon class="text-current"
+                [svgIcon]="'heroicons_outline:x'"></mat-icon>
+        </button>
+    </div>
+
+    <form [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto">
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput
+                [formControlName]="'nombre'">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Tipo</mat-label>
+            <mat-select [formControlName]="'tipo'">
+                <mat-option [value]="''">Tipo</mat-option>
+                <mat-option [value]="'ECI'">ECI</mat-option>
+                <mat-option [value]="'ESI'">ESI</mat-option>
+                <mat-option [value]="'NE'">NE</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Responsable</mat-label>
+            <input matInput
+                [matAutocomplete]="auto"
+                placeholder="Responsable"
+                [formControlName]="'responsable'">
+            <mat-autocomplete #auto="matAutocomplete"
+                [displayWith]="displayFn">
+                <mat-option *ngFor="let persona of personasFiltradas | async"
+                    [value]="persona">
+                    {{persona.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <mat-label class="mt-1">Equipo responsable:</mat-label>
+        <ng-container formArrayName="equipo">
+
+            <ng-container *ngFor="let equipoForm of integrantes.controls; let i = index">
+                <mat-form-field [formGroup]="equipoForm">
+
+                    <input matInput
+                        [matAutocomplete]="auto2"
+                        class="w-full"
+                        placeholder="Integrante"
+                        [formControlName]="'integrante'">
+                    <mat-autocomplete #auto2="matAutocomplete"
+                        [displayWith]="displayFn">
+                        <mat-option *ngFor="let persona of equipoFilteredOptions | async"
+                            [value]="persona">
+                            {{persona.name}}
+                        </mat-option>
+                    </mat-autocomplete>
+                    <button mat-icon-button
+                        (click)="eliminarIntegrante(i)">
+                        <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                    </button>
+                </mat-form-field>
+            </ng-container>
+        </ng-container>
+
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">
+            <div>
+                <button type="button"
+                    mat-flat-button
+                    (click)="addIntegrante()">Agregar integrante</button>
+            </div>
+            <div class="flex items-center mt-4 sm:mt-0">
+                <!-- Save as draft -->
+                <button class="order-first sm:order-last"
+                    type="submit"
+                    mat-flat-button
+                    [color]="'primary'">
+                    Guardar
+                </button>
+            </div>
+
+        </div>
+    </form>
+</div>
