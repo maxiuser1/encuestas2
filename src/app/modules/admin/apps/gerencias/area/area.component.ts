@@ -18,6 +18,7 @@ import { GerenciasAsignacionComponent } from '../asignacion/asignacion.component
 import { Subject } from 'rxjs';
 import { debounceTime, switchMap, takeUntil } from 'rxjs/operators';
 import { GerenciasService } from '../gerencias.service';
+import { GerenciasAgregarServicioComponent } from '../agregar-servicio/agregar-servicio.component';
 
 @Component({
     selector: 'gerencias-area',
@@ -55,14 +56,17 @@ export class GerenciasAreaComponent implements OnInit {
     }
 
     agregarServicio() {
-        const dialogRef = this._matDialog.open(GerenciasAsignacionComponent, {
-            autoFocus: false,
-            data: {
-                titulo: `${this.gerencia.nombre}-${
-                    this.gerenciard?.nombre || ''
-                }: nuevo servicio`,
-            },
-        });
+        const dialogRef = this._matDialog.open(
+            GerenciasAgregarServicioComponent,
+            {
+                autoFocus: false,
+                data: {
+                    titulo: `${this.gerencia.nombre}-${
+                        this.gerenciard?.nombre || ''
+                    }: nuevo servicio`,
+                },
+            }
+        );
 
         dialogRef.afterClosed().subscribe((result: Subgerencia) => {
             result.id = getGuid();
