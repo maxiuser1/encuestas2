@@ -135,11 +135,10 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Gerencia) => {
-            if (result) {
-                this._gerenciasService.createGerencia(result).subscribe((t) => {
-                    this._changeDetectorRef.markForCheck();
-                });
-            }
+            if (!result) return;
+            this._gerenciasService.createGerencia(result).subscribe((t) => {
+                this._changeDetectorRef.markForCheck();
+            });
         });
     }
 
@@ -152,6 +151,7 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Gerencia) => {
+            if (!result) return;
             gerencia = {
                 ...gerencia,
                 nombre: result.nombre,
@@ -219,12 +219,11 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Gerenciard) => {
-            if (result) {
-                result.id = getGuid();
-                if (!gerencia.gerenciasrd) gerencia.gerenciasrd = [];
-                gerencia.gerenciasrd.push(result);
-                this.gerenciaChanged.next(gerencia);
-            }
+            if (!result) return;
+            result.id = getGuid();
+            if (!gerencia.gerenciasrd) gerencia.gerenciasrd = [];
+            gerencia.gerenciasrd.push(result);
+            this.gerenciaChanged.next(gerencia);
         });
     }
 
@@ -237,12 +236,11 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Subgerencia) => {
-            if (result) {
-                result.id = getGuid();
-                if (!gerencia.subgerencias) gerencia.subgerencias = [];
-                gerencia.subgerencias.push(result);
-                this.gerenciaChanged.next(gerencia);
-            }
+            if (!result) return;
+            result.id = getGuid();
+            if (!gerencia.subgerencias) gerencia.subgerencias = [];
+            gerencia.subgerencias.push(result);
+            this.gerenciaChanged.next(gerencia);
         });
     }
 
@@ -255,12 +253,11 @@ export class GerenciasListComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Area) => {
-            if (result) {
-                result.id = getGuid();
-                if (!gerencia.areas) gerencia.areas = [];
-                gerencia.areas.push(result);
-                this.gerenciaChanged.next(gerencia);
-            }
+            if (!result) return;
+            result.id = getGuid();
+            if (!gerencia.areas) gerencia.areas = [];
+            gerencia.areas.push(result);
+            this.gerenciaChanged.next(gerencia);
         });
     }
 }

@@ -147,6 +147,8 @@ export class GerenciasAreaComponent implements OnInit {
         );
 
         dialogRef.afterClosed().subscribe((result: Asignable) => {
+            if (!result) return;
+
             if (this.gerenciard) {
                 const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
                     (t) => t.id === this.gerenciard.id
@@ -233,6 +235,8 @@ export class GerenciasAreaComponent implements OnInit {
         );
 
         dialogRef.afterClosed().subscribe((result: Subgerencia) => {
+            if (!result) return;
+
             result.id = getGuid();
 
             if (this.gerenciard) {

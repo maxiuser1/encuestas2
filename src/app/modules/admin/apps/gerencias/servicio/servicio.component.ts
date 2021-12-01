@@ -195,6 +195,7 @@ export class GerenciasServicioComponent implements OnInit {
         );
 
         dialogRef.afterClosed().subscribe((result: Servicio) => {
+            if (!result) return;
             if (this.gerenciard) {
                 const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
                     (t) => t.id === this.gerenciard.id

@@ -67,6 +67,7 @@ export class SubgerenciaComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Subgerencia) => {
+            if (!result) return;
             result.id = getGuid();
 
             if (this.gerenciard) {
@@ -173,6 +174,7 @@ export class SubgerenciaComponent implements OnInit {
         );
 
         dialogRef.afterClosed().subscribe((result: Asignable) => {
+            if (!result) return;
             if (this.gerenciard) {
                 // si pertenezco a una gerencia R2
                 const igerenciaRd = this.gerencia.gerenciasrd.findIndex(
@@ -219,6 +221,7 @@ export class SubgerenciaComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Servicio) => {
+            if (!result) return;
             result.id = getGuid();
 
             if (this.gerenciard) {

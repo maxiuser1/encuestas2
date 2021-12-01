@@ -65,6 +65,8 @@ export class GerenciasGerenciardComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Subgerencia) => {
+            if (!result) return;
+
             result.id = getGuid();
 
             if (
@@ -98,6 +100,8 @@ export class GerenciasGerenciardComponent implements OnInit {
         });
 
         dialogRef.afterClosed().subscribe((result: Area) => {
+            if (!result) return;
+
             result.id = getGuid();
 
             if (
@@ -160,6 +164,8 @@ export class GerenciasGerenciardComponent implements OnInit {
         );
 
         dialogRef.afterClosed().subscribe((result: Asignable) => {
+            if (!result) return;
+
             const igerenciard = this.gerencia.gerenciasrd.findIndex(
                 (t) => t.id === this.gerenciard.id
             );
