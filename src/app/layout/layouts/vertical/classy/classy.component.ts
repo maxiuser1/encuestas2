@@ -65,6 +65,9 @@ export class ClassyLayoutComponent implements OnInit, OnDestroy {
         this._userService.user$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((user: User) => {
+                if (!user) {
+                    this._router.navigate(['/sign-out']);
+                }
                 this.user = user;
             });
 
