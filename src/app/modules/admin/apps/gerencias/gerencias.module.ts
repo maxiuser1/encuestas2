@@ -30,6 +30,8 @@ import { GerenciasServicioComponent } from './servicio/servicio.component';
 import { GerenciasAgregarServicioComponent } from './agregar-servicio/agregar-servicio.component';
 import { GerenciasEditarServicioComponent } from './editar-servicio/editar-servicio.component';
 import { GerenciasEditarAsignacionComponent } from './editar-asignacion/editar-asignacion.component';
+import { GerenciasEvaluadoresComponent } from './evaluadores/evaluadores.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const routes: Route[] = [
     {
@@ -70,6 +72,7 @@ const routes: Route[] = [
         GerenciasAgregarServicioComponent,
         GerenciasEditarServicioComponent,
         GerenciasEditarAsignacionComponent,
+        GerenciasEvaluadoresComponent,
     ],
     imports: [
         RouterModule.forChild(routes),
@@ -79,6 +82,7 @@ const routes: Route[] = [
         MatSelectModule,
         MatDialogModule,
         MatChipsModule,
+        MatTooltipModule,
         MatAutocompleteModule,
         MatSlideToggleModule,
         MatMenuModule,
