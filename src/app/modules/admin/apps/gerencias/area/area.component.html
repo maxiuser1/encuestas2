@@ -1,46 +1,53 @@
-<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8">
-    <div class="text-lg font-medium">Área: {{ area.nombre }} ({{area.responsable?.name || 'sin responsable'}})</div>
-    <button class="ml-auto"
-        mat-icon-button
-        [matMenuTriggerFor]="conversationHeaderMenu">
-        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
-        <mat-menu #conversationHeaderMenu>
-
-            <button (click)="agregarServicio()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
-                Agregar servicio
-            </button>
-
-            <button (click)="editar()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
-                Editar
-            </button>
-
-            <button (click)="eliminar()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                Eliminar
-            </button>
-        </mat-menu>
-    </button>
-</div>
+<mat-expansion-panel class="bg-yellow-50 bg-opacity-20 dark:bg-transparent dark:border">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Área: {{ area.nombre }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{area.responsable?.name || 'sin responsable'}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
 
 
 
-
-<div class="flex flex-col p-6">
-    <div class="grid gap-8">
-        <ng-container *ngFor="let cadaServicio of area.servicios; let i = index">
-            <div class="mt-2 rounded-xl bg-gray-800 bg-opacity-12 dark:bg-transparent dark:border">
+    <div class="flex flex-col p-6">
+        <div class="grid gap-8">
+            <ng-container *ngFor="let cadaServicio of area.servicios; let i = index">
                 <gerencias-servicio [gerencia]="gerencia"
                     [gerenciard]="gerenciard"
                     [subgerencia]="subgerencia"
                     [area]="area"
                     [servicio]="cadaServicio">
                 </gerencias-servicio>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
-</div>
+
+    <mat-action-row>
+        <button class="ml-auto"
+            mat-icon-button
+            [matMenuTriggerFor]="conversationHeaderMenu">
+            <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+            <mat-menu #conversationHeaderMenu>
+
+                <button (click)="agregarServicio()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+                    Agregar servicio
+                </button>
+
+                <button (click)="editar()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                    Editar
+                </button>
+
+                <button (click)="eliminar()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                    Eliminar
+                </button>
+            </mat-menu>
+        </button>
+    </mat-action-row>
+</mat-expansion-panel>

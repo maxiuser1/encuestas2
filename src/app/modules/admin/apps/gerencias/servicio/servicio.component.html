@@ -1,12 +1,36 @@
-<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8">
-    <div class="text-lg font-medium">
-        <mat-icon class="text-primary"
-            matTooltip="Está registrado como evaluador de este servicio"
-            *ngIf="esEvaluador"
-            [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
-        Servicio: {{ servicio.nombre }} ({{servicio.responsable?.name || 'sin responsable'}})
+<mat-expansion-panel class="bg-red-100 bg-opacity-20 dark:bg-transparent dark:border">
+
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            <mat-icon class="text-primary"
+                matTooltip="Está registrado como evaluador de este servicio"
+                *ngIf="esEvaluador"
+                [svgIcon]="'heroicons_solid:check-circle'"></mat-icon>
+
+            {{ servicio.nombre }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{servicio.responsable?.name || 'sin responsable'}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <div class="pl-6 pb-4">
+        <div class="mt-4 space-y-2">
+            <div class="flex">
+                <mat-icon class="icon-size-5 text-green-600"
+                    [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                <div class="ml-2 leading-5"><b>{{servicio.definidos?.length || '0'}}</b> Evaluadores definidos</div>
+            </div>
+            <div class="flex">
+                <mat-icon class="icon-size-5 text-green-600"
+                    [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                <div class="ml-2 leading-5"><b>{{servicio.ascritos?.length || '0'}}</b> Suscritos</div>
+            </div>
+
+        </div>
     </div>
-    <div>
+
+    <mat-action-row>
         <button class="ml-auto"
             matTooltip="Registrarse como evaluador de este servicio"
             *ngIf="puedeSuscribirse"
@@ -37,20 +61,5 @@
                 </button>
             </mat-menu>
         </button>
-    </div>
-</div>
-<div class="pl-6 pb-4">
-    <div class="mt-4 space-y-2">
-        <div class="flex">
-            <mat-icon class="icon-size-5 text-green-600"
-                [svgIcon]="'heroicons_solid:check'"></mat-icon>
-            <div class="ml-2 leading-5"><b>{{servicio.definidos?.length || '0'}}</b> Evaluadores definidos</div>
-        </div>
-        <div class="flex">
-            <mat-icon class="icon-size-5 text-green-600"
-                [svgIcon]="'heroicons_solid:check'"></mat-icon>
-            <div class="ml-2 leading-5"><b>{{servicio.ascritos?.length || '0'}}</b> Suscritos</div>
-        </div>
-
-    </div>
-</div>
+    </mat-action-row>
+</mat-expansion-panel>

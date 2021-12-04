@@ -1,54 +1,61 @@
-<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8">
-    <div class="text-lg font-medium">Gerencia R2: {{ gerenciard.nombre }} ({{gerenciard.responsable?.name || 'sin responsable'}})</div>
-    <button class="ml-auto"
-        mat-icon-button
-        [matMenuTriggerFor]="conversationHeaderMenu">
-        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
-        <mat-menu #conversationHeaderMenu>
-            <button (click)="agregarSubGerencia()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:view-grid'"></mat-icon>
-                Agregar subgerencia
-            </button>
-            <button (click)="agregarArea()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
-                Agregar área
-            </button>
+<mat-expansion-panel class="bg-blue-50 bg-opacity-20 dark:bg-transparent dark:border">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            R2: {{ gerenciard.nombre }}
+        </mat-panel-title>
+        <mat-panel-description>
+            {{gerenciard.responsable?.name || 'sin responsable'}}
+        </mat-panel-description>
+    </mat-expansion-panel-header>
 
-            <button (click)="editar()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
-                Editar
-            </button>
 
-            <button (click)="eliminar()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                Eliminar
-            </button>
 
-        </mat-menu>
-    </button>
-</div>
-
-<div class="flex flex-col p-6">
-    <div class="grid gap-8">
-        <ng-container *ngFor="let cadaSubGerencia of gerenciard.subgerencias; let i = index">
-            <div class="mt-2 rounded-xl bg-gray-500 bg-opacity-12 dark:bg-transparent dark:border">
+    <div class="flex flex-col p-6">
+        <div class="grid gap-8">
+            <ng-container *ngFor="let cadaSubGerencia of gerenciard.subgerencias; let i = index">
                 <gerencias-subgerencia [gerencia]="gerencia"
                     [gerenciard]="gerenciard"
                     [subgerencia]="cadaSubGerencia"></gerencias-subgerencia>
-            </div>
-        </ng-container>
+            </ng-container>
 
-        <ng-container *ngFor="let cadaArea of gerenciard.areas; let i = index">
-            <div class="mt-2 rounded-xl bg-gray-500 bg-opacity-12 dark:bg-transparent dark:border">
+            <ng-container *ngFor="let cadaArea of gerenciard.areas; let i = index">
                 <gerencias-area [gerencia]="gerencia"
                     [gerenciard]="gerenciard"
                     [area]="cadaArea">
                 </gerencias-area>
-            </div>
-        </ng-container>
+            </ng-container>
+        </div>
     </div>
-</div>
+    <mat-action-row>
+        <button class="ml-auto"
+            mat-icon-button
+            [matMenuTriggerFor]="conversationHeaderMenu">
+            <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+            <mat-menu #conversationHeaderMenu>
+                <button (click)="agregarSubGerencia()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:view-grid'"></mat-icon>
+                    Agregar subgerencia
+                </button>
+                <button (click)="agregarArea()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
+                    Agregar área
+                </button>
+
+                <button (click)="editar()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                    Editar
+                </button>
+
+                <button (click)="eliminar()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                    Eliminar
+                </button>
+
+            </mat-menu>
+        </button>
+    </mat-action-row>
+</mat-expansion-panel>

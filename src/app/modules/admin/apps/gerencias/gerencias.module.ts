@@ -33,7 +33,7 @@ import { GerenciasEditarAsignacionComponent } from './editar-asignacion/editar-a
 import { GerenciasEvaluadoresComponent } from './evaluadores/evaluadores.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatBadgeModule } from '@angular/material/badge';
-
+import { MatExpansionModule } from '@angular/material/expansion';
 const routes: Route[] = [
     {
         path: '',
@@ -80,6 +80,7 @@ const routes: Route[] = [
         MatFormFieldModule,
         MatIconModule,
         MatInputModule,
+        MatExpansionModule,
         MatSelectModule,
         MatDialogModule,
         MatChipsModule,
