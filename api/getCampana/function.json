@@ -1,0 +1,30 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"private/campanas/{id}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "campanas",
+      "connectionStringSetting": "CosmosDBConnection",
+      "Id":"{id}",
+      "PartitionKey":"{id}"
+    }
+  ],
+  "scriptFile": "../dist/getCampana/index.js"
+}

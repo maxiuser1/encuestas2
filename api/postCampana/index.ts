@@ -1,17 +1,17 @@
 import { AzureFunction, Context, HttpRequest } from '@azure/functions';
 import { getGuid } from '../common/Utils';
-import { Gerencia } from '../model/gerencia';
+import { Campana } from '../model/gerencia';
 
 const httpTrigger: AzureFunction = async function (
     context: Context,
     req: HttpRequest
 ): Promise<void> {
-    const gerenciaVm = req.body as Gerencia;
-    const gerencia: Gerencia = { ...gerenciaVm, id: getGuid() };
-    context.bindings.gerencia = gerencia;
+    const campanaVm = req.body as Campana;
+    const campana: Campana = { ...campanaVm, id: getGuid() };
+    context.bindings.campana = campana;
     context.res = {
         status: 201,
-        body: gerencia,
+        body: campana,
     };
 
     context.done();

@@ -1,0 +1,39 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "put"
+      ],
+      "route":"private/campanas/{id}"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "item",
+      "databaseName": "organizacion",
+      "collectionName": "campanas",
+      "connectionStringSetting": "CosmosDBConnection",
+      "Id":"{id}",
+      "PartitionKey":"{id}"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "updatedCampana",
+      "databaseName": "organizacion",
+      "collectionName": "campanas",
+      "createIfNotExists": false,
+      "connectionStringSetting": "CosmosDBConnection"
+    }
+  ],
+  "scriptFile": "../dist/patchCampana/index.js"
+}

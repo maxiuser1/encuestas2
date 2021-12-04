@@ -1,12 +1,14 @@
 {
   "bindings": [
     {
-      "authLevel": "anonymous",
+      "authLevel": "function",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": ["post"],
-      "route":"private/gerencias"
+      "methods": [
+        "get"
+      ],
+      "route":"private/campanas"
     },
     {
       "type": "http",
@@ -15,13 +17,12 @@
     },
     {
       "type": "cosmosDB",
-      "direction": "out",
-      "name": "gerencia",
+      "direction": "in",
+      "name": "items",
       "databaseName": "organizacion",
-      "collectionName": "gerencias",
-      "createIfNotExists": true,
+      "collectionName": "campanas",
       "connectionStringSetting": "CosmosDBConnection"
     }
   ],
-  "scriptFile": "../dist/postGerencia/index.js"
+  "scriptFile": "../dist/getCampanas/index.js"
 }

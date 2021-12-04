@@ -58,3 +58,8 @@ export interface Asignable {
     nombre?: string;
     responsable?: Responsable;
 }
+
+export interface Campana {
+    id?: string;
+    nombre?: string;
+}

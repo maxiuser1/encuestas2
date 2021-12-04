@@ -162,6 +162,13 @@ export const appRoutes: Route[] = [
                                 'app/modules/admin/apps/tasks/tasks.module'
                             ).then((m) => m.TasksModule),
                     },
+                    {
+                        path: 'campanas',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/apps/campanas/campanas.module'
+                            ).then((m) => m.CampanasModule),
+                    },
                 ],
             },
         ],

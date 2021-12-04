@@ -30,6 +30,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:question-mark-circle',
                 link: '/apps/encuestas',
             },
+            {
+                id: 'apps.campanas',
+                title: 'Campañas',
+                type: 'basic',
+                icon: 'heroicons_outline:chat-alt',
+                link: '/apps/campanas',
+            },
         ],
     },
 ];
