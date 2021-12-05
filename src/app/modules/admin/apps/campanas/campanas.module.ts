@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
 import { CampanasComponent } from './campanas.component';
@@ -22,7 +22,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CampanasAgregarComponent } from './agregar/agregar.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import localeEsCl from '@angular/common/locales/es-CL';
 
+import {
+    registerLocaleData,
+    LocationStrategy,
+    HashLocationStrategy,
+} from '@angular/common';
+
+registerLocaleData(localeEsCl, 'es-CL');
 const routes: Route[] = [
     {
         path: '',
@@ -33,14 +44,12 @@ const routes: Route[] = [
                 component: CampanasListComponent,
                 resolve: {
                     campanas: CampanasResolver,
+                    encuestas: CampanasEncuestasResolver,
                 },
                 children: [
                     {
                         path: ':id',
                         component: CampanasDetalleComponent,
-                        resolve: {
-                            encuestas: CampanasEncuestasResolver,
-                        },
                     },
                 ],
             },
@@ -61,8 +70,10 @@ const routes: Route[] = [
         MatIconModule,
         MatInputModule,
         MatSelectModule,
+        MatDatepickerModule,
         MatDialogModule,
         MatChipsModule,
+        MatMomentDateModule,
         MatBadgeModule,
         MatTooltipModule,
         MatAutocompleteModule,
@@ -70,6 +81,10 @@ const routes: Route[] = [
         MatMenuModule,
         MatButtonModule,
         SharedModule,
+    ],
+    providers: [
+        { provide: LOCALE_ID, useValue: 'es-CL' },
+        { provide: MAT_DATE_LOCALE, useValue: 'es-CL' },
     ],
 })
 export class CampanasModule {}

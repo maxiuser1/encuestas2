@@ -2,7 +2,7 @@
 
 
     <div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary">
-        <div class="text-lg font-medium">Nuevo serviciox</div>
+        <div class="text-lg font-medium">Nueva campaña</div>
         <button mat-icon-button
             matDialogClose
             [tabIndex]="-1">
@@ -22,7 +22,31 @@
         </mat-form-field>
 
 
+        <mat-form-field>
+            <mat-label>Encuesta</mat-label>
+            <mat-select [formControlName]="'encuesta'">
+                <mat-option [value]="''">Seleccione</mat-option>
+                <ng-container *ngFor="let encuesta of encuestas; trackBy: trackByFn">
+                    <mat-option [value]="encuesta.id">{{encuesta.nombre}}</mat-option>
+                </ng-container>
 
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha límite</mat-label>
+            <mat-icon matPrefix
+                class="hidden sm:flex icon-size-5"
+                [svgIcon]="'heroicons_outline:flag'"></mat-icon>
+            <input matInput
+                [matDatepicker]="fechaLimiteDatepicker"
+                [formControlName]="'fechaLimite'"
+                [placeholder]="'Fecha límite'">
+            <mat-datepicker-toggle matSuffix
+                [for]="fechaLimiteDatepicker">
+            </mat-datepicker-toggle>
+            <mat-datepicker #fechaLimiteDatepicker></mat-datepicker>
+        </mat-form-field>
 
         <!-- Actions -->
         <div class="flex flex-col sm:flex-row sm:items-center justify-between mt-4 sm:mt-6">

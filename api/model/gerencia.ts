@@ -62,4 +62,32 @@ export interface Asignable {
 export interface Campana {
     id?: string;
     nombre?: string;
+    fechaLimite?: Date;
+}
+
+export interface Encuesta {
+    id?: string;
+    nombre?: string;
+}
+
+export interface Respuesta {
+    id?: string;
+    evaluador?: Responsable;
+    campana?: Campana;
+    evaluaciones?: Evaluacion[];
+    completada?: boolean;
+}
+
+export interface Evaluacion {
+    id?: string;
+    servicioId?: string;
+    servicioNombre?: string;
+    preguntas?: ItemPregunta[];
+    obligatoria?: boolean;
+}
+
+export interface ItemPregunta {
+    id?: string;
+    glosa?: string;
+    valor?: string;
 }

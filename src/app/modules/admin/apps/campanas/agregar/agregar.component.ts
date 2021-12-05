@@ -35,11 +35,13 @@ export class CampanasAgregarComponent implements OnInit {
         this.form = this._formBuilde.group({
             nombre: ['', [Validators.required]],
             encuesta: ['', Validators.required],
+            fechaLimite: [null, Validators.required],
         });
 
         this._campanasService.encuestas$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((encuestas: Encuesta[]) => {
+                console.log('zaina', encuestas);
                 this.encuestas = encuestas;
                 this._changeDetectorRef.markForCheck();
             });
@@ -49,5 +51,9 @@ export class CampanasAgregarComponent implements OnInit {
         if (this.form.valid) {
             this.matDialogRef.close(this.form.value);
         }
+    }
+
+    trackByFn(index: number, item: any): any {
+        return item.id || index;
     }
 }
