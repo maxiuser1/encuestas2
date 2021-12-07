@@ -1,0 +1,20 @@
+{
+  "bindings": [
+    {
+      "type": "serviceBusTrigger",
+      "name": "order",
+      "direction": "in",
+      "queueName": "evnio-correo",
+      "connection": "ServiceBusConnection"
+    },
+    {
+      "type": "sendGrid",
+      "name": "message",
+      "direction": "out",
+      "apiKey": "SendgridKey",
+      "from": "Encuestas internas <cloudencuestasinternas2021@hotmail.com>",
+      "subject": "Encuesta"
+    }
+  ],
+  "scriptFile": "../dist/taskEnvioEncuesta/index.js"
+}

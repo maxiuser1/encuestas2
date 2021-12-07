@@ -68,11 +68,19 @@ export interface Campana {
 export interface Encuesta {
     id?: string;
     nombre?: string;
+    preguntas?: Pregunta[];
+}
+
+export interface Pregunta {
+    id?: string;
+    glosa?: string;
+    tipos?: string[];
+    orden?: number;
 }
 
 export interface Respuesta {
     id?: string;
-    evaluador?: Responsable;
+    evaluador: Responsable;
     campana?: Campana;
     evaluaciones?: Evaluacion[];
     completada?: boolean;
@@ -80,14 +88,32 @@ export interface Respuesta {
 
 export interface Evaluacion {
     id?: string;
-    servicioId?: string;
-    servicioNombre?: string;
-    preguntas?: ItemPregunta[];
+
+    preguntas?: ItemRespuesta[];
     obligatoria?: boolean;
+
+    gerenciaId?: string;
+    gerencia?: string;
+
+    gerenciardId?: string;
+    gerenciard?: string;
+
+    subgerenciaId?: string;
+    subgerencia?: string;
+
+    areaId?: string;
+    area?: string;
+
+    servicioId?: string;
+    servicio?: string;
+
+    responsableId?: string;
+    responsable?: string;
 }
 
-export interface ItemPregunta {
+export interface ItemRespuesta {
     id?: string;
+    preguntaId?: string;
     glosa?: string;
     valor?: string;
 }

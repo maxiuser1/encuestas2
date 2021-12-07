@@ -5,16 +5,40 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": [
-        "get",
-        "post"
-      ],
+      "methods": [ "post" ],
       "route":"private/initRespuestas"
     },
     {
       "type": "http",
       "direction": "out",
       "name": "res"
+    }, 
+     {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "respuestas",
+      "databaseName": "organizacion",
+      "collectionName": "respuestas",
+      "createIfNotExists": true,
+      "connectionStringSetting": "CosmosDBConnection"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "gerencias",
+      "databaseName": "organizacion",
+      "collectionName": "gerencias",
+      "connectionStringSetting": "CosmosDBConnection"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "encuesta",
+      "databaseName": "organizacion",
+      "collectionName": "encuestas",
+      "connectionStringSetting": "CosmosDBConnection",
+      "Id":"{encuestaId}",
+      "PartitionKey":"{encuestaId}"
     }
   ],
   "scriptFile": "../dist/postInitRespuestas/index.js"
