@@ -25,8 +25,7 @@ const httpTrigger: AzureFunction = async function (
     );
 
     context.res = {
-        // status: 200, /* Defaults to 200 */
-        body: { respuestas, cantidad: respuestas.length },
+        body: { cantidad: respuestas.length },
     };
 
     context.bindings.respuestas = [];
