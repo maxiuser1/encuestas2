@@ -110,4 +110,8 @@ export class CampanasService {
     definirEvaluadores(campana: Campana) {
         return this._httpClient.post('api/private/initRespuestas', campana);
     }
+
+    despacharRespuestas(campana: Campana) {
+        return this._httpClient.post('api/private/despachoRespuestas', campana);
+    }
 }

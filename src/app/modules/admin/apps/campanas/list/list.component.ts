@@ -12,6 +12,7 @@ import { distinctUntilChanged, map } from 'rxjs/operators';
 import { getGuid } from '../../../../../../../api/common/Utils';
 import { Campana } from '../../../../../../../api/model/gerencia';
 import { CampanasAgregarComponent } from '../agregar/agregar.component';
+import { CampanasEncuestasResolver } from '../campanas.resolver';
 import { CampanasService } from '../campanas.service';
 
 @Component({
@@ -84,6 +85,13 @@ export class CampanasListComponent implements OnInit {
                 campana.estado = 2;
                 this._campanasService.updateCampana(campana).subscribe();
             });
+        } else if (campana.estado == 2) {
+            this._campanasService
+                .despacharRespuestas(campana)
+                .subscribe((t) => {
+                    campana.estado = 3;
+                    this._campanasService.updateCampana(campana).subscribe();
+                });
         }
     }
 
