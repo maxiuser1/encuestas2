@@ -117,7 +117,6 @@ export class GerenciasDetailsComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log('thisfoirm', this.form);
         if (this.form.valid) {
             this._matDialogRef.close(this.form.value);
         }

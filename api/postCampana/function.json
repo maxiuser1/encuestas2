@@ -21,7 +21,7 @@
       "name": "campana",
       "databaseName": "organizacion",
       "collectionName": "campanas",
-      "createIfNotExists": true,
+      "createIfNotExists": false,
       "connectionStringSetting": "CosmosDBConnection"
     }
   ],

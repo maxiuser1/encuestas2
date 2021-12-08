@@ -86,7 +86,7 @@ export class CampanasService {
                 switchMap((campanas) =>
                     this._httpClient
                         .put<Campana>(
-                            `api/private/gerencias/${campana.id}`,
+                            `api/private/campanas/${campana.id}`,
                             campana
                         )
                         .pipe(
@@ -105,5 +105,9 @@ export class CampanasService {
         } else {
             return of(campana);
         }
+    }
+
+    definirEvaluadores(campana: Campana) {
+        return this._httpClient.post('api/private/initRespuestas', campana);
     }
 }

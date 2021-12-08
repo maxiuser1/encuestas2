@@ -4,7 +4,7 @@
       "type": "serviceBusTrigger",
       "name": "order",
       "direction": "in",
-      "queueName": "evnio-correo",
+      "queueName": "envio-correo",
       "connection": "ServiceBusConnection"
     },
     {
@@ -12,7 +12,7 @@
       "name": "message",
       "direction": "out",
       "apiKey": "SendgridKey",
-      "from": "Encuestas internas <cloudencuestasinternas2021@hotmail.com>",
+      "from": "Encuestas internas <encuestasinternas@em8235.maxiasesoria.com>",
       "subject": "Encuesta"
     }
   ],

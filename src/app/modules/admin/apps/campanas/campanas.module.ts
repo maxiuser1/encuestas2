@@ -24,6 +24,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CampanasAgregarComponent } from './agregar/agregar.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localeEsCl from '@angular/common/locales/es-CL';
 
@@ -78,6 +79,7 @@ const routes: Route[] = [
         MatTooltipModule,
         MatAutocompleteModule,
         MatSlideToggleModule,
+        MatProgressBarModule,
         MatMenuModule,
         MatButtonModule,
         SharedModule,

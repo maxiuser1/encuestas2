@@ -24,7 +24,7 @@
 
         <mat-form-field>
             <mat-label>Encuesta</mat-label>
-            <mat-select [formControlName]="'encuesta'">
+            <mat-select [formControlName]="'encuestaId'">
                 <mat-option [value]="''">Seleccione</mat-option>
                 <ng-container *ngFor="let encuesta of encuestas; trackBy: trackByFn">
                     <mat-option [value]="encuesta.id">{{encuesta.nombre}}</mat-option>

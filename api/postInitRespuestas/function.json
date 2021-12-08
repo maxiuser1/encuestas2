@@ -19,7 +19,7 @@
       "name": "respuestas",
       "databaseName": "organizacion",
       "collectionName": "respuestas",
-      "createIfNotExists": true,
+      "createIfNotExists": false,
       "connectionStringSetting": "CosmosDBConnection"
     },
     {

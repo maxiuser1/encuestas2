@@ -70,11 +70,21 @@ export class CampanasListComponent implements OnInit {
             if (!result) return;
 
             result.id = getGuid();
+            result.estado = 1;
 
             this._campanasService.createCampana(result).subscribe((t) => {
                 this._changeDetectorRef.markForCheck();
             });
         });
+    }
+
+    continuarCampana(campana: Campana) {
+        if (campana.estado == 1) {
+            this._campanasService.definirEvaluadores(campana).subscribe((t) => {
+                campana.estado = 2;
+                this._campanasService.updateCampana(campana).subscribe();
+            });
+        }
     }
 
     trackByFn(index: number, item: any): any {

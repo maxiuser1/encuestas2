@@ -19,7 +19,7 @@
       "name": "gerencia",
       "databaseName": "organizacion",
       "collectionName": "gerencias",
-      "createIfNotExists": true,
+      "createIfNotExists": false,
       "connectionStringSetting": "CosmosDBConnection"
     }
   ],

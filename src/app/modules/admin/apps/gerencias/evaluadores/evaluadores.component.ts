@@ -85,7 +85,6 @@ export class GerenciasEvaluadoresComponent implements OnInit {
         this.equipoFilteredOptions = equipoForm.valueChanges.pipe(
             startWith(''),
             map((value) => {
-                console.log('value', value);
                 return typeof value === 'string' ? value : value.integrante;
             }),
             map((name) => (name ? this._filter(name) : this.personas.slice()))

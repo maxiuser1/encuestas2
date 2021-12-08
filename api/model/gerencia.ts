@@ -63,6 +63,8 @@ export interface Campana {
     id?: string;
     nombre?: string;
     fechaLimite?: Date;
+    encuestaId?: string;
+    estado?: number; //1 creado, 2 configurado, 3 enviado, 4 terminado, 5 eliminado
 }
 
 export interface Encuesta {

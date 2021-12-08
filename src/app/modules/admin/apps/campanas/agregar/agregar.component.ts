@@ -34,14 +34,13 @@ export class CampanasAgregarComponent implements OnInit {
     ngOnInit(): void {
         this.form = this._formBuilde.group({
             nombre: ['', [Validators.required]],
-            encuesta: ['', Validators.required],
+            encuestaId: ['', Validators.required],
             fechaLimite: [null, Validators.required],
         });
 
         this._campanasService.encuestas$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((encuestas: Encuesta[]) => {
-                console.log('zaina', encuestas);
                 this.encuestas = encuestas;
                 this._changeDetectorRef.markForCheck();
             });

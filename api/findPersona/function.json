@@ -21,7 +21,7 @@
       "name": "item",
       "databaseName": "organizacion",
       "collectionName": "personas",
-      "createIfNotExists": true,
+      "createIfNotExists": false,
       "connectionStringSetting": "CosmosDBConnection",
       "PartitionKey":"{id}",
       "Id":"{id}"

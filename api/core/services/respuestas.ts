@@ -1,6 +1,7 @@
 import { getGuid } from '../../common/Utils';
 import {
     Area,
+    Campana,
     Encuesta,
     Evaluacion,
     Gerencia,
@@ -11,7 +12,11 @@ import {
 } from '../../model/gerencia';
 
 export class Respuestas {
-    public getResults(gerencias: Gerencia[], encuesta: Encuesta): Respuesta[] {
+    public getResults(
+        gerencias: Gerencia[],
+        encuesta: Encuesta,
+        campana: Campana
+    ): Respuesta[] {
         let respuestas: Respuesta[] = [];
 
         for (const gerencia of gerencias as Array<Gerencia>) {
@@ -132,6 +137,13 @@ export class Respuestas {
                                     email: evaluador.email,
                                 },
                                 evaluaciones: [],
+                                campana: {
+                                    id: campana.id,
+                                    nombre: campana.nombre,
+                                    fechaLimite: campana.fechaLimite,
+                                    encuestaId: campana.encuestaId,
+                                    estado: campana.estado,
+                                },
                             };
                             respuesta.evaluaciones.push(evaluacion);
                             respuestas.push(respuesta);

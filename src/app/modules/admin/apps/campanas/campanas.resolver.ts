@@ -21,7 +21,6 @@ export class CampanasResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<Campana[]> {
-        console.log('llamo campanas resolver');
         return this._campanasService.getCampanas();
     }
 }
@@ -36,7 +35,6 @@ export class CampanasEncuestasResolver implements Resolve<any> {
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<Encuesta[]> {
-        console.log('llamo campana encuestas resolver');
         return this._campanasService.getEncuestas();
     }
 }

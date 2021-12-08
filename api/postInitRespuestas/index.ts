@@ -18,10 +18,10 @@ const httpTrigger: AzureFunction = async function (
     encuesta: any
 ): Promise<void> {
     const respuestasService = new Respuestas();
-    console.log(encuesta);
     let respuestas: Respuesta[] = respuestasService.getResults(
         gerencias,
-        encuesta
+        encuesta,
+        req.body
     );
 
     context.res = {

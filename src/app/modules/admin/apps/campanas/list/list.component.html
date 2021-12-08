@@ -44,12 +44,26 @@
                     <div class="grid grid-cols-3 sm:grid-cols-1 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
                         <ng-container *ngFor="let campana of campanas; trackBy: trackByFn">
                             <div class="flex flex-col shadow rounded-2xl overflow-hidden bg-card">
-                                <div class="p-3 sm:pr-5 pl-6 sm:pl-8">
+                                <div class="mt-3 p-3 sm:pr-5 pl-6 sm:pl-8">
                                     <div class="text-lg font-medium">
                                         {{ campana.nombre }}
                                     </div>
                                     <div class="text-sm mt-2">
                                         Fecha límite: {{ campana.fechaLimite | date }}
+                                    </div>
+                                    <div class="mt-4 space-y-2">
+                                        <div class="flex">
+                                            <mat-icon [ngClass]="{'icon-size-5 text-green-600' : campana.estado > 1,
+                                                                'icon-size-5 text-gray-200' : campana.estado < 2}"
+                                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                                            <div class="ml-2 leading-5">Evaluadores definidos</div>
+                                        </div>
+                                        <div class="flex">
+                                            <mat-icon [ngClass]="{'icon-size-5 text-green-600' : campana.estado > 2,
+                                                'icon-size-5 text-gray-200' : campana.estado < 3}"
+                                                [svgIcon]="'heroicons_solid:check'"></mat-icon>
+                                            <div class="ml-2 leading-5">Correos despachados</div>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="flex flex-col w-full mt-auto">
@@ -59,15 +73,24 @@
                                             [matTooltipPosition]="'above'"
                                             [matTooltipClass]="'-mb-0.5'"></div>
                                         <mat-progress-bar class="h-0.5"
-                                            [value]="0.5"></mat-progress-bar>
+                                            [value]="campana.estado * 20"></mat-progress-bar>
                                     </div>
                                     <div class="px-6 py-4 text-right bg-gray-50 dark:bg-transparent">
-                                        <button mat-stroked-button>
+                                        <button mat-stroked-button
+                                            (click)="continuarCampana(campana)">
                                             <span class="inline-flex items-center">
 
                                                 <!-- Started -->
-                                                <ng-container>
-                                                    <span>Continuar</span>
+                                                <ng-container *ngIf="campana.estado == 1">
+                                                    <span>Definir evaluadores</span>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="campana.estado == 2">
+                                                    <span>Despachar correos</span>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="campana.estado == 3">
+                                                    <span>Cerrar encuesta</span>
                                                 </ng-container>
 
                                                 <mat-icon class="ml-1.5 icon-size-5"
