@@ -19,7 +19,7 @@ export class RespuestasService {
 
     getRespuestas(id: string): Observable<Respuesta[]> {
         return this._httpClient
-            .get<Respuesta[]>(`api/private/campanas/${id}/respuestas`)
+            .get<Respuesta[]>(`api/private/campanas/${id}/reporte`)
             .pipe(
                 tap((respuestas) => {
                     this._respuestas.next(respuestas);

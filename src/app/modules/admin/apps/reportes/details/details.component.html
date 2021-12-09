@@ -55,37 +55,37 @@
                                 Evaluador
                             </div>
                             <div [mat-sort-header]="'name'">Servicios </div>
-                            <div class="hidden sm:block"></div>
+                            <div [mat-sort-header]="'name'">Pregunta </div>
+                            <div class="hidden sm:block">Respuesta</div>
                         </div>
 
                         <!-- Rows -->
 
                         <ng-container *ngIf="(respuestas$ | async) as respuestas">
                             <ng-container *ngFor="let respuesta of respuestas; trackBy: trackByFn">
-                                <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
+                                <ng-container *ngFor="let evaluacion of respuesta.evaluaciones">
+                                    <ng-container *ngFor="let pregunta of evaluacion.preguntas">
+                                        <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
 
 
-                                    <div>
-                                        {{respuesta.name}}
-                                    </div>
+                                            <div>
+                                                {{respuesta.name}}
+                                            </div>
 
-                                    <div>
-                                        <ol class="list-decimal list-inside space-y-2">
-                                            <li *ngFor="let evaluacion of respuesta.evaluaciones">
+                                            <div>
                                                 {{evaluacion.servicio}}
-                                            </li>
-                                        </ol>
-                                    </div>
+                                            </div>
+                                            <div>
+                                                {{pregunta.glosa}}
+                                            </div>
 
+                                            <div>
+                                                {{pregunta.valor}}
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                </ng-container>
 
-                                    <div>
-                                        <button class="min-w-10 min-h-7 h-7 px-2 leading-6"
-                                            mat-stroked-button>
-                                            <mat-icon class="icon-size-5"
-                                                [svgIcon]="'heroicons_solid:chevron-up'"></mat-icon>
-                                        </button>
-                                    </div>
-                                </div>
 
                             </ng-container>
                         </ng-container>

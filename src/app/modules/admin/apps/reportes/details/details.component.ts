@@ -16,18 +16,18 @@ import { RespuestasService } from '../respuestas.service';
         /* language=SCSS */
         `
             .inventory-grid {
-                grid-template-columns: 112px auto 72px;
+                grid-template-columns: 112px auto auto 72px;
 
                 @screen sm {
-                    grid-template-columns: 112px auto 72px;
+                    grid-template-columns: 112px auto auto 72px;
                 }
 
                 @screen md {
-                    grid-template-columns: 112px auto 72px;
+                    grid-template-columns: 112px auto auto 72px;
                 }
 
                 @screen lg {
-                    grid-template-columns: 222px auto 72px;
+                    grid-template-columns: 222px auto auto 72px;
                 }
             }
         `,
