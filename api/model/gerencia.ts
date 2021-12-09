@@ -64,6 +64,8 @@ export interface Campana {
     nombre?: string;
     fechaLimite?: Date;
     encuestaId?: string;
+    listos?: string[];
+    total?: number;
     estado?: number; //1 creado, 2 configurado, 3 enviado, 4 terminado, 5 eliminado
 }
 

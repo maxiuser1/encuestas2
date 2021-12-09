@@ -49,14 +49,33 @@
                                         {{ campana.nombre }}
                                     </div>
                                     <div class="text-sm mt-2">
-                                        Fecha límite: {{ campana.fechaLimite | date }}
+                                        Fecha límite: <b>{{ campana.fechaLimite | date }}</b>
+                                    </div>
+                                    <div class="text-sm mt-2">
+                                        Respuestas: <b>{{campana.listos.length}}</b>
+                                    </div>
+                                    <div class="text-sm mt-2">
+                                        Evaluadores: <b>{{campana.total}}</b>
                                     </div>
                                     <div class="mt-4 space-y-2">
                                         <div class="flex">
                                             <mat-icon [ngClass]="{'icon-size-5 text-green-600' : campana.estado > 1,
                                                                 'icon-size-5 text-gray-200' : campana.estado < 2}"
                                                 [svgIcon]="'heroicons_solid:check'"></mat-icon>
-                                            <div class="ml-2 leading-5">Evaluadores definidos</div>
+                                            <div class="ml-2 leading-5">
+                                                <a class="whitespace-nowrap text-primary-500"
+                                                    [routerLink]="['./', campana.id]"
+                                                    href="https://www.google.cl"
+                                                    *ngIf="campana.estado > 1;else asignarEvaluadoresBlock">
+                                                    Evaluadores definidos
+
+                                                </a>
+                                                <ng-template #asignarEvaluadoresBlock>
+                                                    Evaluadores definidos
+                                                </ng-template>
+
+                                            </div>
+
                                         </div>
                                         <div class="flex">
                                             <mat-icon [ngClass]="{'icon-size-5 text-green-600' : campana.estado > 2,
@@ -64,6 +83,7 @@
                                                 [svgIcon]="'heroicons_solid:check'"></mat-icon>
                                             <div class="ml-2 leading-5">Correos despachados</div>
                                         </div>
+
                                     </div>
                                 </div>
                                 <div class="flex flex-col w-full mt-auto">

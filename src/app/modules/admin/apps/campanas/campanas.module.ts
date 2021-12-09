@@ -6,6 +6,7 @@ import { CampanasListComponent } from './list/list.component';
 import {
     CampanasEncuestasResolver,
     CampanasResolver,
+    CampanasRespuestasResolver,
 } from './campanas.resolver';
 import { CampanasDetalleComponent } from './detalle/detalle.component';
 import { SharedModule } from 'app/shared/shared.module';
@@ -27,12 +28,14 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import localeEsCl from '@angular/common/locales/es-CL';
+import { MatSortModule } from '@angular/material/sort';
 
 import {
     registerLocaleData,
     LocationStrategy,
     HashLocationStrategy,
 } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 registerLocaleData(localeEsCl, 'es-CL');
 const routes: Route[] = [
@@ -47,12 +50,13 @@ const routes: Route[] = [
                     campanas: CampanasResolver,
                     encuestas: CampanasEncuestasResolver,
                 },
-                children: [
-                    {
-                        path: ':id',
-                        component: CampanasDetalleComponent,
-                    },
-                ],
+            },
+            {
+                path: ':id',
+                component: CampanasDetalleComponent,
+                resolve: {
+                    respuestas: CampanasRespuestasResolver,
+                },
             },
         ],
     },
@@ -82,6 +86,8 @@ const routes: Route[] = [
         MatProgressBarModule,
         MatMenuModule,
         MatButtonModule,
+        MatSortModule,
+        MatPaginatorModule,
         SharedModule,
     ],
     providers: [

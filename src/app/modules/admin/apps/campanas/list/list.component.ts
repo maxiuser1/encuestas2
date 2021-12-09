@@ -72,6 +72,7 @@ export class CampanasListComponent implements OnInit {
 
             result.id = getGuid();
             result.estado = 1;
+            result.listos = [];
 
             this._campanasService.createCampana(result).subscribe((t) => {
                 this._changeDetectorRef.markForCheck();
@@ -81,10 +82,13 @@ export class CampanasListComponent implements OnInit {
 
     continuarCampana(campana: Campana) {
         if (campana.estado == 1) {
-            this._campanasService.definirEvaluadores(campana).subscribe((t) => {
-                campana.estado = 2;
-                this._campanasService.updateCampana(campana).subscribe();
-            });
+            this._campanasService
+                .definirEvaluadores(campana)
+                .subscribe((t: any) => {
+                    campana.estado = 2;
+                    campana.total = t.cantidad;
+                    this._campanasService.updateCampana(campana).subscribe();
+                });
         } else if (campana.estado == 2) {
             this._campanasService
                 .despacharRespuestas(campana)
