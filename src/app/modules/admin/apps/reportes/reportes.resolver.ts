@@ -13,7 +13,7 @@ import { RespuestasService } from './respuestas.service';
 @Injectable({
     providedIn: 'root',
 })
-export class CampanasResolver implements Resolve<any> {
+export class ReportesResolver implements Resolve<any> {
     constructor(private _campanasService: CampanasService) {}
 
     resolve(
@@ -27,21 +27,7 @@ export class CampanasResolver implements Resolve<any> {
 @Injectable({
     providedIn: 'root',
 })
-export class CampanasEncuestasResolver implements Resolve<any> {
-    constructor(private _campanasService: CampanasService) {}
-
-    resolve(
-        route: ActivatedRouteSnapshot,
-        state: RouterStateSnapshot
-    ): Observable<Encuesta[]> {
-        return this._campanasService.getEncuestas();
-    }
-}
-
-@Injectable({
-    providedIn: 'root',
-})
-export class CampanasRespuestasResolver implements Resolve<any> {
+export class ReportesRespuestasResolver implements Resolve<any> {
     constructor(private _respuestasService: RespuestasService) {}
 
     resolve(

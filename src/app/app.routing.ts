@@ -169,6 +169,13 @@ export const appRoutes: Route[] = [
                                 'app/modules/admin/apps/campanas/campanas.module'
                             ).then((m) => m.CampanasModule),
                     },
+                    {
+                        path: 'reportes',
+                        loadChildren: () =>
+                            import(
+                                'app/modules/admin/apps/reportes/reportes.module'
+                            ).then((m) => m.ReportesModule),
+                    },
                 ],
             },
         ],

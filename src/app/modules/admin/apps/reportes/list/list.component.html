@@ -2,12 +2,10 @@
     cdkScrollable>
 
 
-
-
     <div class="relative flex-0 py-8 px-4 sm:p-16 overflow-hidden bg-gray-800 dark">
         <div class="z-10 relative flex flex-col items-center">
             <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
-                Campañas
+                Reportes
             </div>
         </div>
     </div>
@@ -29,12 +27,7 @@
                         #query />
                 </mat-form-field>
 
-                <button class="mt-8 sm:mt-0 sm:ml-auto"
-                    mat-flat-button
-                    [color]="'primary'"
-                    (click)="agregarCampana()">
-                    <span class="hidden sm:inline-block ml-2">Nueva Campaña</span>
-                </button>
+
             </div>
 
 
@@ -48,33 +41,18 @@
                                     <div class="text-lg font-medium">
                                         {{ campana.nombre }}
                                     </div>
-                                    <div class="text-sm mt-2">
-                                        Fecha límite: <b>{{ campana.fechaLimite | date }}</b>
-                                    </div>
+
                                     <div class="mt-4 space-y-2">
+
                                         <div class="flex">
-                                            <mat-icon [ngClass]="{'icon-size-5 text-green-600' : campana.estado > 1,
-                                                                'icon-size-5 text-gray-200' : campana.estado < 2}"
+                                            <mat-icon class="icon-size-5 text-green-600"
                                                 [svgIcon]="'heroicons_solid:check'"></mat-icon>
-                                            <div class="ml-2 leading-5">
-                                                <a class="whitespace-nowrap text-primary-500"
-                                                    [routerLink]="['./', campana.id]"
-                                                    *ngIf="campana.estado > 1;else asignarEvaluadoresBlock">
-                                                    Evaluadores definidos
-
-                                                </a>
-                                                <ng-template #asignarEvaluadoresBlock>
-                                                    Evaluadores definidos
-                                                </ng-template>
-
-                                            </div>
-
+                                            <div class="ml-2 leading-5">Evaluadores: <b>{{campana.total}}</b></div>
                                         </div>
                                         <div class="flex">
-                                            <mat-icon [ngClass]="{'icon-size-5 text-green-600' : campana.estado > 2,
-                                                'icon-size-5 text-gray-200' : campana.estado < 3}"
+                                            <mat-icon class="icon-size-5 text-green-600"
                                                 [svgIcon]="'heroicons_solid:check'"></mat-icon>
-                                            <div class="ml-2 leading-5">Correos despachados</div>
+                                            <div class="ml-2 leading-5">Respuestas: <b>{{campana.listos.length}}</b></div>
                                         </div>
 
                                     </div>
@@ -89,27 +67,10 @@
                                             [value]="campana.estado * 20"></mat-progress-bar>
                                     </div>
                                     <div class="px-6 py-4 text-right bg-gray-50 dark:bg-transparent">
-                                        <button mat-stroked-button
-                                            (click)="continuarCampana(campana)">
-                                            <span class="inline-flex items-center">
-
-                                                <!-- Started -->
-                                                <ng-container *ngIf="campana.estado == 1">
-                                                    <span>Definir evaluadores</span>
-                                                </ng-container>
-
-                                                <ng-container *ngIf="campana.estado == 2">
-                                                    <span>Despachar correos</span>
-                                                </ng-container>
-
-                                                <ng-container *ngIf="campana.estado == 3">
-                                                    <span>Cerrar encuesta</span>
-                                                </ng-container>
-
-                                                <mat-icon class="ml-1.5 icon-size-5"
-                                                    [svgIcon]="'heroicons_solid:arrow-sm-right'"></mat-icon>
-                                            </span>
-                                        </button>
+                                        <a class="whitespace-nowrap text-primary-500"
+                                            [routerLink]="['./', campana.id]">
+                                            Detalle
+                                        </a>
                                     </div>
                                 </div>
                             </div>

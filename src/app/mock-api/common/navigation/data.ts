@@ -37,6 +37,13 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 icon: 'heroicons_outline:chat-alt',
                 link: '/apps/campanas',
             },
+            {
+                id: 'apps.reportes',
+                title: 'Reportes',
+                type: 'basic',
+                icon: 'heroicons_outline:chart-pie',
+                link: '/apps/reportes',
+            },
         ],
     },
 ];

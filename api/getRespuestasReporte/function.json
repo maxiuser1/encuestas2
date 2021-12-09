@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "get"
+      ],
+      "route":"private/campanas/{id}/reporte"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "in",
+      "name": "items",
+      "databaseName": "organizacion",
+      "collectionName": "respuestas",
+      "connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery":"SELECT c.id, c.evaluador.name, c.evaluaciones.servicio, c.evaluaciones.preguntas.glosa, c.evaluaciones.preguntas.valor from c where c.campana.id = {id}"
+    }
+  ],
+  "scriptFile": "../dist/getRespuestasReporte/index.js"
+}
