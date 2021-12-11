@@ -1,5 +1,4 @@
-<div
-    class="
+<div class="
         fixed
         flex
         items-center
@@ -17,29 +16,23 @@
     [class.lg:right-0]="
         config.layout === 'centered' || config.layout === 'material'
     "
-    [class.lg:right-16]="
+    [class.lg:right-0]="
         config.layout !== 'centered' && config.layout !== 'material'
     "
     style="top: 275px"
-    (click)="settingsDrawer.toggle()"
->
-    <mat-icon
-        class="icon-size-5 text-white animate-spin-slow"
-        [svgIcon]="'heroicons_solid:cog'"
-    ></mat-icon>
+    (click)="settingsDrawer.toggle()">
+    <mat-icon class="icon-size-5 text-white animate-spin-slow"
+        [svgIcon]="'heroicons_solid:cog'"></mat-icon>
 </div>
 
-<fuse-drawer
-    class="w-screen min-w-screen sm:w-100 sm:min-w-100 z-999"
+<fuse-drawer class="w-screen min-w-screen sm:w-100 sm:min-w-100 z-999"
     fixed
     [mode]="'over'"
     [name]="'settingsDrawer'"
     [position]="'right'"
-    #settingsDrawer
->
+    #settingsDrawer>
     <div class="flex flex-col w-full overflow-auto bg-card">
-        <div
-            class="
+        <div class="
                 flex flex-row
                 items-center
                 px-6
@@ -47,24 +40,17 @@
                 min-h-20
                 text-white
                 bg-primary
-            "
-        >
-            <mat-icon
-                class="icon-size-7 text-current"
-                [svgIcon]="'heroicons_solid:cog'"
-            ></mat-icon>
+            ">
+            <mat-icon class="icon-size-7 text-current"
+                [svgIcon]="'heroicons_solid:cog'"></mat-icon>
             <div class="ml-3 text-2xl font-semibold tracking-tight">
                 Settings
             </div>
-            <button
-                class="ml-auto"
+            <button class="ml-auto"
                 mat-icon-button
-                (click)="settingsDrawer.close()"
-            >
-                <mat-icon
-                    class="text-current"
-                    [svgIcon]="'heroicons_outline:x'"
-                ></mat-icon>
+                (click)="settingsDrawer.close()">
+                <mat-icon class="text-current"
+                    [svgIcon]="'heroicons_outline:x'"></mat-icon>
             </button>
         </div>
 
@@ -73,8 +59,7 @@
             <div class="text-md font-semibold text-secondary">THEME</div>
             <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mt-6">
                 <ng-container *ngFor="let theme of themes">
-                    <div
-                        class="
+                    <div class="
                             flex
                             items-center
                             justify-center
@@ -86,16 +71,11 @@
                             bg-hover
                         "
                         [class.ring-2]="config.theme === theme[0]"
-                        (click)="setTheme(theme[0])"
-                    >
-                        <div
-                            class="flex-0 w-3 h-3 rounded-full"
-                            [style.background-color]="theme[1].primary"
-                        ></div>
-                        <div
-                            class="ml-2.5 font-medium leading-5 truncate"
-                            [class.text-secondary]="config.theme !== theme[0]"
-                        >
+                        (click)="setTheme(theme[0])">
+                        <div class="flex-0 w-3 h-3 rounded-full"
+                            [style.background-color]="theme[1].primary"></div>
+                        <div class="ml-2.5 font-medium leading-5 truncate"
+                            [class.text-secondary]="config.theme !== theme[0]">
                             {{ theme[0] | titlecase }}
                         </div>
                     </div>
@@ -108,8 +88,7 @@
             <div class="text-md font-semibold text-secondary">SCHEME</div>
             <div class="grid grid-cols-3 gap-3 justify-items-start mt-6">
                 <!-- Auto -->
-                <div
-                    class="
+                <div class="
                         flex
                         items-center
                         py-3
@@ -122,24 +101,18 @@
                     "
                     [class.ring-2]="config.scheme === 'auto'"
                     matTooltip="Automatically sets the scheme based on user's operating system's color scheme preference using 'prefer-color-scheme' media query."
-                    (click)="setScheme('auto')"
-                >
+                    (click)="setScheme('auto')">
                     <div class="flex items-center rounded-full overflow-hidden">
-                        <mat-icon
-                            class="icon-size-5"
-                            [svgIcon]="'heroicons_solid:lightning-bolt'"
-                        ></mat-icon>
+                        <mat-icon class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:lightning-bolt'"></mat-icon>
                     </div>
-                    <div
-                        class="flex items-center ml-2 font-medium leading-5"
-                        [class.text-secondary]="config.scheme !== 'auto'"
-                    >
+                    <div class="flex items-center ml-2 font-medium leading-5"
+                        [class.text-secondary]="config.scheme !== 'auto'">
                         Auto
                     </div>
                 </div>
                 <!-- Dark -->
-                <div
-                    class="
+                <div class="
                         flex
                         items-center
                         py-3
@@ -151,24 +124,18 @@
                         bg-hover
                     "
                     [class.ring-2]="config.scheme === 'dark'"
-                    (click)="setScheme('dark')"
-                >
+                    (click)="setScheme('dark')">
                     <div class="flex items-center rounded-full overflow-hidden">
-                        <mat-icon
-                            class="icon-size-5"
-                            [svgIcon]="'heroicons_solid:moon'"
-                        ></mat-icon>
+                        <mat-icon class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:moon'"></mat-icon>
                     </div>
-                    <div
-                        class="flex items-center ml-2 font-medium leading-5"
-                        [class.text-secondary]="config.scheme !== 'dark'"
-                    >
+                    <div class="flex items-center ml-2 font-medium leading-5"
+                        [class.text-secondary]="config.scheme !== 'dark'">
                         Dark
                     </div>
                 </div>
                 <!-- Light -->
-                <div
-                    class="
+                <div class="
                         flex
                         items-center
                         py-3
@@ -180,18 +147,13 @@
                         bg-hover
                     "
                     [class.ring-2]="config.scheme === 'light'"
-                    (click)="setScheme('light')"
-                >
+                    (click)="setScheme('light')">
                     <div class="flex items-center rounded-full overflow-hidden">
-                        <mat-icon
-                            class="icon-size-5"
-                            [svgIcon]="'heroicons_solid:sun'"
-                        ></mat-icon>
+                        <mat-icon class="icon-size-5"
+                            [svgIcon]="'heroicons_solid:sun'"></mat-icon>
                     </div>
-                    <div
-                        class="flex items-center ml-2 font-medium leading-5"
-                        [class.text-secondary]="config.scheme !== 'light'"
-                    >
+                    <div class="flex items-center ml-2 font-medium leading-5"
+                        [class.text-secondary]="config.scheme !== 'light'">
                         Light
                     </div>
                 </div>
@@ -203,12 +165,9 @@
             <div class="text-md font-semibold text-secondary">LAYOUT</div>
             <div class="grid grid-cols-3 gap-3 mt-6">
                 <!-- Empty -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('empty')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('empty')">
+                    <div class="
                             flex flex-col
                             h-20
                             rounded-md
@@ -216,36 +175,28 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'empty'"
-                    >
-                        <div
-                            class="
+                        [class.border-primary]="config.layout === 'empty'">
+                        <div class="
                                 flex flex-col flex-auto
                                 bg-gray-50
                                 dark:bg-gray-900
-                            "
-                        ></div>
+                            "></div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'empty'"
-                    >
+                        [class.text-primary]="config.layout === 'empty'">
                         Empty
                     </div>
                 </div>
 
                 <!-- Classic -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('classic')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('classic')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -253,125 +204,99 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'classic'"
-                    >
+                        [class.border-primary]="config.layout === 'classic'">
                         <div class="w-8 bg-gray-100 dark:bg-gray-800">
                             <div class="mt-3 mx-1.5 space-y-1">
-                                <div
-                                    class="
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto border-l">
                             <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         h-full
                                         mr-1.5
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'classic'"
-                    >
+                        [class.text-primary]="config.layout === 'classic'">
                         Classic
                     </div>
                 </div>
 
                 <!-- Classy -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('classy')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('classy')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -379,42 +304,34 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'classy'"
-                    >
+                        [class.border-primary]="config.layout === 'classy'">
                         <div class="w-8 bg-gray-100 dark:bg-gray-800">
                             <div class="flex items-center mt-1 mx-1">
-                                <div
-                                    class="
+                                <div class="
                                         w-1
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1
                                         h-1
                                         ml-auto
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1
                                         h-1
                                         ml-0.5
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     w-4
                                     h-4
                                     mt-2.5
@@ -422,95 +339,75 @@
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
+                                "></div>
                             <div class="mt-2 mx-1 space-y-1">
-                                <div
-                                    class="
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto border-l">
                             <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         h-full
                                         mr-2
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'classy'"
-                    >
+                        [class.text-primary]="config.layout === 'classy'">
                         Classy
                     </div>
                 </div>
 
                 <!-- Compact -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('compact')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('compact')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -518,11 +415,9 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'compact'"
-                    >
+                        [class.border-primary]="config.layout === 'compact'">
                         <div class="w-5 bg-gray-100 dark:bg-gray-800">
-                            <div
-                                class="
+                            <div class="
                                     w-3
                                     h-3
                                     mt-2
@@ -530,119 +425,95 @@
                                     rounded-sm
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     flex flex-col
                                     items-center
                                     w-full
                                     mt-2
                                     space-y-1
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-3
                                         h-2.5
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-2.5
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-2.5
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto border-l">
                             <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         h-full
                                         mr-1.5
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'compact'"
-                    >
+                        [class.text-primary]="config.layout === 'compact'">
                         Compact
                     </div>
                 </div>
 
                 <!-- Dense -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('dense')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('dense')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -650,11 +521,9 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'dense'"
-                    >
+                        [class.border-primary]="config.layout === 'dense'">
                         <div class="w-4 bg-gray-100 dark:bg-gray-800">
-                            <div
-                                class="
+                            <div class="
                                     w-2
                                     h-2
                                     mt-2
@@ -662,119 +531,95 @@
                                     rounded-sm
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     flex flex-col
                                     items-center
                                     w-full
                                     mt-2
                                     space-y-1
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-2
                                         h-2
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-2
                                         h-2
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-2
                                         h-2
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto border-l">
                             <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         h-full
                                         mr-1.5
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'dense'"
-                    >
+                        [class.text-primary]="config.layout === 'dense'">
                         Dense
                     </div>
                 </div>
 
                 <!-- Futuristic -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('futuristic')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('futuristic')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -782,126 +627,100 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'futuristic'"
-                    >
+                        [class.border-primary]="config.layout === 'futuristic'">
                         <div class="w-8 bg-gray-100 dark:bg-gray-800">
-                            <div
-                                class="
+                            <div class="
                                     flex flex-col flex-auto
                                     h-full
                                     py-3
                                     px-1.5
                                     space-y-1
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                                 <div class="flex-auto"></div>
-                                <div
-                                    class="
+                                <div class="
                                         h-1
                                         rounded-sm
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto border-l">
                             <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         h-full
                                         mr-1.5
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'futuristic'"
-                    >
+                        [class.text-primary]="config.layout === 'futuristic'">
                         Futuristic
                     </div>
                 </div>
 
                 <!-- Thin -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('thin')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('thin')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -909,11 +728,9 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'thin'"
-                    >
+                        [class.border-primary]="config.layout === 'thin'">
                         <div class="w-3 bg-gray-100 dark:bg-gray-800">
-                            <div
-                                class="
+                            <div class="
                                     w-1.5
                                     h-1.5
                                     mt-2
@@ -921,126 +738,101 @@
                                     rounded-sm
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     flex flex-col
                                     items-center
                                     w-full
                                     mt-2
                                     space-y-1
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-1.5
                                         h-1.5
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1.5
                                         h-1.5
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1.5
                                         h-1.5
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1.5
                                         h-1.5
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1.5
                                         h-1.5
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto border-l">
                             <div class="h-3 bg-gray-100 dark:bg-gray-800">
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         h-full
                                         mr-1.5
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'thin'"
-                    >
+                        [class.text-primary]="config.layout === 'thin'">
                         Thin
                     </div>
                 </div>
@@ -1048,12 +840,9 @@
                 <div class="col-span-2"></div>
 
                 <!-- Centered -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('centered')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('centered')">
+                    <div class="
                             flex
                             h-20
                             rounded-md
@@ -1061,129 +850,103 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'centered'"
-                    >
-                        <div
-                            class="
+                        [class.border-primary]="config.layout === 'centered'">
+                        <div class="
                                 flex flex-col flex-auto
                                 my-1
                                 mx-2
                                 border
                                 rounded-md
                                 overflow-hidden
-                            "
-                        >
-                            <div
-                                class="
+                            ">
+                            <div class="
                                     flex
                                     items-center
                                     h-3
                                     bg-gray-100
                                     dark:bg-gray-800
-                                "
-                            >
+                                ">
                                 <div class="flex ml-1.5">
-                                    <div
-                                        class="
+                                    <div class="
                                             w-1
                                             h-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-3
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-3
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-3
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
-                                <div
-                                    class="
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         ml-auto
                                         mr-1.5
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             ml-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'centered'"
-                    >
+                        [class.text-primary]="config.layout === 'centered'">
                         Centered
                     </div>
                 </div>
 
                 <!-- Enterprise -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('enterprise')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('enterprise')">
+                    <div class="
                             flex flex-col
                             h-20
                             rounded-md
@@ -1191,67 +954,53 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'enterprise'"
-                    >
-                        <div
-                            class="
+                        [class.border-primary]="config.layout === 'enterprise'">
+                        <div class="
                                 flex
                                 items-center
                                 h-3
                                 px-2
                                 bg-gray-100
                                 dark:bg-gray-800
-                            "
-                        >
-                            <div
-                                class="
+                            ">
+                            <div class="
                                     w-2
                                     h-2
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     flex
                                     items-center
                                     justify-end
                                     ml-auto
                                     space-x-1
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-1
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
-                        <div
-                            class="
+                        <div class="
                                 flex
                                 items-center
                                 h-3
@@ -1260,84 +1009,66 @@
                                 space-x-1
                                 bg-gray-100
                                 dark:bg-gray-800
-                            "
-                        >
-                            <div
-                                class="
+                            ">
+                            <div class="
                                     w-3
                                     h-1
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     w-3
                                     h-1
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     w-3
                                     h-1
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
-                            <div
-                                class="
+                                "></div>
+                            <div class="
                                     w-3
                                     h-1
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
+                                "></div>
                         </div>
-                        <div
-                            class="
+                        <div class="
                                 flex flex-col flex-auto
                                 my-1
                                 mx-2
                                 border
                                 rounded
                                 overflow-hidden
-                            "
-                        >
-                            <div
-                                class="
+                            ">
+                            <div class="
                                     flex flex-auto
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'enterprise'"
-                    >
+                        [class.text-primary]="config.layout === 'enterprise'">
                         Enterprise
                     </div>
                 </div>
 
                 <!-- Material -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('material')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('material')">
+                    <div class="
                             flex flex-col
                             h-20
                             rounded-md
@@ -1345,77 +1076,61 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'material'"
-                    >
-                        <div
-                            class="
+                        [class.border-primary]="config.layout === 'material'">
+                        <div class="
                                 flex flex-col flex-auto
                                 my-1
                                 mx-2
                                 border
                                 rounded
                                 overflow-hidden
-                            "
-                        >
-                            <div
-                                class="
+                            ">
+                            <div class="
                                     flex
                                     items-center
                                     h-4
                                     px-2
                                     bg-gray-100
                                     dark:bg-gray-800
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-2
                                         h-2
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         flex
                                         items-center
                                         justify-end
                                         ml-auto
                                         space-x-1
-                                    "
-                                >
-                                    <div
-                                        class="
+                                    ">
+                                    <div class="
                                             w-1
                                             h-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
-                                    <div
-                                        class="
+                                        "></div>
+                                    <div class="
                                             w-1
                                             h-1
                                             rounded-full
                                             bg-gray-300
                                             dark:bg-gray-700
-                                        "
-                                    ></div>
+                                        "></div>
                                 </div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex
                                     items-center
                                     h-2
@@ -1423,75 +1138,59 @@
                                     space-x-1
                                     bg-gray-100
                                     dark:bg-gray-800
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     border-t
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'material'"
-                    >
+                        [class.text-primary]="config.layout === 'material'">
                         Material
                     </div>
                 </div>
 
                 <!-- Modern -->
-                <div
-                    class="flex flex-col cursor-pointer"
-                    (click)="setLayout('modern')"
-                >
-                    <div
-                        class="
+                <div class="flex flex-col cursor-pointer"
+                    (click)="setLayout('modern')">
+                    <div class="
                             flex flex-col
                             h-20
                             rounded-md
@@ -1499,10 +1198,8 @@
                             border-2
                             hover:opacity-80
                         "
-                        [class.border-primary]="config.layout === 'modern'"
-                    >
-                        <div
-                            class="
+                        [class.border-primary]="config.layout === 'modern'">
+                        <div class="
                                 flex
                                 items-center
                                 h-4
@@ -1510,94 +1207,75 @@
                                 border-b
                                 bg-gray-100
                                 dark:bg-gray-800
-                            "
-                        >
-                            <div
-                                class="
+                            ">
+                            <div class="
                                     w-2
                                     h-2
                                     rounded-full
                                     bg-gray-300
                                     dark:bg-gray-700
-                                "
-                            ></div>
+                                "></div>
                             <div class="flex items-center h-3 ml-2 space-x-1">
-                                <div
-                                    class="
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-3
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
-                            <div
-                                class="
+                            <div class="
                                     flex
                                     items-center
                                     justify-end
                                     ml-auto
                                     space-x-1
-                                "
-                            >
-                                <div
-                                    class="
+                                ">
+                                <div class="
                                         w-1
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
-                                <div
-                                    class="
+                                    "></div>
+                                <div class="
                                         w-1
                                         h-1
                                         rounded-full
                                         bg-gray-300
                                         dark:bg-gray-700
-                                    "
-                                ></div>
+                                    "></div>
                             </div>
                         </div>
                         <div class="flex flex-col flex-auto">
-                            <div
-                                class="
+                            <div class="
                                     flex flex-auto
                                     bg-gray-50
                                     dark:bg-gray-900
-                                "
-                            ></div>
+                                "></div>
                         </div>
                     </div>
-                    <div
-                        class="
+                    <div class="
                             mt-2
                             text-md
                             font-medium
                             text-center text-secondary
                         "
-                        [class.text-primary]="config.layout === 'modern'"
-                    >
+                        [class.text-primary]="config.layout === 'modern'">
                         Modern
                     </div>
                 </div>
