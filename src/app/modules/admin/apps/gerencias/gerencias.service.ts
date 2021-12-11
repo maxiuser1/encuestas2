@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, KeyValueDiffers } from '@angular/core';
-import { items } from 'app/mock-api/apps/file-manager/data';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap } from 'rxjs/internal/operators/tap';
 import { map, switchMap, take } from 'rxjs/operators';

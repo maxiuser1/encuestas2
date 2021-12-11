@@ -87,29 +87,7 @@ export class AuthService {
      */
     signInUsingToken(): Observable<any> {
         // Renew token
-        return this._httpClient
-            .post('api/auth/refresh-access-token', {
-                accessToken: this.accessToken,
-            })
-            .pipe(
-                catchError(() =>
-                    // Return false
-                    of(false)
-                ),
-                switchMap((response: any) => {
-                    // Store the access token in the local storage
-                    this.accessToken = response.accessToken;
-
-                    // Set the authenticated flag to true
-                    this._authenticated = true;
-
-                    // Store the user on the user service
-                    this._userService.user = response.user;
-
-                    // Return true
-                    return of(true);
-                })
-            );
+        return of(true);
     }
 
     /**
