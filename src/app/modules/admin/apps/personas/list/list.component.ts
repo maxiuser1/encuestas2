@@ -6,8 +6,12 @@ import {
     ChangeDetectorRef,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { cloneDeep } from 'lodash';
 import { Observable } from 'rxjs';
 import { Persona } from '../../../../../../../api/model/gerencia';
+import { PersonasAgregarComponent } from '../agregar/agregar.component';
+import { PersonasEditarComponent } from '../editar/editar.component';
 import { PersonasService } from '../personas.service';
 
 @Component({
@@ -42,6 +46,7 @@ export class PersonasListComponent implements OnInit {
     isLoading: boolean = false;
 
     constructor(
+        private _matDialog: MatDialog,
         private _changeDetectorRef: ChangeDetectorRef,
         private _personasService: PersonasService
     ) {}
@@ -50,7 +55,40 @@ export class PersonasListComponent implements OnInit {
         this.personas$ = this._personasService.personas$;
     }
 
-    crearPersona() {}
+    crearPersona() {
+        const dialogRef = this._matDialog.open(PersonasAgregarComponent, {
+            autoFocus: false,
+        });
+
+        dialogRef.afterClosed().subscribe((result: Persona) => {
+            if (!result) return;
+
+            this._personasService
+                .createPersona(result)
+                .subscribe((t) => this._changeDetectorRef.markForCheck());
+        });
+    }
+
+    editar(persona: Persona) {
+        const dialogRef = this._matDialog.open(PersonasEditarComponent, {
+            autoFocus: false,
+            data: {
+                persona: cloneDeep(persona),
+            },
+        });
+
+        dialogRef.afterClosed().subscribe((result: Persona) => {
+            if (!result) return;
+
+            this._personasService
+                .updatePersona({
+                    ...persona,
+                    name: result.name,
+                    email: result.email,
+                })
+                .subscribe((t) => this._changeDetectorRef.markForCheck());
+        });
+    }
 
     trackByFn(index: number, item: any): any {
         return item.id || index;

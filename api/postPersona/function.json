@@ -1,0 +1,29 @@
+{
+  "bindings": [
+    {
+      "authLevel": "function",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": [
+        "post"
+      ],
+      "route":"private/personas"
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "direction": "out",
+      "name": "persona",
+      "databaseName": "organizacion",
+      "collectionName": "personas",
+      "createIfNotExists": false,
+      "connectionStringSetting": "CosmosDBConnection"
+    }
+  ],
+  "scriptFile": "../dist/postPersona/index.js"
+}

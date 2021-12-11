@@ -10,6 +10,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { PersonasResolver } from './personas.resolver';
+import { PersonasAgregarComponent } from './agregar/agregar.component';
+import { PersonasEditarComponent } from './editar/editar.component';
 
 const routes: Route[] = [
     {
@@ -28,7 +30,11 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-    declarations: [PersonasListComponent],
+    declarations: [
+        PersonasListComponent,
+        PersonasAgregarComponent,
+        PersonasEditarComponent,
+    ],
     imports: [
         RouterModule.forChild(routes),
         MatButtonModule,
