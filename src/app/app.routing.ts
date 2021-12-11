@@ -133,25 +133,11 @@ export const appRoutes: Route[] = [
                             ).then((m) => m.EncuestasModule),
                     },
                     {
-                        path: 'notes',
+                        path: 'personas',
                         loadChildren: () =>
                             import(
-                                'app/modules/admin/apps/notes/notes.module'
-                            ).then((m) => m.NotesModule),
-                    },
-                    {
-                        path: 'contacts',
-                        loadChildren: () =>
-                            import(
-                                'app/modules/admin/apps/contacts/contacts.module'
-                            ).then((m) => m.ContactsModule),
-                    },
-                    {
-                        path: 'tasks',
-                        loadChildren: () =>
-                            import(
-                                'app/modules/admin/apps/tasks/tasks.module'
-                            ).then((m) => m.TasksModule),
+                                'app/modules/admin/apps/personas/personas.module'
+                            ).then((m) => m.PersonasModule),
                     },
                     {
                         path: 'campanas',

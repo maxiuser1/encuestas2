@@ -13,6 +13,7 @@ import { LayoutModule } from 'app/layout/layout.module';
 import { AppComponent } from 'app/app.component';
 import { appRoutes } from 'app/app.routing';
 import { InicioComponent } from './modules/admin/pages/inicio/inicio.component';
+import { PersonasComponent } from './modules/admin/apps/personas/personas.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy: PreloadAllModules,
@@ -20,7 +21,7 @@ const routerConfig: ExtraOptions = {
 };
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, PersonasComponent],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,

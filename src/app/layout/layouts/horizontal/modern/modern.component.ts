@@ -74,14 +74,14 @@ export class ModernLayoutComponent implements OnInit, OnDestroy {
                         link: '/apps/gerencias',
                     },
                     {
-                        id: 'apps.contacts',
+                        id: 'apps.personas',
                         title: 'Personas',
                         type: 'basic',
                         icon: 'heroicons_outline:user-group',
-                        link: '/apps/contacts',
+                        link: '/apps/personas',
                     },
                     {
-                        id: 'apps.contacts',
+                        id: 'apps.encuestas',
                         title: 'Encuestas',
                         type: 'basic',
                         icon: 'heroicons_outline:question-mark-circle',
