@@ -18,10 +18,8 @@ import { SharedModule } from 'app/shared/shared.module';
 import { ModernLayoutComponent } from 'app/layout/layouts/horizontal/modern/modern.component';
 
 @NgModule({
-    declarations: [
-        ModernLayoutComponent
-    ],
-    imports     : [
+    declarations: [ModernLayoutComponent],
+    imports: [
         HttpClientModule,
         RouterModule,
         MatButtonModule,
@@ -37,12 +35,8 @@ import { ModernLayoutComponent } from 'app/layout/layouts/horizontal/modern/mode
         SearchModule,
         ShortcutsModule,
         UserModule,
-        SharedModule
+        SharedModule,
     ],
-    exports     : [
-        ModernLayoutComponent
-    ]
+    exports: [ModernLayoutComponent],
 })
-export class ModernLayoutModule
-{
-}
+export class ModernLayoutModule {}
