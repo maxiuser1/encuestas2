@@ -43,7 +43,6 @@ export class GerenciasDetailsComponent implements OnInit {
     form!: FormGroup;
 
     personasFiltradas: Observable<Persona[]>;
-    controlResponsable = new FormControl();
 
     gerenciaChanged: Subject<Gerencia> = new Subject<Gerencia>();
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -97,11 +96,16 @@ export class GerenciasDetailsComponent implements OnInit {
                 this._changeDetectorRef.markForCheck();
             });
 
-        this.personasFiltradas = this.controlResponsable.valueChanges.pipe(
-            startWith(''),
-            map((value) => (typeof value === 'string' ? value : value.name)),
-            map((name) => (name ? this._filter(name) : this.personas.slice()))
-        );
+        this.personasFiltradas =
+            this.form.controls.responsable.valueChanges.pipe(
+                startWith(''),
+                map((value) =>
+                    typeof value === 'string' ? value : value.name
+                ),
+                map((name) =>
+                    name ? this._filter(name) : this.personas.slice()
+                )
+            );
     }
 
     private _filter(value: string): Persona[] {

@@ -23,7 +23,7 @@
       "collectionName": "gerencias",
       "connectionStringSetting": "CosmosDBConnection",
       "Id":"{id}",
-      "PartitionKey":"{id}"
+      "PartitionKey":"bciseguros"
     }
   ],
   "scriptFile": "../dist/getGerencia/index.js"

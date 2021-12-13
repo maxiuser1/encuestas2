@@ -6,9 +6,9 @@
       "direction": "in",
       "name": "req",
       "methods": [
-        "get"
+        "post"
       ],
-      "route":"public/persona"
+      "route": "private/personas/buscar"
     },
     {
       "type": "http",
@@ -18,14 +18,13 @@
     {
       "type": "cosmosDB",
       "direction": "in",
-      "name": "item",
+      "name": "items",
       "databaseName": "organizacion",
       "collectionName": "personas",
-      "createIfNotExists": false,
-      "connectionStringSetting": "CosmosDBConnection",
       "PartitionKey":"bciseguros",
-      "Id":"{id}"
+      "connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery":"SELECT c.id, c.name, c.email from c where  CONTAINS(c.name, {query} ,true) order by c.name"
     }
   ],
-  "scriptFile": "../dist/findPersona/index.js"
+  "scriptFile": "../dist/searchPersonas/index.js"
 }

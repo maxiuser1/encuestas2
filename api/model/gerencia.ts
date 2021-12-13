@@ -6,6 +6,7 @@ export interface Gerencia {
     subgerencias?: Subgerencia[];
     areas?: Area[];
     responsable?: Responsable;
+    compania?: string;
 }
 
 export interface Gerenciard {
@@ -51,6 +52,8 @@ export interface Persona {
     id?: string;
     name?: string;
     email?: string;
+    deshabilitado?: boolean;
+    compania?: string;
 }
 
 export interface Asignable {

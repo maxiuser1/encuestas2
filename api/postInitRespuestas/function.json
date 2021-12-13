@@ -28,6 +28,7 @@
       "name": "gerencias",
       "databaseName": "organizacion",
       "collectionName": "gerencias",
+      "PartitionKey":"bciseguros",
       "connectionStringSetting": "CosmosDBConnection"
     },
     {

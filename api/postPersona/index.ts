@@ -7,7 +7,11 @@ const httpTrigger: AzureFunction = async function (
     req: HttpRequest
 ): Promise<void> {
     const personaVm = req.body as Persona;
-    const persona: Persona = { ...personaVm, id: getGuid() };
+    const persona: Persona = {
+        ...personaVm,
+        id: getGuid(),
+        compania: 'bciseguros',
+    };
     context.bindings.persona = persona;
     context.res = {
         status: 201,

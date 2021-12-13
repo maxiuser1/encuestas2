@@ -23,7 +23,7 @@
       "collectionName": "personas",
       "connectionStringSetting": "CosmosDBConnection",
       "Id":"{id}",
-      "PartitionKey":"{id}"
+      "PartitionKey":"bciseguros"
     },
     {
       "type": "cosmosDB",
@@ -32,7 +32,8 @@
       "databaseName": "organizacion",
       "collectionName": "personas",
       "createIfNotExists": false,
-      "connectionStringSetting": "CosmosDBConnection"
+      "connectionStringSetting": "CosmosDBConnection",
+      "PartitionKey":"bciseguros"
     }
   ],
   "scriptFile": "../dist/patchPersona/index.js"

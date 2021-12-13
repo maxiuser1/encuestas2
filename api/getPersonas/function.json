@@ -21,7 +21,9 @@
       "name": "items",
       "databaseName": "organizacion",
       "collectionName": "personas",
-      "connectionStringSetting": "CosmosDBConnection"
+      "connectionStringSetting": "CosmosDBConnection",
+      "sqlQuery":"SELECT  c.id, c.name, c.email from c order by c.name",
+      "PartitionKey":"bciseguros"
     }
   ],
   "scriptFile": "../dist/getPersonas/index.js"

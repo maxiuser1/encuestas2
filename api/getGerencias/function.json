@@ -21,7 +21,8 @@
       "name": "items",
       "databaseName": "organizacion",
       "collectionName": "gerencias",
-      "connectionStringSetting": "CosmosDBConnection"
+      "connectionStringSetting": "CosmosDBConnection",
+      "PartitionKey":"bciseguros"
     }
   ],
   "scriptFile": "../dist/getGerencias/index.js"
