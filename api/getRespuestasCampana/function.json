@@ -22,7 +22,7 @@
       "databaseName": "organizacion",
       "collectionName": "respuestas",
       "connectionStringSetting": "CosmosDBConnection",
-      "sqlQuery":"SELECT c.id, c.evaluador.name, ARRAY(select f.servicio from f in c.evaluaciones) as evaluaciones from c where c.campana.id = {id}"
+      "sqlQuery":"SELECT c.id, c.evaluador.name, c.evaluador.email, ARRAY(select f.servicio from f in c.evaluaciones) as evaluaciones from c where c.campana.id = {id}"
     }
   ],
   "scriptFile": "../dist/getRespuestasCampana/index.js"
