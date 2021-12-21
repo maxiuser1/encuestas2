@@ -124,3 +124,11 @@ export interface ItemRespuesta {
     glosa?: string;
     valor?: string;
 }
+
+export interface Suscripcion {
+    id?: string;
+    servicioId?: string;
+    establecidos?: string[];
+    suscritos?: string[];
+    compania?: string;
+}

@@ -17,6 +17,8 @@ export class Respuestas {
         encuesta: Encuesta,
         campana: Campana
     ): Respuesta[] {
+        const envi = process.env['envi'] ?? process.env['envi'];
+
         let respuestas: Respuesta[] = [];
 
         for (const gerencia of gerencias as Array<Gerencia>) {
@@ -134,7 +136,10 @@ export class Respuestas {
                                 evaluador: {
                                     id: evaluador.id,
                                     name: evaluador.name,
-                                    email: evaluador.email,
+                                    email:
+                                        envi == 'PROD'
+                                            ? evaluador.email
+                                            : 'pe.jose.calderon@gmail.com',
                                 },
                                 evaluaciones: [],
                                 campana: {
