@@ -15,7 +15,7 @@
         (ngSubmit)="onSubmit()"
         class="flex flex-col flex-auto p-6 sm:p-8 overflow-y-auto">
 
-        <mat-label class="mt-1">Equipo responsable:</mat-label>
+        <mat-label class="mt-1">Evaluadores:</mat-label>
         <ng-container formArrayName="equipo">
 
             <ng-container *ngFor="let equipoForm of integrantes.controls; let i = index">
@@ -47,7 +47,7 @@
             <div>
                 <button type="button"
                     mat-flat-button
-                    (click)="addIntegrante()">Agregar integrante</button>
+                    (click)="addIntegrante()">Agregar aveluador</button>
             </div>
             <div class="flex items-center mt-4 sm:mt-0">
                 <!-- Save as draft -->
