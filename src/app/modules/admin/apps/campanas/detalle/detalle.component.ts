@@ -5,6 +5,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
 } from '@angular/core';
+import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
 import { Respuesta } from '../../../../../../../api/model/gerencia';
 import { RespuestasService } from '../respuestas.service';
@@ -36,12 +37,17 @@ import { RespuestasService } from '../respuestas.service';
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CampanasDetalleComponent implements OnInit {
+    urlRespuetas: string;
     respuestas$: Observable<Respuesta[]>;
     isLoading: boolean = false;
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _respuestasService: RespuestasService
-    ) {}
+    ) {
+        this.urlRespuetas = window.location.hostname.includes('white')
+            ? environment.prdrespuestas
+            : environment.qarespuestas;
+    }
 
     ngOnInit(): void {
         this.respuestas$ = this._respuestasService.respuestas$;

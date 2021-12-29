@@ -53,6 +53,7 @@
                                             <mat-icon class="icon-size-5 text-green-600"
                                                 [svgIcon]="'heroicons_solid:check'"></mat-icon>
                                             <div class="ml-2 leading-5">Respuestas: <b>{{campana.listos.length}}</b></div>
+
                                         </div>
 
                                     </div>
@@ -67,10 +68,27 @@
                                             [value]="campana.estado * 20"></mat-progress-bar>
                                     </div>
                                     <div class="px-6 py-4 text-right bg-gray-50 dark:bg-transparent">
-                                        <a class="whitespace-nowrap text-primary-500"
-                                            [routerLink]="['./', campana.id]">
-                                            Detalle
-                                        </a>
+
+                                        <div class="flex items-center justify-between mt-4">
+
+                                            <div class="flex items-center space-x-2">
+                                                <div>
+                                                    <button mat-icon-button
+                                                        *ngIf="campana.listos.length > 0"
+                                                        class="whitespace-nowrap text-primary-500"
+                                                        (click)="exportar(campana.id)">
+                                                        <mat-icon [svgIcon]="'heroicons_outline:download'"></mat-icon>
+                                                    </button>
+                                                </div>
+
+                                            </div>
+                                            <a class="whitespace-nowrap text-primary-500"
+                                                [routerLink]="['./', campana.id]">
+                                                Detalle
+                                            </a>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>

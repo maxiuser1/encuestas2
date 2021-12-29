@@ -26,4 +26,10 @@ export class RespuestasService {
                 })
             );
     }
+
+    getRespuestasCsv(id: string): Observable<Respuesta[]> {
+        return this._httpClient.get<Respuesta[]>(
+            `api/private/campanas/${id}/csv`
+        );
+    }
 }

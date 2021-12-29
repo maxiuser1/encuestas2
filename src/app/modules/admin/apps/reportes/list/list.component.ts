@@ -8,8 +8,9 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
-import { Campana } from '../../../../../../../api/model/gerencia';
+import { Campana, Respuesta } from '../../../../../../../api/model/gerencia';
 import { CampanasService } from '../campanas.service';
+import { RespuestasService } from '../respuestas.service';
 
 @Component({
     selector: 'reportes-list',
@@ -32,7 +33,8 @@ export class ReportesListComponent implements OnInit {
     constructor(
         private _matDialog: MatDialog,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _campanasService: CampanasService
+        private _campanasService: CampanasService,
+        private _repotersService: RespuestasService
     ) {}
 
     ngOnInit(): void {
@@ -57,5 +59,36 @@ export class ReportesListComponent implements OnInit {
 
     trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+
+    exportar(id) {
+        this._repotersService.getRespuestasCsv(id).subscribe((t: any) => {
+            console.log('res', t);
+            let csvContent = 'EVALUADOR;GERENCIA;SERVICIO;PREGUNTA;NOTA';
+            for (let cadaRespuesta of t) {
+                for (let cadaEvaluacion of cadaRespuesta.evaluaciones) {
+                    for (let cadaPregunta of cadaEvaluacion.preguntas) {
+                        const dataLine = `${cadaRespuesta.name};${cadaEvaluacion.gerencia};${cadaEvaluacion.servicio};${cadaPregunta.glosa};${cadaPregunta.valor}`;
+                        csvContent += `\n${dataLine}`;
+                    }
+                }
+            }
+
+            const blob = new Blob(['\uFEFF' + csvContent], {
+                type: 'text/csv;charset=utf-8;',
+            });
+
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                // Browsers that support HTML5 download attribute
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'data.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        });
     }
 }

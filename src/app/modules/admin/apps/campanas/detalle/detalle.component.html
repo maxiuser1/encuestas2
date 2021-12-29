@@ -66,13 +66,11 @@
 
 
                                     <div>
-                                        <div>
-                                            {{respuesta.name}}
-                                        </div>
+
                                         <a class="text-primary cursor-pointer"
                                             target="_blank"
-                                            href="https://red-bush-0aaffb20f.azurestaticapps.net/?i={{respuesta.id}}">
-                                            {{respuesta.email}}
+                                            href="{{urlRespuetas}}/?i={{respuesta.id}}">
+                                            {{respuesta.name}} - {{respuesta.email}}
                                         </a>
                                     </div>
 
