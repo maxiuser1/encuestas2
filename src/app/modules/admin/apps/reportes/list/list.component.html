@@ -72,14 +72,19 @@
                                         <div class="flex items-center justify-between mt-4">
 
                                             <div class="flex items-center space-x-2">
-                                                <div>
-                                                    <button mat-icon-button
-                                                        *ngIf="campana.listos.length > 0"
-                                                        class="whitespace-nowrap text-primary-500"
-                                                        (click)="exportar(campana.id)">
-                                                        <mat-icon [svgIcon]="'heroicons_outline:download'"></mat-icon>
-                                                    </button>
-                                                </div>
+                                                <button mat-icon-button
+                                                    *ngIf="campana.listos.length > 0"
+                                                    class="whitespace-nowrap text-primary-500"
+                                                    (click)="exportar(campana.id)">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:download'"></mat-icon>
+                                                </button>
+
+                                                <button mat-icon-button
+                                                    *ngIf="campana.listos.length > 0"
+                                                    class="whitespace-nowrap text-primary-500"
+                                                    (click)="comentarios(campana.id)">
+                                                    <mat-icon [svgIcon]="'heroicons_outline:chat-alt'"></mat-icon>
+                                                </button>
 
                                             </div>
                                             <a class="whitespace-nowrap text-primary-500"

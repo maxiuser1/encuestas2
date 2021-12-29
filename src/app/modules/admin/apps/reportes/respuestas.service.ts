@@ -32,4 +32,10 @@ export class RespuestasService {
             `api/private/campanas/${id}/csv`
         );
     }
+
+    getComentariosCsv(id: string): Observable<Respuesta[]> {
+        return this._httpClient.get<Respuesta[]>(
+            `api/private/campanas/${id}/comentarios`
+        );
+    }
 }

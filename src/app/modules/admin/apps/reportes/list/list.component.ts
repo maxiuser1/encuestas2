@@ -91,4 +91,35 @@ export class ReportesListComponent implements OnInit {
             }
         });
     }
+
+    comentarios(id) {
+        this._repotersService.getComentariosCsv(id).subscribe((t: any) => {
+            console.log('res', t);
+            let csvContent = 'EVALUADOR;GERENCIA;SERVICIO;COMENTARIO';
+            for (let cadaRespuesta of t) {
+                for (let cadaEvaluacion of cadaRespuesta.evaluaciones) {
+                    if (cadaEvaluacion.comentario) {
+                        const dataLine = `${cadaRespuesta.name};${cadaEvaluacion.gerencia};${cadaEvaluacion.servicio};${cadaEvaluacion.comentario}`;
+                        csvContent += `\n${dataLine}`;
+                    }
+                }
+            }
+
+            const blob = new Blob(['\uFEFF' + csvContent], {
+                type: 'text/csv;charset=utf-8;',
+            });
+
+            const link = document.createElement('a');
+            if (link.download !== undefined) {
+                // Browsers that support HTML5 download attribute
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'comentarios.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        });
+    }
 }
