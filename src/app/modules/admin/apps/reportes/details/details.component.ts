@@ -5,7 +5,8 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Respuesta } from '../../../../../../../api/model/gerencia';
 import { RespuestasService } from '../respuestas.service';
 
@@ -38,16 +39,52 @@ import { RespuestasService } from '../respuestas.service';
 export class ReportesDetailsComponent implements OnInit {
     respuestas$: Observable<Respuesta[]>;
     isLoading: boolean = false;
+
+    filters: {
+        query$: BehaviorSubject<string>;
+    } = {
+        query$: new BehaviorSubject(''),
+    };
+
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
         private _respuestasService: RespuestasService
     ) {}
 
     ngOnInit(): void {
-        this.respuestas$ = this._respuestasService.respuestas$;
+        this.respuestas$ = combineLatest([
+            this._respuestasService.respuestas$,
+            this.filters.query$,
+        ]).pipe(
+            distinctUntilChanged(),
+            map(([respuestas, query]) => {
+                if (!respuestas || !respuestas.length) {
+                    return;
+                }
+
+                let filteredRespuestas = respuestas;
+
+                if (query !== '') {
+                    const qlq = query.toLowerCase();
+                    filteredRespuestas = filteredRespuestas.filter(
+                        (respuesta) =>
+                            respuesta.name.toLowerCase().includes(qlq) ||
+                            respuesta.evaluaciones.some((p) =>
+                                p.servicio.toLowerCase().includes(qlq)
+                            )
+                    );
+                }
+
+                return filteredRespuestas;
+            })
+        );
     }
 
     trackByFn(index: number, item: any): any {
         return item.id || index;
+    }
+
+    filtrar(query: string): void {
+        this.filters.query$.next(query);
     }
 }

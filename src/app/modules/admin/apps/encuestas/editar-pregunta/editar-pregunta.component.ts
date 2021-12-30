@@ -26,7 +26,6 @@ export class EncuestasEditarPreguntaComponent implements OnInit {
 
     onSubmit() {
         if (this.form.valid) {
-            console.log('pregunta', this.form.value);
             this._maDialogRef.close(this.form.value);
         }
     }

@@ -24,7 +24,6 @@ export class EncuestasEditarComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        console.log('0', this._data.encuesta);
         this.form = this._formBuilder.group({
             nombre: [this._data.encuesta.nombre, [Validators.required]],
         });

@@ -87,6 +87,7 @@ export interface Pregunta {
 
 export interface Respuesta {
     id?: string;
+    name?: string;
     evaluador: Responsable;
     campana?: Campana;
     evaluaciones?: Evaluacion[];

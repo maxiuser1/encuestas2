@@ -26,9 +26,11 @@
                 <mat-icon class="icon-size-5"
                     matPrefix
                     [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                <input matInput
+                <input (input)="filtrar(query.value)"
+                    matInput
                     [autocomplete]="'off'"
-                    [placeholder]="'Buscar'">
+                    [placeholder]="'Buscar'"
+                    #query>
             </mat-form-field>
 
         </div>
@@ -54,8 +56,8 @@
                                 [mat-sort-header]="'sku'">
                                 Evaluador
                             </div>
-                            <div [mat-sort-header]="'name'">Servicios </div>
-                            <div [mat-sort-header]="'name'">Pregunta </div>
+                            <div [mat-sort-header]="'servicio'">Servicios </div>
+                            <div [mat-sort-header]="'pregunta'">Pregunta </div>
                             <div class="hidden sm:block">Respuesta</div>
                         </div>
 

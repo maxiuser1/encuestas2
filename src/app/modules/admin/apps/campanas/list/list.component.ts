@@ -50,6 +50,14 @@ export class CampanasListComponent implements OnInit {
                     return;
                 }
                 let filteredCampanas = campanas;
+
+                if (query !== '') {
+                    const qlq = query.toLowerCase();
+                    filteredCampanas = filteredCampanas.filter((encuesta) =>
+                        encuesta.nombre.toLowerCase().includes(qlq)
+                    );
+                }
+
                 return filteredCampanas;
             })
         );

@@ -63,7 +63,6 @@ export class ReportesListComponent implements OnInit {
 
     exportar(id) {
         this._repotersService.getRespuestasCsv(id).subscribe((t: any) => {
-            console.log('res', t);
             let csvContent = 'EVALUADOR;GERENCIA;SERVICIO;PREGUNTA;NOTA';
             for (let cadaRespuesta of t) {
                 for (let cadaEvaluacion of cadaRespuesta.evaluaciones) {
@@ -94,7 +93,6 @@ export class ReportesListComponent implements OnInit {
 
     comentarios(id) {
         this._repotersService.getComentariosCsv(id).subscribe((t: any) => {
-            console.log('res', t);
             let csvContent = 'EVALUADOR;GERENCIA;SERVICIO;COMENTARIO';
             for (let cadaRespuesta of t) {
                 for (let cadaEvaluacion of cadaRespuesta.evaluaciones) {
