@@ -17,10 +17,10 @@
                 <mat-icon class="icon-size-5"
                     matPrefix
                     [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                <input matInput
-                    [formControl]="searchInputControl"
-                    [autocomplete]="'off'"
-                    [placeholder]="'Buscar persona'">
+                <input (input)="filtrarPorNombre(query.value)"
+                    placeholder="Buscar"
+                    matInput
+                    #query />
             </mat-form-field>
             <!-- Add product button -->
             <button class="ml-4"

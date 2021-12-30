@@ -8,7 +8,8 @@ import {
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { cloneDeep } from 'lodash';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { Persona } from '../../../../../../../api/model/gerencia';
 import { PersonasAgregarComponent } from '../agregar/agregar.component';
 import { PersonasEditarComponent } from '../editar/editar.component';
@@ -42,6 +43,13 @@ import { PersonasService } from '../personas.service';
 })
 export class PersonasListComponent implements OnInit {
     personas$: Observable<Persona[]>;
+
+    filters: {
+        query$: BehaviorSubject<string>;
+    } = {
+        query$: new BehaviorSubject(''),
+    };
+
     searchInputControl: FormControl = new FormControl();
     isLoading: boolean = false;
 
@@ -52,7 +60,35 @@ export class PersonasListComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.personas$ = this._personasService.personas$;
+        this._personasService.getPersonas().subscribe();
+
+        this.personas$ = combineLatest([
+            this._personasService.personas$,
+            this.filters.query$,
+        ]).pipe(
+            distinctUntilChanged(),
+            map(([personas, query]) => {
+                if (!personas || !personas.length) {
+                    return;
+                }
+
+                let filteredPersonas = personas;
+
+                if (query !== '') {
+                    const qlq = query.toLowerCase();
+                    filteredPersonas = filteredPersonas.filter(
+                        (persona) =>
+                            persona.name.toLowerCase().includes(qlq) ||
+                            persona.email.toLowerCase().includes(qlq)
+                    );
+                }
+                return filteredPersonas;
+            })
+        );
+    }
+
+    filtrarPorNombre(query: string): void {
+        this.filters.query$.next(query);
     }
 
     crearPersona() {
