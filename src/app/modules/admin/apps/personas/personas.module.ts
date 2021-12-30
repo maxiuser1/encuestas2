@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { PersonasResolver } from './personas.resolver';
 import { PersonasAgregarComponent } from './agregar/agregar.component';
 import { PersonasEditarComponent } from './editar/editar.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Route[] = [
     {
@@ -39,6 +40,7 @@ const routes: Route[] = [
         RouterModule.forChild(routes),
         MatButtonModule,
         MatFormFieldModule,
+        MatDialogModule,
         MatIconModule,
         MatInputModule,
         MatProgressBarModule,
