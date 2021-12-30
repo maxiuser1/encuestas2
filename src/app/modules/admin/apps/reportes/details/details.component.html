@@ -68,15 +68,15 @@
                                 <ng-container *ngFor="let evaluacion of respuesta.evaluaciones">
                                     <ng-container *ngFor="let pregunta of evaluacion.preguntas">
                                         <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
-
+                                            <div>
+                                                {{evaluacion.servicio}}
+                                            </div>
 
                                             <div>
                                                 {{respuesta.name}}
                                             </div>
 
-                                            <div>
-                                                {{evaluacion.servicio}}
-                                            </div>
+
                                             <div>
                                                 {{pregunta.glosa}}
                                             </div>
