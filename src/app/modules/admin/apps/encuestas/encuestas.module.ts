@@ -14,6 +14,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SharedModule } from 'app/shared/shared.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { EncuestasAgregarComponent } from './agregar/agregar.component';
+import { EncuestasEditarComponent } from './editar/editar.component';
+import { EncuestasAgregarPreguntaComponent } from './agregar-pregunta/agregar-pregunta.component';
+import { EncuestasEditarPreguntaComponent } from './editar-pregunta/editar-pregunta.component';
+import { MatMenuModule } from '@angular/material/menu';
 
 const routes: Route[] = [
     {
@@ -32,7 +37,14 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-    declarations: [EncuestasComponent, EncuestasListComponent],
+    declarations: [
+        EncuestasComponent,
+        EncuestasListComponent,
+        EncuestasAgregarComponent,
+        EncuestasEditarComponent,
+        EncuestasAgregarPreguntaComponent,
+        EncuestasEditarPreguntaComponent,
+    ],
     imports: [
         RouterModule.forChild(routes),
         MatFormFieldModule,
@@ -43,6 +55,7 @@ const routes: Route[] = [
         MatChipsModule,
         MatAutocompleteModule,
         MatSlideToggleModule,
+        MatMenuModule,
         MatButtonModule,
         SharedModule,
     ],

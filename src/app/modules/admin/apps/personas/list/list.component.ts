@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { cloneDeep } from 'lodash';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { getGuid } from '../../../../../../../api/common/Utils';
 import { Persona } from '../../../../../../../api/model/gerencia';
 import { PersonasAgregarComponent } from '../agregar/agregar.component';
 import { PersonasEditarComponent } from '../editar/editar.component';
@@ -98,7 +99,7 @@ export class PersonasListComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe((result: Persona) => {
             if (!result) return;
-
+            result.id = getGuid();
             this._personasService
                 .createPersona(result)
                 .subscribe((t) => this._changeDetectorRef.markForCheck());
