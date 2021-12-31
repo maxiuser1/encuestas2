@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { FuseConfirmationService } from '@fuse/services/confirmation';
 import { cloneDeep } from 'lodash';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
@@ -34,7 +35,7 @@ import { PersonasService } from '../personas.service';
                 }
 
                 @screen lg {
-                    grid-template-columns: 222px auto 72px;
+                    grid-template-columns: 222px auto 172px;
                 }
             }
         `,
@@ -57,7 +58,8 @@ export class PersonasListComponent implements OnInit {
     constructor(
         private _matDialog: MatDialog,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _personasService: PersonasService
+        private _personasService: PersonasService,
+        private _fuseConfirmationService: FuseConfirmationService
     ) {}
 
     ngOnInit(): void {
@@ -73,7 +75,10 @@ export class PersonasListComponent implements OnInit {
                     return;
                 }
 
-                let filteredPersonas = personas;
+                let filteredPersonas = personas.filter(
+                    (t) =>
+                        t.deshabilitado == undefined || t.deshabilitado == false
+                );
 
                 if (query !== '') {
                     const qlq = query.toLowerCase();
@@ -124,6 +129,31 @@ export class PersonasListComponent implements OnInit {
                     email: result.email,
                 })
                 .subscribe((t) => this._changeDetectorRef.markForCheck());
+        });
+    }
+
+    eliminar(persona: Persona) {
+        const confirmation = this._fuseConfirmationService.open({
+            title: 'Eliminar',
+            message: '¿Estas seguro que vas a eliminar este registro?',
+            actions: {
+                confirm: {
+                    label: 'Eliminar',
+                },
+            },
+        });
+
+        confirmation.afterClosed().subscribe((result) => {
+            if (result == 'confirmed') {
+                persona.deshabilitado = true;
+                this._personasService
+                    .updatePersona({
+                        ...persona,
+                        name: result.name,
+                        email: result.email,
+                    })
+                    .subscribe((t) => this._changeDetectorRef.markForCheck());
+            }
         });
     }
 

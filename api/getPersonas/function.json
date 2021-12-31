@@ -22,7 +22,7 @@
       "databaseName": "organizacion",
       "collectionName": "personas",
       "connectionStringSetting": "CosmosDBConnection",
-      "sqlQuery":"SELECT  c.id, c.name, c.email from c order by c.name",
+      "sqlQuery":"SELECT  c.id, c.name, c.email, c.deshabilitado from c order by c.name",
       "PartitionKey":"bciseguros"
     }
   ],
