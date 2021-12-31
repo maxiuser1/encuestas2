@@ -100,6 +100,7 @@ export class PersonasListComponent implements OnInit {
     crearPersona() {
         const dialogRef = this._matDialog.open(PersonasAgregarComponent, {
             autoFocus: false,
+            width: '95%',
         });
 
         dialogRef.afterClosed().subscribe((result: Persona) => {
