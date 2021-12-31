@@ -109,7 +109,6 @@ export class ReportesListComponent implements OnInit {
 
             const link = document.createElement('a');
             if (link.download !== undefined) {
-                // Browsers that support HTML5 download attribute
                 const url = URL.createObjectURL(blob);
                 link.setAttribute('href', url);
                 link.setAttribute('download', 'comentarios.csv');
