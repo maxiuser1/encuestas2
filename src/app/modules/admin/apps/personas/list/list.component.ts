@@ -24,10 +24,10 @@ import { PersonasService } from '../personas.service';
         /* language=SCSS */
         `
             .inventory-grid {
-                grid-template-columns: 112px auto 72px;
+                grid-template-columns: auto 72px;
 
                 @screen sm {
-                    grid-template-columns: 212px auto 72px;
+                    grid-template-columns: auto 72px;
                 }
 
                 @screen md {

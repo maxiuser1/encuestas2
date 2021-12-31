@@ -50,12 +50,9 @@
                         <div class="inventory-grid z-10 sticky top-0 grid gap-4 py-4 px-6 md:px-8 shadow text-md font-semibold text-secondary bg-gray-50 dark:bg-black dark:bg-opacity-5"
                             matSort
                             matSortDisableClear>
-                            <div class="hidden md:block"
-                                [mat-sort-header]="'sku'">
-                                Nombres
-                            </div>
-                            <div [mat-sort-header]="'name'">Correo </div>
-                            <div class="hidden sm:block"></div>
+                            <div class="hidden lg:block">Correo</div>
+                            <div>Nombres </div>
+                            <div></div>
                         </div>
 
                         <!-- Rows -->
@@ -65,15 +62,15 @@
                                 <div class="inventory-grid grid items-center gap-4 py-3 px-6 md:px-8 border-b">
 
 
+                                    <div class="hidden lg:block ">
+                                        {{persona.email}}
+                                    </div>
+
+
                                     <div>
                                         {{persona.name}}
                                     </div>
 
-                                    <div>
-
-                                        {{persona.email}}
-
-                                    </div>
 
 
                                     <div>
