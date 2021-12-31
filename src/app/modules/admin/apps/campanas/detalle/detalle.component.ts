@@ -3,7 +3,6 @@ import {
     OnInit,
     ViewEncapsulation,
     ChangeDetectionStrategy,
-    ChangeDetectorRef,
 } from '@angular/core';
 import { environment } from 'environments/environment';
 import { Observable } from 'rxjs';
@@ -40,10 +39,7 @@ export class CampanasDetalleComponent implements OnInit {
     urlRespuetas: string;
     respuestas$: Observable<Respuesta[]>;
     isLoading: boolean = false;
-    constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _respuestasService: RespuestasService
-    ) {
+    constructor(private _respuestasService: RespuestasService) {
         this.urlRespuetas = window.location.hostname.includes('white')
             ? environment.prdrespuestas
             : environment.qarespuestas;
