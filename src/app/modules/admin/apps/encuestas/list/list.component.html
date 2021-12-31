@@ -12,25 +12,34 @@
     <div class="flex flex-auto p-6 sm:p-10">
         <div class="flex flex-col flex-auto w-full max-w-xs sm:max-w-5xl mx-auto">
             <!-- Filtros -->
-            <div class="flex flex-col sm:flex-row items-center justify-between w-full max-w-xs sm:max-w-none">
+
+            <div class="flex items-center mt-4 sm:mt-0 md:mt-4">
+                <!-- Search -->
+                <div class="flex-auto">
+                    <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded w-full min-w-50">
+                        <mat-icon class="icon-size-5"
+                            matPrefix
+                            [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                        <input matInput
+                            (input)="filtrarPorNombre(query.value)"
+                            [autocomplete]="'off'"
+                            [placeholder]="''"
+                            #query>
+                    </mat-form-field>
+                </div>
 
 
-                <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript fuse-mat-rounded min-w-64">
-                    <mat-icon class="icon-size-5"
-                        matPrefix
-                        [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                    <input (input)="filtrarPorNombre(query.value)"
-                        matInput
-                        #query />
-                </mat-form-field>
-
-                <button class="mt-8 sm:mt-0 sm:ml-auto"
-                    (click)="agregarEncuesta()"
+                <button class="ml-4 px-1 sm:px-4 min-w-10"
                     mat-flat-button
-                    [color]="'primary'">
-                    <span class="hidden sm:inline-block ml-2">Nueva Encuesta</span>
+                    [color]="'primary'"
+                    (click)="agregarEncuesta()">
+                    <mat-icon class="icon-size-5"
+                        [svgIcon]="'heroicons_solid:plus-circle'"></mat-icon>
+                    <span class="hidden sm:inline-block ml-2">Nueva encuesta</span>
                 </button>
+
             </div>
+
 
             <!-- Gerencias -->
             <ng-container *ngIf="encuestas$ | async as encuestas; else loading">

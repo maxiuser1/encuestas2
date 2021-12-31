@@ -41,7 +41,7 @@
             <!-- Campanas -->
             <ng-container *ngIf="(campanas$ | async) as campanas">
                 <ng-container *ngIf="campanas.length">
-                    <div class="grid grid-cols-3 sm:grid-cols-1 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
+                    <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-3 gap-8 mt-8 sm:mt-10">
                         <ng-container *ngFor="let campana of campanas; trackBy: trackByFn">
                             <div class="flex flex-col shadow rounded-2xl overflow-hidden bg-card">
                                 <div class="mt-3 p-3 sm:pr-5 pl-6 sm:pl-8">
