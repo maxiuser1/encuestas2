@@ -161,7 +161,7 @@ export class Respuestas {
                                         email:
                                             envi == 'PROD'
                                                 ? evaluador.email
-                                                : 'pe.jose.calderon@gmail.com',
+                                                : 'natalia.anhuaman21@gmail.com',
                                     },
                                     evaluaciones: [],
                                     campana: {
