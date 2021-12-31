@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
     declarations: [
         SettingsComponent
     ],
-    imports: [
+    imports     : [
         CommonModule,
         RouterModule,
         MatIconModule,

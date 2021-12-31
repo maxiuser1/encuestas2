@@ -43,7 +43,6 @@ export class AuthSignInComponent implements OnInit {
         this.signInForm = this._formBuilder.group({
             email: ['', [Validators.required, Validators.email]],
             password: ['', Validators.required],
-            rememberMe: [''],
         });
     }
 
@@ -91,7 +90,7 @@ export class AuthSignInComponent implements OnInit {
                 // Set the alert
                 this.alert = {
                     type: 'error',
-                    message: 'Credenciales no válidas',
+                    message: 'Wrong email or password',
                 };
 
                 // Show the alert

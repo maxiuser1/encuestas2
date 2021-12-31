@@ -1,3 +1,6 @@
+<!-- Loading bar -->
+<fuse-loading-bar></fuse-loading-bar>
+
 <!-- Navigation -->
 <ng-container *ngIf="isScreenSmall">
     <fuse-vertical-navigation class="dark bg-gray-900 print:hidden"
@@ -48,7 +51,17 @@
         </ng-container>
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
-
+            <languages></languages>
+            <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
+            <search [appearance]="'bar'"></search>
+            <shortcuts></shortcuts>
+            <messages></messages>
+            <notifications></notifications>
+            <button class="lg:hidden"
+                mat-icon-button
+                (click)="quickChat.toggle()">
+                <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
+            </button>
             <user></user>
         </div>
     </div>
@@ -62,9 +75,10 @@
 
     <!-- Footer -->
     <div class="relative flex flex-0 items-center w-full h-14 sm:h-20 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
-        <span class="font-medium text-secondary">Encuestas Internas - Bci Seguros &copy; {{currentYear}}</span>
+        <span class="font-medium text-secondary">Fuse &copy; {{currentYear}}</span>
     </div>
 
 </div>
 
 <!-- Quick chat -->
+<quick-chat #quickChat="quickChat"></quick-chat>

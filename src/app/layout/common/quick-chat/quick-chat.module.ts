@@ -13,7 +13,7 @@ import { QuickChatComponent } from 'app/layout/common/quick-chat/quick-chat.comp
     declarations: [
         QuickChatComponent
     ],
-    imports: [
+    imports     : [
         RouterModule,
         MatButtonModule,
         MatFormFieldModule,
@@ -21,7 +21,7 @@ import { QuickChatComponent } from 'app/layout/common/quick-chat/quick-chat.comp
         MatInputModule,
         FuseDrawerModule,
         FuseScrollbarModule,
-        SharedModule,
+        SharedModule
     ],
     exports     : [
         QuickChatComponent

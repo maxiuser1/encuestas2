@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
     declarations: [
         FuseFullscreenComponent
     ],
-    imports: [
+    imports     : [
         MatButtonModule,
         MatIconModule,
         MatTooltipModule,

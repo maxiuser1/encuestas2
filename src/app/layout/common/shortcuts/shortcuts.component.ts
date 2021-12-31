@@ -3,8 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { MatButton } from '@angular/material/button';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Shortcut } from 'app/layout/common/shortcuts/shortcuts.types';
 import { ShortcutsService } from 'app/layout/common/shortcuts/shortcuts.service';
 
@@ -77,7 +76,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
 
         // Dispose the overlay
@@ -116,7 +115,7 @@ export class ShortcutsComponent implements OnInit, OnDestroy
     }
 
     /**
-     * Close the messages panel
+     * Close the shortcuts panel
      */
     closePanel(): void
     {

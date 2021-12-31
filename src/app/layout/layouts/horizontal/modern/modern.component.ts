@@ -1,15 +1,14 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 import { FuseMediaWatcherService } from '@fuse/services/media-watcher';
 import {
+    FuseNavigationItem,
     FuseNavigationService,
     FuseVerticalNavigationComponent,
 } from '@fuse/components/navigation';
 import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
-import { FuseNavigationItem } from '@fuse/components/navigation';
 
 @Component({
     selector: 'modern-layout',
@@ -52,6 +51,7 @@ export class ModernLayoutComponent implements OnInit, OnDestroy {
      * On init
      */
     ngOnInit(): void {
+        // Subscribe to navigation data
         this.menus = [
             {
                 id: 'inicio',
@@ -119,7 +119,7 @@ export class ModernLayoutComponent implements OnInit, OnDestroy {
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 

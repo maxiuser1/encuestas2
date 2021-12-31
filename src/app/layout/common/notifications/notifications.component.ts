@@ -2,8 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnIni
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { MatButton } from '@angular/material/button';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 import { Notification } from 'app/layout/common/notifications/notifications.types';
 import { NotificationsService } from 'app/layout/common/notifications/notifications.service';
 
@@ -67,7 +66,7 @@ export class NotificationsComponent implements OnInit, OnDestroy
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
 
         // Dispose the overlay
@@ -103,7 +102,7 @@ export class NotificationsComponent implements OnInit, OnDestroy
     }
 
     /**
-     * Close the messages panel
+     * Close the notifications panel
      */
     closePanel(): void
     {

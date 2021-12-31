@@ -35,6 +35,7 @@ const routes: Route[] = [
         PersonasListComponent,
         PersonasAgregarComponent,
         PersonasEditarComponent,
+        PersonasComponent,
     ],
     imports: [
         RouterModule.forChild(routes),

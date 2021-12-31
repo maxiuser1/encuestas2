@@ -1,7 +1,6 @@
 import { Directive, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 @Directive({
     selector: '[fuseScrollReset]',
@@ -47,7 +46,7 @@ export class FuseScrollResetDirective implements OnInit, OnDestroy
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 }

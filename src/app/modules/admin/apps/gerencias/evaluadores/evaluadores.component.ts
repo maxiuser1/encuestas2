@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { optionsToString } from 'rrule/dist/esm/src/optionstostring';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith, takeUntil } from 'rxjs/operators';
 import { Persona, Servicio } from '../../../../../../../api/model/gerencia';

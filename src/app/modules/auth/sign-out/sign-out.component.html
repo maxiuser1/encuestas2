@@ -7,11 +7,11 @@
             </div>
 
             <!-- Title -->
-            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight text-center">Ha salido de la aplcación!</div>
+            <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight text-center">Saliste de la aplicación!</div>
             <div class="flex justify-center mt-0.5 font-medium">
                 <!-- Redirect countdown -->
                 <ng-container *ngIf="countdown > 0">
-                    Será redirigido en {{countdown | i18nPlural: countdownMapping }}
+                    Serás rediridigo en {{countdown | i18nPlural: countdownMapping }}
                 </ng-container>
 
                 <!-- Redirect message -->
@@ -22,9 +22,9 @@
 
             <!-- Form footer -->
             <div class="mt-8 text-md font-medium text-secondary text-center">
-                <span>Ir a</span>
+                <span>Ir</span>
                 <a class="ml-1 text-primary-500 hover:underline"
-                    [routerLink]="['/sign-in']">autenticarse
+                    [routerLink]="['/sign-in']">ingresar
                 </a>
             </div>
         </div>

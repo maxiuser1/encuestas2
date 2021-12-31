@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostBinding, HostListener, NgZone, OnDestroy, OnInit, Renderer2, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ScrollStrategy, ScrollStrategyOptions } from '@angular/cdk/overlay';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Subject, takeUntil } from 'rxjs';
 import { QuickChatService } from 'app/layout/common/quick-chat/quick-chat.service';
 import { Chat } from 'app/layout/common/quick-chat/quick-chat.types';
 
@@ -110,7 +109,7 @@ export class QuickChatComponent implements OnInit, OnDestroy
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 

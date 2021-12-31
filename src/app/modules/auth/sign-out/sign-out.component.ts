@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, timer } from 'rxjs';
-import { finalize, takeUntil, takeWhile, tap } from 'rxjs/operators';
+import { finalize, Subject, takeUntil, takeWhile, tap, timer } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
 
 @Component({
@@ -51,7 +50,7 @@ export class AuthSignOutComponent implements OnInit, OnDestroy {
      */
     ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 }

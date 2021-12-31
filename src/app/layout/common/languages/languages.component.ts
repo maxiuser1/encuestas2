@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { take } from 'rxjs';
 import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
 import { FuseNavigationService, FuseVerticalNavigationComponent } from '@fuse/components/navigation';
 

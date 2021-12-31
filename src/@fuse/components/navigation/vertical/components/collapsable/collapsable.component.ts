@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostBinding, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { BooleanInput } from '@angular/cdk/coercion';
-import { Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, Subject, takeUntil } from 'rxjs';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseVerticalNavigationComponent } from '@fuse/components/navigation/vertical/vertical.component';
 import { FuseNavigationService } from '@fuse/components/navigation/navigation.service';
@@ -176,7 +175,7 @@ export class FuseVerticalNavigationCollapsableItemComponent implements OnInit, O
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 

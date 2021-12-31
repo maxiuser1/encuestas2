@@ -2,8 +2,7 @@ import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, SimpleChang
 import { Router } from '@angular/router';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
-import { fromEvent, Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { merge } from 'lodash-es';
 import { ScrollbarGeometry, ScrollbarPosition } from '@fuse/directives/scrollbar/scrollbar.types';
@@ -138,7 +137,7 @@ export class FuseScrollbarDirective implements OnChanges, OnInit, OnDestroy
         this._destroy();
 
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 

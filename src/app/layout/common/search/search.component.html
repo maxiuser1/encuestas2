@@ -7,7 +7,7 @@
         <mat-icon [svgIcon]="'heroicons_outline:search'"></mat-icon>
     </button>
     <div
-        class="absolute inset-0 flex items-center flex-shrink-0 z-99 bg-card"
+        class="absolute inset-0 flex items-center shrink-0 z-99 bg-card"
         *ngIf="opened"
         @slideInTop
         @slideOutTop>
@@ -55,7 +55,7 @@
             </ng-container>
         </mat-autocomplete>
         <button
-            class="absolute top-1/2 right-5 sm:right-7 flex-shrink-0 w-10 h-10 -mt-5"
+            class="absolute top-1/2 right-5 sm:right-7 shrink-0 w-10 h-10 -mt-5"
             mat-icon-button
             (click)="close()">
             <mat-icon [svgIcon]="'heroicons_outline:x'"></mat-icon>
@@ -118,7 +118,7 @@
     #contactResult
     let-result>
     <div class="flex items-center">
-        <div class="flex flex-shrink-0 items-center justify-center w-8 h-8 rounded-full overflow-hidden bg-primary-100 dark:bg-primary-800">
+        <div class="flex shrink-0 items-center justify-center w-8 h-8 rounded-full overflow-hidden bg-primary-100 dark:bg-primary-800">
             <img
                 *ngIf="result.avatar"
                 [src]="result.avatar">

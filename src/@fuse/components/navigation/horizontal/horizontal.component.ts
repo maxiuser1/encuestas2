@@ -76,7 +76,7 @@ export class FuseHorizontalNavigationComponent implements OnChanges, OnInit, OnD
         this._fuseNavigationService.deregisterComponent(this.name);
 
         // Unsubscribe from all subscriptions
-        this._unsubscribeAll.next();
+        this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
     }
 

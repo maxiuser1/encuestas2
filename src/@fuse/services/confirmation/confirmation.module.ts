@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
     declarations: [
         FuseConfirmationDialogComponent
     ],
-    imports: [
+    imports     : [
         MatButtonModule,
         MatDialogModule,
         MatIconModule,

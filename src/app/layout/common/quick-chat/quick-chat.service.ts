@@ -1,20 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, map, Observable, of, switchMap, tap, throwError } from 'rxjs';
 import { Chat } from 'app/layout/common/quick-chat/quick-chat.types';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
-export class QuickChatService {
+export class QuickChatService
+{
     private _chat: BehaviorSubject<Chat> = new BehaviorSubject(null);
     private _chats: BehaviorSubject<Chat[]> = new BehaviorSubject<Chat[]>(null);
 
     /**
      * Constructor
      */
-    constructor(private _httpClient: HttpClient) {}
+    constructor(private _httpClient: HttpClient)
+    {
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
@@ -23,14 +25,16 @@ export class QuickChatService {
     /**
      * Getter for chat
      */
-    get chat$(): Observable<Chat> {
+    get chat$(): Observable<Chat>
+    {
         return this._chat.asObservable();
     }
 
     /**
      * Getter for chat
      */
-    get chats$(): Observable<Chat[]> {
+    get chats$(): Observable<Chat[]>
+    {
         return this._chats.asObservable();
     }
 
@@ -41,9 +45,13 @@ export class QuickChatService {
     /**
      * Get chats
      */
-    getChats(): Observable<any> {
-        const chats: Chat[] = new Array();
-        return of(chats);
+    getChats(): Observable<any>
+    {
+        return this._httpClient.get<Chat[]>('api/apps/chat/chats').pipe(
+            tap((response: Chat[]) => {
+                this._chats.next(response);
+            })
+        );
     }
 
     /**
@@ -51,26 +59,26 @@ export class QuickChatService {
      *
      * @param id
      */
-    getChatById(id: string): Observable<any> {
-        return this._httpClient
-            .get<Chat>('api/apps/chat/chat', { params: { id } })
-            .pipe(
-                map((chat) => {
-                    // Update the chat
-                    this._chat.next(chat);
+    getChatById(id: string): Observable<any>
+    {
+        return this._httpClient.get<Chat>('api/apps/chat/chat', {params: {id}}).pipe(
+            map((chat) => {
 
-                    // Return the chat
-                    return chat;
-                }),
-                switchMap((chat) => {
-                    if (!chat) {
-                        return throwError(
-                            'Could not found chat with id of ' + id + '!'
-                        );
-                    }
+                // Update the chat
+                this._chat.next(chat);
 
-                    return of(chat);
-                })
-            );
+                // Return the chat
+                return chat;
+            }),
+            switchMap((chat) => {
+
+                if ( !chat )
+                {
+                    return throwError('Could not found chat with id of ' + id + '!');
+                }
+
+                return of(chat);
+            })
+        );
     }
 }
