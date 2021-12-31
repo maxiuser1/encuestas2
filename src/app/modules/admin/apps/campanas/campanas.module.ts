@@ -36,6 +36,7 @@ import {
     HashLocationStrategy,
 } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DirectivasModule } from 'app/core/directives/directivas.module';
 
 registerLocaleData(localeEsCl, 'es-CL');
 const routes: Route[] = [
@@ -89,6 +90,7 @@ const routes: Route[] = [
         MatSortModule,
         MatPaginatorModule,
         SharedModule,
+        DirectivasModule,
     ],
     providers: [
         { provide: LOCALE_ID, useValue: 'es-CL' },

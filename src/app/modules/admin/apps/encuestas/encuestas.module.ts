@@ -19,6 +19,7 @@ import { EncuestasEditarComponent } from './editar/editar.component';
 import { EncuestasAgregarPreguntaComponent } from './agregar-pregunta/agregar-pregunta.component';
 import { EncuestasEditarPreguntaComponent } from './editar-pregunta/editar-pregunta.component';
 import { MatMenuModule } from '@angular/material/menu';
+import { DirectivasModule } from 'app/core/directives/directivas.module';
 
 const routes: Route[] = [
     {
@@ -58,6 +59,7 @@ const routes: Route[] = [
         MatMenuModule,
         MatButtonModule,
         SharedModule,
+        DirectivasModule,
     ],
 })
 export class EncuestasModule {}
