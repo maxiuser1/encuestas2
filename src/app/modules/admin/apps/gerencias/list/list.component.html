@@ -1,13 +1,10 @@
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto"
     cdkScrollable>
 
-
-
-
     <div class="relative flex-0 py-8 px-4 sm:p-16 overflow-hidden bg-gray-800 dark">
         <div class="z-10 relative flex flex-col items-center">
             <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
-                Gerencias.
+                Gerencias
             </div>
         </div>
     </div>
@@ -59,64 +56,71 @@
                     <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1 gap-8 mt-8 sm:mt-10">
                         <ng-container *ngFor="let gerencia of gerencias; trackBy: trackByFn">
                             <!-- Gerencia -->
-                            <div class="flex flex-col shadow rounded-2xl overflow-hidden bg-card">
+                            <div class="flex flex-col flex-auto p-1 lg:p-6 pr-1 lg:pr-3 pb-1 lg:pr-3 rounded-2xl shadow overflow-hidden overflow-hidden bg-card">
 
-                                <div class="flex flex-0 items-center justify-between h-16 pt-3 pr-3 sm:pr-5 pl-6 sm:pl-8">
-                                    <div class="text-lg font-medium">
-                                        <span class="min-w-6  p-2 text-sm font-semibold rounded-full bg-gray-300 text-secondary dark:bg-gray-700">
-                                            {{gerencia.empresa}}</span> Gerencia: {{ gerencia.nombre }} ({{gerencia.responsable?.name || 'sin responsable'}})
+                                <div class="flex items-center">
+
+                                    <div class="flex flex-col p-3">
+                                        <div class="text-lg font-medium">Gerencia {{gerencia.empresa}}: {{ gerencia.nombre }}</div>
+                                        <div class="font-medium text-sm">
+                                            {{gerencia.responsable?.name || 'sin responsable'}}
+                                        </div>
                                     </div>
-                                    <button class="ml-auto"
-                                        mat-icon-button
-                                        [matMenuTriggerFor]="conversationHeaderMenu">
-                                        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
-                                        <mat-menu #conversationHeaderMenu>
-                                            <button (click)="agregarGerenciard(gerencia)"
-                                                mat-menu-item>
-                                                <mat-icon [svgIcon]="'heroicons_outline:view-boards'"></mat-icon>
-                                                Agregar gerencia R2
-                                            </button>
-                                            <button (click)="agregarSubGerencia(gerencia)"
-                                                mat-menu-item>
-                                                <mat-icon [svgIcon]="'heroicons_outline:view-grid'"></mat-icon>
-                                                Agregar subgerencia
-                                            </button>
-                                            <button (click)="agregarArea(gerencia)"
-                                                mat-menu-item>
-                                                <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
-                                                Agregar área
-                                            </button>
+                                    <div class="ml-auto -mt-2">
+                                        <button class="ml-auto"
+                                            mat-icon-button
+                                            [matMenuTriggerFor]="conversationHeaderMenu">
+                                            <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                                            <mat-menu #conversationHeaderMenu>
+                                                <button (click)="agregarGerenciard(gerencia)"
+                                                    mat-menu-item>
+                                                    <mat-icon [svgIcon]="'heroicons_outline:view-boards'"></mat-icon>
+                                                    Agregar gerencia R2
+                                                </button>
+                                                <button (click)="agregarSubGerencia(gerencia)"
+                                                    mat-menu-item>
+                                                    <mat-icon [svgIcon]="'heroicons_outline:view-grid'"></mat-icon>
+                                                    Agregar subgerencia
+                                                </button>
+                                                <button (click)="agregarArea(gerencia)"
+                                                    mat-menu-item>
+                                                    <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
+                                                    Agregar área
+                                                </button>
 
-                                            <button (click)="editarGerencia(gerencia)"
-                                                mat-menu-item>
-                                                <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
-                                                Editar
-                                            </button>
+                                                <button (click)="editarGerencia(gerencia)"
+                                                    mat-menu-item>
+                                                    <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                                                    Editar
+                                                </button>
 
-                                        </mat-menu>
-                                    </button>
+                                            </mat-menu>
+                                        </button>
+                                    </div>
+
+
                                 </div>
 
 
                                 <!-- Body -->
-                                <div class="flex flex-col p-6">
+                                <div class="flex flex-col p-2 lg:p-6">
                                     <div class="grid gap-8">
                                         <ng-container *ngFor="let cadaGerenciard of gerencia.gerenciasrd; let i = index">
-                                            <div class="mt-2 rounded-xl bg-gray-600 bg-opacity-12 dark:bg-transparent dark:border">
+                                            <div class="flex flex-col flex-auto p-1 lg:p-6 pr-1 lg:pr-3 pb-1 lg:pr-3 rounded-2xl shadow overflow-hidden bg-gray-600 bg-opacity-12 dark:bg-transparent dark:border">
                                                 <gerencias-app-gerenciard [gerencia]="gerencia"
                                                     [gerenciard]="cadaGerenciard"></gerencias-app-gerenciard>
                                             </div>
                                         </ng-container>
 
                                         <ng-container *ngFor="let cadaSubgerencia of gerencia.subgerencias; let i = index">
-                                            <div class="mt-2 rounded-xl bg-gray-500 bg-opacity-12 dark:bg-transparent dark:border">
+                                            <div class="flex flex-col flex-auto p-1 lg:p-6 pr-1 lg:pr-3 pb-1 lg:pr-3 rounded-2xl shadow overflow-hidden bg-gray-500 bg-opacity-12 dark:bg-transparent dark:border">
                                                 <gerencias-subgerencia [gerencia]="gerencia"
                                                     [subgerencia]="cadaSubgerencia"></gerencias-subgerencia>
                                             </div>
                                         </ng-container>
 
                                         <ng-container *ngFor="let cadaArea of gerencia.areas; let i = index">
-                                            <div class="mt-2 rounded-xl bg-gray-500 bg-opacity-12 dark:bg-transparent dark:border">
+                                            <div class="flex flex-col flex-auto p-1 lg:p-6 pr-1 lg:pr-3 pb-1 lg:pr-3 rounded-2xl shadow overflow-hidden bg-gray-500 bg-opacity-12 dark:bg-transparent dark:border">
                                                 <gerencias-area [gerencia]="gerencia"
                                                     [area]="cadaArea">
                                                 </gerencias-area>

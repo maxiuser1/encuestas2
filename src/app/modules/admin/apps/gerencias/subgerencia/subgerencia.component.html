@@ -1,40 +1,50 @@
-<div class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8">
-    <div class="text-lg font-medium">Subgerencia: {{ subgerencia.nombre }} ({{subgerencia.responsable?.name || 'sin responsable'}})</div>
-    <button class="ml-auto"
-        mat-icon-button
-        [matMenuTriggerFor]="conversationHeaderMenu">
-        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
-        <mat-menu #conversationHeaderMenu>
-            <button (click)="agregarArea()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
-                Agregar área
-            </button>
-            <button (click)="agregarServicio()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
-                Agregar servicio
-            </button>
-            <button (click)="editar()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
-                Editar
-            </button>
+<div class="flex items-center">
 
-            <button (click)="eliminar()"
-                mat-menu-item>
-                <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
-                Eliminar
-            </button>
+    <div class="flex flex-col p-3">
+        <div class="text-lg font-medium">Subgerencia: {{ subgerencia.nombre }}</div>
+        <div class="font-medium text-sm">
+            {{subgerencia.responsable?.name || 'sin responsable'}}
+        </div>
+    </div>
 
-        </mat-menu>
-    </button>
+    <div class="ml-auto -mt-2">
+        <button class="ml-auto"
+            mat-icon-button
+            [matMenuTriggerFor]="conversationHeaderMenu">
+            <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+            <mat-menu #conversationHeaderMenu>
+                <button (click)="agregarArea()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:view-grid-add'"></mat-icon>
+                    Agregar área
+                </button>
+                <button (click)="agregarServicio()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:cog'"></mat-icon>
+                    Agregar servicio
+                </button>
+                <button (click)="editar()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:pencil'"></mat-icon>
+                    Editar
+                </button>
+
+                <button (click)="eliminar()"
+                    mat-menu-item>
+                    <mat-icon [svgIcon]="'heroicons_outline:trash'"></mat-icon>
+                    Eliminar
+                </button>
+
+            </mat-menu>
+        </button>
+    </div>
+
 </div>
 
-<div class="flex flex-col p-6">
+<div class="flex flex-col p-2 lg:p-6">
     <div class="grid gap-8">
         <ng-container *ngFor="let cadaArea of subgerencia.areas; let i = index">
-            <div class="mt-2 rounded-xl bg-gray-400 bg-opacity-12 dark:bg-transparent dark:border">
+            <div class="flex flex-col flex-auto p-1 lg:p-6 pr-1 lg:pr-3 pb-1 lg:pr-3 rounded-2xl shadow overflow-hidden bg-gray-400 bg-opacity-12 dark:bg-transparent dark:border">
                 <gerencias-area [gerencia]="gerencia"
                     [gerenciard]="gerenciard"
                     [subgerencia]="subgerencia"
@@ -44,7 +54,7 @@
         </ng-container>
 
         <ng-container *ngFor="let cadaServicio of subgerencia.servicios; let i = index">
-            <div class="mt-2 rounded-xl bg-gray-800 bg-opacity-12 dark:bg-transparent dark:border">
+            <div class="relative flex flex-col flex-auto p-6 pr-3 pb-3 rounded-2xl shadow overflow-hidden bg-card    dark:border">
                 <gerencias-servicio [gerencia]="gerencia"
                     [gerenciard]="gerenciard"
                     [subgerencia]="subgerencia"
